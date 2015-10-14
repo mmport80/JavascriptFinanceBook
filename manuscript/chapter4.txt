@@ -8,7 +8,7 @@ Similar to the idea of 'optionality' in quantitative finance, once you understan
 
 But let's begin with something more down to earth - summarising a portfolio holdings file from AQR's Large Cap Momentum Fund.
 
-#Beginner's Origami
+##Beginner's Origami
 
 `rows
  .reduce(
@@ -36,7 +36,7 @@ Every time we `return`, we add to the current running total.
 
 In this case we find the `Exposure` figure for each stock holding (the `+` suffix converts text to numbers in JavaScript) and then adds it to `a` - our running total.
 
-#Gilding the Lily
+##Gilding the Lily
 
 Let's tweak the code to further describe the portfolio.
 
@@ -56,7 +56,7 @@ We update `a` if a current row's exposure is greater than our current highest ro
 
 No surprise that the largest holding for August 2015 is Apple at $68m.
 
-#Efficiency
+##Efficiency
 
 Let's combine the first two examples and see how much of the portfolio is comprised of REITs.
 
@@ -105,19 +105,19 @@ The upshot?
 
 Fold or `reduce` can be incredibly efficient and succinct. We are summarising the data in three different ways with just one pass through!
 
-#Fundamental
+##Fundamental
 
 As alluded to previously, Fold is perhaps *the* fundamental building block of functional programming, but much more than that, it is incredibly useful too!
 
 We will explore more applications of Fold in the coming chapters and along the way uncover some more of its deep secrets.
 
-#More Info
+##More Info
 
 Mozilla's `reduce` [documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) for JavaScript. Note the optional extra index and array inputs.
 
 Graham Hutton's [Tutorial](http://www.cs.nott.ac.uk/~pszgmh/fold.pdf) on the universality and expresiveness of fold.
 
-#Try
+##Try
 
 1) Modify the example application to summarise some of your own spreadsheets.
 

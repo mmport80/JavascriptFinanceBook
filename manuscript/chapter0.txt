@@ -1,198 +1,44 @@
-#Introduction
+The humble spreadsheet is the workhorse of the finance industry.
 
-Much of our coding time is spent in an interactive environment, colloquially called the 'REPL', 'Read-Eval-Print Loop' or console.
+Every financial analyst has spent hours, preparing complex spreadsheets, only for an error to creep in here or there.
 
-The REPL reads input, evaluates it according to our code and prints it.
+The spreadsheet is a gift and a curse. Its luscious visual appeal is beguiling, but keeping track of hundreds or thousands of cell formulae inevitably leads to headaches and errors.
 
-Javascript's REPLs, can be found in any browser, by pressing Ctrl+Shift+J, Command+Shift+J or F12 depending on your system (Firefox users may prefer 'K' over 'J').
+Financial analysts are often far smarter than their spreadsheets allow. Investing a little time into more modern technology and ideas will reap immediate benefits to the average analyst.
 
-Do some maths,
+This book will show you how to use a few lines of Javascript to automate your daily tasks.
 
-`1+1`
+##Javascript
 
-`>>2`
+Javascript is even more ubiquitous than Visual Basic for Applications (VBA) it is available on every desktop in the form of a web browser, into which we can load and process files and download the results.
 
-or
+VBA is the goto language for analysts, but even when it was fresh decades ago it was never considered a proper programming language.
 
-`Math.log(Math.E)`
+Javascript, moreover, is the world's most commonly used language with a large number of libraries that make solving problems easy.
 
-`>>1`
+It is also the language with the most money behind it. Microsoft, Google, Apple and Mozilla all invest heavily in the language. All those corporations are taking part in an unprecedented race to have the fastest Javascript implementation, making the language one of the most efficient also.
 
-#Welcome to the Web's OS
+## Functional
 
-Every environment's console or REPL has its own flavour.
+We will focus on a functional style of programming which is both succinct and declarative.
 
-The UNIX command line is built around a file system. The Excel scripting environment's basic unit of currency is the spreadsheet.
+Functional code often requires an order of magnitude fewer lines of code than the imperative
+alternative.
 
-The basic unit for Javascript is the web page.
+The reason is that imperative code comes from a lineage of telling the computer exactly what to do, step by step. This was a necessity when computers were slow.
 
-Go to,
+Functional programming on the other hand is a little more mathematical. In fact, the basic building block of a functional language is the mathematical function, which simply maps inputs into outputs (similar to a spreadsheet formula).
 
-[http://dev.markitondemand.com/Api/v2/Quote/json?symbol=AAPL](http://dev.markitondemand.com/Api/v2/Quote/json?symbol=AAPL)
+Such succinct code which reduces boilerplate leaves code that describes and solves the problem at hand, this is often called declarative or intuitive code.
 
-open the REPL or console, and type as one command (Ctrl+Shift+Return inserts new lines)
+##The Way Forward
 
-`location.reload();`
+Each chapter will solve a common problem faced by financial analysts; introduce a functional programming concept; and discuss a line or two of code in detail.
 
-`JSON.parse( $('pre').innerHTML );`
+For example, the first chapter discusses maps and shows how you can solve a common Extract Transform Load (ETL) problem, and discusses the magical line of code which will help reduce all the nasty daily spreadsheet copying and pasting.
 
-which will result in this,
+The goal of the book is not just practical automation; it is also about writing elegant code which gets you thinking and edifies your daily tasks to boot.
 
-`>> Object { Status: "SUCCESS", Name: "Apple Inc", Symbol: "AAPL", ... }`
+As the old programming adage goes,
 
-What have we just done?
-
-The Markit API reports market action in real time (while markets are open). 
-
-We first reload the web page to pull in the latest available information, and then parse the page's text into a format which our Javascript understands.
-
-Javascript's lingua franca is objects. Each object has keys and values. We use keys to access the data we are interested in.
-
-E.g.
-
-`JSON.parse( $('pre').innerHTML ).LastPrice;`
-
-will show the 'value' for the 'LastPrice' key,
-
-`>> 113.48`
-
-HTML web pages can be parsed in a similar manner, although by 'parse' I really mean 'scrape'.
-
-For example go to, [one of Google finance's historical price pages](https://www.google.com/finance/historical?q=NYSEARCA%3ARSP&ei=X7D-VeC-NNCDsAHunLjoAQ).
-
-Using code we will learn more about in the coming chapters, type this line of code into the REPL,
-
-`[].slice.call(
- $$('.gf-table.historical_price td')
- )
- .filter(
-  function(_,i){
-   return i%6===4;
-   }
-  )
- .map(
-  function(i){
-   return +i.innerHTML;
-   }
-  );`
-
-`>> [75.37, 77.04, 77.18, ... ]`
-
-We select the HTML table containing historical data and have filtered every 6th number in the table which happens to coincide with each close price in the table.
-
-As you can see, scraping HTML is trickier than parsing APIs - nevertheless Javascript is born to swim on the web.
-
-#More Info
-
-Take a look at [Google](https://developer.chrome.com/devtools/docs/console) and [Mozilla's](https://developer.mozilla.org/en/docs/Web/API/console) browser console reference pages.
-
-The $() and $$() functions utilise [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors) to search web pages.
-
-#Try
-
-1) Find a JSON API to parse or web page to scrape
-2) Read up on JSON
-3) [Watch](https://www.youtube.com/watch?v=v2ifWcnQs6M) Douglas Crockford's (the creator of JSON) talk on Javascript
-
-~~
-
-Do you have any related ideas, examples or problems which you have come across? Let me know! [John.Orford@gmail.com](mailto:John.Orford@gmail.com)
-#Introduction
-
-Much of our coding time is spent in an interactive environment, colloquially called the 'REPL', 'Read-Eval-Print Loop' or console.
-
-The REPL reads input, evaluates it according to our code and prints it.
-
-Javascript's REPLs, can be found in any browser, by pressing Ctrl+Shift+J, Command+Shift+J or F12 depending on your system (Firefox users may prefer 'K' over 'J').
-
-Do some maths,
-
-`1+1`
-
-`>>2`
-
-or
-
-`Math.log(Math.E)`
-
-`>>1`
-
-#Welcome to the Web's OS
-
-Every environment's console or REPL has its own flavour.
-
-The UNIX command line is built around a file system. The Excel scripting environment's basic unit of currency is the spreadsheet.
-
-The basic unit for Javascript is the web page.
-
-Go to,
-
-[http://dev.markitondemand.com/Api/v2/Quote/json?symbol=AAPL](http://dev.markitondemand.com/Api/v2/Quote/json?symbol=AAPL)
-
-open the REPL or console, and type as one command (Ctrl+Shift+Return inserts new lines)
-
-`location.reload();`
-
-`JSON.parse( $('pre').innerHTML );`
-
-which will result in this,
-
-`>> Object { Status: "SUCCESS", Name: "Apple Inc", Symbol: "AAPL", ... }`
-
-What have we just done?
-
-The Markit API reports market action in real time (while markets are open). 
-
-We first reload the web page to pull in the latest available information, and then parse the page's text into a format which our Javascript understands.
-
-Javascript's lingua franca is objects. Each object has keys and values. We use keys to access the data we are interested in.
-
-E.g.
-
-`JSON.parse( $('pre').innerHTML ).LastPrice;`
-
-will show the 'value' for the 'LastPrice' key,
-
-`>> 113.48`
-
-HTML web pages can be parsed in a similar manner, although by 'parse' I really mean 'scrape'.
-
-For example go to, [one of Google finance's historical price pages](https://www.google.com/finance/historical?q=NYSEARCA%3ARSP&ei=X7D-VeC-NNCDsAHunLjoAQ).
-
-Using code we will learn more about in the coming chapters, type this line of code into the REPL,
-
-`[].slice.call(
- $$('.gf-table.historical_price td')
- )
- .filter(
-  function(_,i){
-   return i%6===4;
-   }
-  )
- .map(
-  function(i){
-   return +i.innerHTML;
-   }
-  );`
-
-`>> [75.37, 77.04, 77.18, ... ]`
-
-We select the HTML table containing historical data and have filtered every 6th number in the table which happens to coincide with each close price in the table.
-
-As you can see, scraping HTML is trickier than parsing APIs - nevertheless Javascript is born to swim on the web.
-
-#More Info
-
-Take a look at [Google](https://developer.chrome.com/devtools/docs/console) and [Mozilla's](https://developer.mozilla.org/en/docs/Web/API/console) browser console reference pages.
-
-The $() and $$() functions utilise [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors) to search web pages.
-
-#Try
-
-1) Find a JSON API to parse or web page to scrape
-2) Read up on JSON
-3) [Watch](https://www.youtube.com/watch?v=v2ifWcnQs6M) Douglas Crockford's (the creator of JSON) talk on Javascript
-
-~~
-
-Do you have any related ideas, examples or problems which you have come across? Let me know! [John.Orford@gmail.com](mailto:John.Orford@gmail.com)
+> Laziness is a virtue

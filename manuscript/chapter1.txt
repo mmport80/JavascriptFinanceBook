@@ -18,7 +18,7 @@ or
 
 `>>1`
 
-#Welcome to the Web's OS
+##Welcome to the Web's OS
 
 Every environment's console or REPL has its own flavour.
 
@@ -82,13 +82,13 @@ We select the HTML table containing historical data and have filtered every 6th 
 
 As you can see, scraping HTML is trickier than parsing APIs - nevertheless Javascript is born to swim on the web.
 
-#More Info
+##More Info
 
 Take a look at [Google](https://developer.chrome.com/devtools/docs/console) and [Mozilla's](https://developer.mozilla.org/en/docs/Web/API/console) browser console reference pages.
 
 The $() and $$() functions utilise [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors) to search web pages.
 
-#Try
+##Try
 
 1) Find a JSON API to parse or web page to scrape
 2) Read up on JSON

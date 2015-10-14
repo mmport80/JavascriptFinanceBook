@@ -37,7 +37,7 @@ The code filters then squares whatever's left after the filtering,
 
 `>> [1, 9, 25, 49, 81]`
 
-#Plumbing Aesthetics
+##Plumbing Aesthetics
 
 There are two things to note.
 
@@ -85,13 +85,13 @@ This style of coding is called 'declarative', i.e. we are *declaring* the proble
 
 At first, the pipe analogy seems like an attempt at overly dumbing down, but in fact the abstraction does simplify our code substantially. Reducing extraneous boilerplate down to a minimum, leaves us with a richer more expressive code vocabulary.
 
-#More Info 
+##More Info 
 
 Read up on declarative programming [here](https://en.wikipedia.org/wiki/Declarative_programming) and [here](http://latentflip.com/imperative-vs-declarative/).
 
 Mozilla's JavaScript [filter documentation](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
-#Try
+##Try
 
 1) Tweak the map above to multiply each element by two, then figure out how to make it more declarative. I.e. filtering before or after the map should result in doubling the odd numbers, e.g. `>> [2,6,10,14]`.
 
