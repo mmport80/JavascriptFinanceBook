@@ -1,4 +1,4 @@
-#Introduction
+#Chapter 1
 
 Much of our coding time is spent in an interactive environment, colloquially called the 'REPL', 'Read-Eval-Print Loop' or console.
 
@@ -93,7 +93,3 @@ The $() and $$() functions utilise [CSS Selectors](https://developer.mozilla.org
 1) Find a JSON API to parse or web page to scrape
 2) Read up on JSON
 3) [Watch](https://www.youtube.com/watch?v=v2ifWcnQs6M) Douglas Crockford's (the creator of JSON) talk on Javascript
-
-~~
-
-Do you have any related ideas, examples or problems which you have come across? Let me know! [John.Orford@gmail.com](mailto:John.Orford@gmail.com)
