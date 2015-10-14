@@ -6,7 +6,7 @@ The spreadsheet is a gift and a curse. Its luscious visual appeal is beguiling, 
 
 Financial analysts are often far smarter than their spreadsheets allow. Investing a little time into more modern technology and ideas will reap immediate benefits to the average analyst.
 
-This book will show you how to use a few lines of Javascript to automate your daily tasks. 
+This book will show you how to use a few lines of Javascript to automate your daily tasks.
 
 ##Javascript
 
