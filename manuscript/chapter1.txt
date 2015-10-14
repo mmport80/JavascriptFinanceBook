@@ -1,4 +1,4 @@
-#Chapter 1
+#Getting Started with JavaScript
 
 Much of our coding time is spent in an interactive environment, colloquially called the 'REPL', 'Read-Eval-Print Loop' or console.
 
