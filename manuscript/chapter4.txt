@@ -10,13 +10,15 @@ But let's begin with something more down to earth - summarising a portfolio hold
 
 ##Beginner's Origami
 
-`rows
- .reduce(
-  function(a,c){
-   return +c.Exposure + a;
-   }
-  , 0
- );`
+~~~~~~~~
+rows
+ 	.reduce(
+  		function(a,c){
+   			return +c.Exposure + a;
+   			}
+  		, 0
+ 		);
+~~~~~~~~
 
 The quicker amongst you will notice no fold in the code! JavaScript uses the term `reduce` instead of fold.
 
@@ -40,13 +42,15 @@ In this case we find the `Exposure` figure for each stock holding (the `+` suffi
 
 Let's tweak the code to further describe the portfolio.
 
-`rows
-  .reduce(
-   function(a,c){
-    if (+c.Exposure > +a.Exposure) { return c; }
-    else { return a; }
-    }
-  );`
+~~~~~~~~
+rows
+  	.reduce(
+   		function(a,c){
+    			if (+c.Exposure > +a.Exposure) { return c; }
+    			else { return a; }
+    			}
+  		);
+~~~~~~~~
 
 This will return the row or stock with the largest exposure.
 
@@ -60,34 +64,38 @@ No surprise that the largest holding for August 2015 is Apple at $68m.
 
 Let's combine the first two examples and see how much of the portfolio is comprised of REITs.
 
-`rows
- .reduce(
-  function(a,c){
-   if(c['Security Description'].contains('REIT')){ return +c.Exposure + a; }
-   else { return a; }
-   }
-  , 0
-  );`
+~~~~~~~~
+rows
+ 	.reduce(
+  		function(a,c){
+   			if(c['Security Description'].contains('REIT')){ return +c.Exposure + a; }
+   			else { return a; }
+   			}
+  		, 0
+  		);
+~~~~~~~~
 
 If the row's security description field contains the word 'REIT' we add the current row's exposure, otherwise it remains as before.
 
 Lastly, let's combine all three examples together in one fold.
 
-`rows
- .reduce(
-  function(a,c){
-   return {
-    'Total': totalExp(a['Total'],c),
-    'Top':   topExp(a['Top'],c),
-    'REIT':  reitExp(a['REIT'],c)
-    };
-   }
-  , {
-    'Total': 0,
-    'Top':   {Exposure:-Infinity},
-    'REIT':  0
-    }
- );`
+~~~~~~~~
+rows
+ 	.reduce(
+  		function(a,c){
+   			return {
+    				'Total': totalExp(a['Total'],c),
+    				'Top':   topExp(a['Top'],c),
+    				'REIT':  reitExp(a['REIT'],c)
+    				};
+   			}
+		, {
+    			'Total': 0,
+    			'Top':   {Exposure:-Infinity},
+    			'REIT':  0
+    			}
+ 		);
+~~~~~~~~
 
 Beginning at our initial values. As before, our total and REIT exposures begin at `0`; our top exposure now begins at minus infinity (just in case we encounter short positions).
 
@@ -95,9 +103,11 @@ We now have a set or object of initial values, and we return an object matching 
 
 You will notice also that we have named functions for each set of logic. `totalExp` looks like this for example:
 
-`totalExp = function(a,c){
- return +c.Exposure + a;
- };`
+~~~~~~~~
+totalExp = function(a,c){
+	return +c.Exposure + a;
+ 	};
+~~~~~~~~
 
 which helps keep everything tidy.
 
