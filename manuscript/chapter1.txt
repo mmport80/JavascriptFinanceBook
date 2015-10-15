@@ -30,9 +30,11 @@ Go to,
 
 [http://dev.markitondemand.com/Api/v2/Quote/json?symbol=AAPL](http://dev.markitondemand.com/Api/v2/Quote/json?symbol=AAPL)
 
-open the REPL or console, and type as one command (Ctrl+Shift+Return inserts new lines)
+open the REPL or console, and type this
 
 `location.reload();`
+
+then
 
 `JSON.parse( $('pre').innerHTML );`
 
@@ -44,7 +46,7 @@ What have we just done?
 
 The Markit API reports market action in real time (while markets are open). 
 
-We first reload the web page to pull in the latest available information, and then parse the page's text into a format which our Javascript understands.
+We first reload the web page to pull in the latest available information, and then parse the page's text into a format which JavaScript understands.
 
 Javascript's lingua franca is objects. Each object has keys and values. We use keys to access the data we are interested in.
 
@@ -60,7 +62,7 @@ HTML web pages can be parsed in a similar manner, although by 'parse' I really m
 
 For example go to, [one of Google finance's historical price pages](https://www.google.com/finance/historical?q=NYSEARCA%3ARSP&ei=X7D-VeC-NNCDsAHunLjoAQ).
 
-Using code we will learn more about in the coming chapters, type this line of code into the REPL,
+Using code we will learn more about in the coming chapters, type or paste this line of code into the REPL,
 
 `[].slice.call(
  $$('.gf-table.historical_price td')
