@@ -68,7 +68,9 @@ Let's combine the first two examples and see how much of the portfolio is compri
 rows
  	.reduce(
   		function(a,c){
-   			if(c['Security Description'].contains('REIT')){ return +c.Exposure + a; }
+   			if( c['Security Description'].contains('REIT') ){ 
+				return +c.Exposure + a;
+				}
    			else { return a; }
    			}
   		, 0

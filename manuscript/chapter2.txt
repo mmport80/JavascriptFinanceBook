@@ -62,7 +62,7 @@ Sometimes, you need to know about where each element is relative to the others, 
 rows
 	.map(
    		function(row, i){
-    			return {Index: i, Range: row['High'] - row['Low']};
+			return {Index: i, Range: row['High'] - row['Low']};
    			}
   		);
 ~~~~~~~~
