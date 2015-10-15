@@ -34,11 +34,15 @@ Go to,
 
 open the REPL or console, and type this
 
-`location.reload();`
+~~~~~~~~
+location.reload();
+~~~~~~~~
 
 then
 
-`JSON.parse( $('pre').innerHTML );`
+~~~~~~~~
+JSON.parse( $('pre').innerHTML );
+~~~~~~~~
 
 which will result in this,
 
@@ -54,7 +58,9 @@ Javascript's lingua franca is objects. Each object has keys and values. We use k
 
 E.g.
 
-`JSON.parse( $('pre').innerHTML ).LastPrice;`
+~~~~~~~~
+JSON.parse( $('pre').innerHTML ).LastPrice;
+~~~~~~~~
 
 will show the 'value' for the 'LastPrice' key,
 
@@ -67,7 +73,7 @@ For example go to, [one of Google finance's historical price pages](https://www.
 Using code we will learn more about in the coming chapters, type or paste this line of code into the REPL,
 
 ~~~~~~~~
-[]	.slice
+[].slice
 	.call(
 		$$('.gf-table.historical_price td')
 		)
