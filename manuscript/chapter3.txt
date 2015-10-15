@@ -1,6 +1,6 @@
 #Pipes
 
-The [first chapter](http://blog.johnorford.com/2015/09/20/getting-started-with-javscript/) ended with code which included a map and a filter which we will dive back into now with a less applied more intuitive example.
+The first chapter ended with code which included a map and a filter which we will dive back into now with a less applied more intuitive example.
 
 Open up the JavaScript console and paste or type in the following code,
 
@@ -33,7 +33,7 @@ E.g.,
   }
  );`
 
-The code filters then squares whatever's left after the filtering,
+The code filters out even numbers then squares whatever's left,
 
 `>> [1, 9, 25, 49, 81]`
 
@@ -57,7 +57,7 @@ E.g.,
  }
 )`
 
-This code is positively mind bending in comparison, and yet this is how it's usually written!
+This ‘classic’ code style is positively mind bending in comparison, and yet this is how it's usually written!
 
 Secondly, whenever the order of our logic 'blocks' is not important we know we are onto something!
 
@@ -81,7 +81,7 @@ Think about describing a dog. The order with which we describe its colour, size 
 
 Code is the same, except we use it to describe problems. If the order of our logic doesn't matter, each block of code is more or less independent of the other, which means when we run into trouble with one block we need only revisit that piece of code to get things up and running again.
 
-This style of coding is called 'declarative', i.e. we are *declaring* the problem rather than telling the machine exactly how to solve it, and ends up in more reliable and intuitive code.
+This style of coding is called 'declarative', i.e. we are *declaring* the problem rather than telling the machine exactly how to solve it, and we end up with more reliable and intuitive code.
 
 At first, the pipe analogy seems like an attempt at overly dumbing down, but in fact the abstraction does simplify our code substantially. Reducing extraneous boilerplate down to a minimum, leaves us with a richer more expressive code vocabulary.
 
@@ -93,7 +93,7 @@ Mozilla's JavaScript [filter documentation](https://developer.mozilla.org/en/doc
 
 ##Try
 
-1) Tweak the map above to multiply each element by two, then figure out how to make it more declarative. I.e. filtering before or after the map should result in doubling the odd numbers, e.g. `>> [2,6,10,14]`.
+1) Tweak the map above to multiply each element by two instead of squaring, then figure out how to make it more declarative. I.e. filtering before or after the map should result in doubling the odd numbers, e.g. `>> [2,6,10,14]`.
 
 2) Add a filter to the previous chapter's map which results in weekly and monthly data rather than daily.
 
