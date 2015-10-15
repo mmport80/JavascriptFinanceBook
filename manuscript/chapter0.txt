@@ -18,16 +18,15 @@ VBA is the goto language for analysts, but even when it was fresh decades ago it
 
 Javascript, moreover, is the world's most commonly used language with a large number of libraries that make solving problems easy.
 
-It is also the language with the most money behind it. Microsoft, Google, Apple and Mozilla all invest heavily in the language. All those corporations are taking part in an unprecedented race to have the fastest Javascript implementation, making the language one of the most efficient also.
+It is also the language with the most money behind it. Microsoft, Google, Apple and Mozilla all invest heavily in the language. Those corporations are taking part in an unprecedented race to have the fastest Javascript implementation, making the language one of the most efficient also.
 
 ## Functional
 
 We will focus on a functional style of programming which is both succinct and declarative.
 
-Functional code often requires an order of magnitude fewer lines of code than the imperative
-alternative.
+Functional code often requires an order of magnitude fewer lines of code than the imperative alternative.
 
-The reason is that imperative code comes from a lineage of telling the computer exactly what to do, step by step. This was a necessity when computers were slow.
+Classic imperative code comes from a lineage of telling the computer exactly what to do, step by step. This was a necessity when computers were slow.
 
 Functional programming on the other hand is a little more mathematical. In fact, the basic building block of a functional language is the mathematical function, which simply maps inputs into outputs (similar to a spreadsheet formula).
 
@@ -37,7 +36,7 @@ Such succinct code which reduces boilerplate leaves code that describes and solv
 
 Each chapter will solve a common problem faced by financial analysts; introduce a functional programming concept; and discuss a line or two of code in detail.
 
-For example, the first chapter discusses maps and shows how you can solve a common Extract Transform Load (ETL) problem, and discusses the magical line of code which will help reduce all the nasty daily spreadsheet copying and pasting.
+For example, the first chapter discusses map; shows how you can solve a common Extract Transform Load (ETL) problem; and discusses the magical line of code which will help reduce all the nasty daily spreadsheet copying and pasting.
 
 The goal of the book is not just practical automation; it is also about writing elegant code which gets you thinking and edifies your daily tasks to boot.
 
