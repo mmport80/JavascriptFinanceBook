@@ -4,12 +4,14 @@ The first chapter ended with code which included a map and a filter which we wil
 
 Open up the JavaScript console and paste or type in the following code,
 
-`[0,1,2,3,4,5,6,7,8,9]
- .filter(
-  function(j){
-   return j%2===1;
-   }
-  );`
+~~~~~~~~
+[0,1,2,3,4,5,6,7,8,9]
+ 	.filter(
+  		function(j){
+   			return j%2===1;
+   			}
+  		);
+~~~~~~~~
 
 This code filters the array of numbers and returns an array of odd numbers.
 
@@ -21,17 +23,19 @@ What does this mean? It means we can plumb filters and maps together, letting th
 
 E.g.,
 
-`[0,1,2,3,4,5,6,7,8,9]
- .filter(
-  function(j){
-   return j%2===1;
-   }
-  )
- .map(
-  function(j){
-   return j*j;
-  }
- );`
+~~~~~~~~
+[0,1,2,3,4,5,6,7,8,9]
+ 	.filter(
+  		function(j){
+   			return j%2===1;
+   			}
+  		)
+ 	.map(
+  		function(j){
+   			return j*j;
+  			}
+ 		);
+~~~~~~~~
 
 The code filters out even numbers then squares whatever's left,
 
@@ -45,17 +49,19 @@ Firstly, because the inputs and outputs of the filters and maps are arrays, our 
 
 E.g.,
 
-`[].map.call(
- [].filter.call(
-  [0,1,2,3,4,5,6,7,8,9],
-   function(i){
-     return i%2===1;
-    }
-  ),
- function(i){
-  return i*i;
- }
-)`
+~~~~~~~~
+[].map.call(
+	[].filter.call(
+  		[0,1,2,3,4,5,6,7,8,9],
+   		function(i){
+     			return i%2===1;
+    			}
+  		),
+ 	function(i){
+  		return i*i;
+ 		}
+	)
+~~~~~~~~
 
 This ‘classic’ code style is positively mind bending in comparison, and yet this is how it's usually written!
 
@@ -63,17 +69,20 @@ Secondly, whenever the order of our logic 'blocks' is not important we know we a
 
 E.g. we can switch the order of map and filter,
 
-`[0,1,2,3,4,5,6,7,8,9]
- .map(
-  function(j){
-   return j*j;
-   }
-  )
- .filter(
-  function(j){
-   return j%2===1;
-   }
-  );`
+
+~~~~~~~~
+[0,1,2,3,4,5,6,7,8,9]
+ 	.map(
+  		function(j){
+   			return j*j;
+   			}
+  		)
+ 	.filter(
+  		function(j){
+   			return j%2===1;
+   			}
+  		);
+~~~~~~~~
 
 and the result is the same.
 
