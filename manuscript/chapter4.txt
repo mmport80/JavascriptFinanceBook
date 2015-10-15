@@ -108,7 +108,7 @@ You will notice also that we have named functions for each set of logic. `totalE
 ~~~~~~~~
 totalExp = function(a,c){
 	return +c.Exposure + a;
- 	};
+	};
 ~~~~~~~~
 
 which helps keep everything tidy.
