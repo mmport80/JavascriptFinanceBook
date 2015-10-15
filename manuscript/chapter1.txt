@@ -8,15 +8,17 @@ Javascript's REPLs, can be found in any browser, by pressing Ctrl+Shift+J, Comma
 
 Do some maths,
 
-`1+1`
-
-`>>2`
+~~~~~~~~
+1+1
+>>2
+~~~~~~~~
 
 or
 
-`Math.log(Math.E)`
-
-`>>1`
+~~~~~~~~
+Math.log(Math.E)
+>>1
+~~~~~~~~
 
 ##Welcome to the Web's OS
 
