@@ -20,7 +20,7 @@ While technically just one line, it's a little complex.
 
 Firstly what is `rows`? This is an array of data, each object within it is a 'row' object, which is exactly how we view spreadsheets.
 
-<iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1lIipy4wQWq4GPWXxjmbghhOjMETgd2E6FnWSVsi4Xqs/pubchart?oid=235438940&amp;format=interactive"></iframe>
+![Example Table](images/01_example_table.png)
 
 The column names are used as the 'keys' for each object.
 
@@ -28,7 +28,7 @@ So `row['Open']` (or indeed `row.Open`) gives us the open price on each row.
 
 As the name implies, map takes input objects and maps them one by one over to output objects.
 
-Always keep this in mind when you are about to take Map out of your mental toolbox - only use Map when you know the length of the output array will equal the length of  input array!
+Always keep this in mind when you are about to take Map out of your mental toolbox - only use Map when you know the length of the output array will equal the length of the input array!
 
 The Map function ends up returning,
 
@@ -54,7 +54,7 @@ Now we calculate intra-day price ranges, by taking a row's low figure from the d
 
 ##Extras
 
-Sometimes, you need to know about where each element is relative to others, JavaScript adds an index feature into its implementation of map which keeps track of an element's current placing.
+Sometimes, you need to know about where each element is relative to the others, JavaScript adds an index feature into its implementation of map which keeps track of an element's current placing.
 
 `rows
   .map(
@@ -66,7 +66,7 @@ Sometimes, you need to know about where each element is relative to others, Java
 
 The `i` variable keeps track of each element's current index and we output using an 'Index' key in our object.
 
-<iframe width="600" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/1lIipy4wQWq4GPWXxjmbghhOjMETgd2E6FnWSVsi4Xqs/pubchart?oid=636326794&amp;format=interactive"></iframe>
+![Indexed Table](images/01_index_table.png)
 
 As well as keeping track of relative order each map can also have an eye on the `rows` array as a whole. E.g.
 
