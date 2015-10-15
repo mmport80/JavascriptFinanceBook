@@ -8,13 +8,14 @@ Extract, Transform and Load (ETL) takes up an inordinate amount of energy. Many 
 
 You can use variations of this line of JavaScript to transform your spreadsheets and save a whole lot of time and money.
 
-`rows
-  .map(
-   function(row){
-    return {openPrice: row['Open']};
-   }
-  );
-`
+~~~~~~~~
+rows
+	.map(
+		function(row){
+   			return {openPrice: row['Open']};
+   			}
+  		);
+~~~~~~~~
 
 While technically just one line, it's a little complex.
 
@@ -42,13 +43,14 @@ A few extra lines of JavaScript, and we can output a one column CSV file, with t
 
 Let's try something slightly trickier,
 
-`rows
-  .map(
-   function(row){
-    return {Range: row['High'] - row['Low']};
-   }
-  );
-`
+~~~~~~~~
+rows
+  	.map(
+   		function(row){
+    			return {Range: row['High'] - row['Low']};
+   			}
+  		);
+~~~~~~~~
 
 Now we calculate intra-day price ranges, by taking a row's low figure from the daily high.
 
@@ -56,13 +58,14 @@ Now we calculate intra-day price ranges, by taking a row's low figure from the d
 
 Sometimes, you need to know about where each element is relative to the others, JavaScript adds an index feature into its implementation of map which keeps track of an element's current placing.
 
-`rows
-  .map(
-   function(row, i){
-    return {Index: i, Range: row['High'] - row['Low']};
-   }
-  );
-`
+~~~~~~~~
+rows
+	.map(
+   		function(row, i){
+    			return {Index: i, Range: row['High'] - row['Low']};
+   			}
+  		);
+~~~~~~~~
 
 The `i` variable keeps track of each element's current index and we output using an 'Index' key in our object.
 
@@ -70,13 +73,14 @@ The `i` variable keeps track of each element's current index and we output using
 
 As well as keeping track of relative order each map can also have an eye on the `rows` array as a whole. E.g.
 
-`rows
-  .map(
-   function(row,i,a){
-    return {Index: a.length-i, Range: row['High'] - row['Low']};
-   }
-  );
-`
+~~~~~~~~
+rows
+  	.map(
+   		function(row,i,a){
+    			return {Index: a.length-i, Range: row['High'] - row['Low']};
+   			}
+  		);
+~~~~~~~~
 
 Now our index will count down to zero, as the new `a` variable represents `rows` within the mapping logic.
 
