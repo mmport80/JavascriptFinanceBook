@@ -66,19 +66,22 @@ For example go to, [one of Google finance's historical price pages](https://www.
 
 Using code we will learn more about in the coming chapters, type or paste this line of code into the REPL,
 
-`[].slice.call(
- $$('.gf-table.historical_price td')
- )
- .filter(
-  function(_,i){
-   return i%6===4;
-   }
-  )
- .map(
-  function(i){
-   return +i.innerHTML;
-   }
-  );`
+~~~~~~~~
+[]	.slice
+	.call(
+		$$('.gf-table.historical_price td')
+		)
+	.filter(
+  		function(_,i){
+   			return i%6===4;
+   			}
+  		)
+ 	.map(
+  		function(i){
+   			return +i.innerHTML;
+   			}
+  		);
+~~~~~~~~
 
 `>> [75.37, 77.04, 77.18, ... ]`
 
