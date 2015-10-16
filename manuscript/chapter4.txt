@@ -1,28 +1,28 @@
-#Folds
+#Reduce
 
 Up until now we have introduced a handful of new concepts which needed just two words of vocabulary - `map` and `filter`.
 
-Fold however, is a new piece of vocabulary and one of the most powerful concepts in computer science rolled into one!
+`reduce` however, is a new piece of vocabulary (also known as 'fold') and one of the most powerful concepts in computer science rolled into one!
 
-Similar to the idea of 'optionality' in quantitative finance, once you understand that folds are fundamental you begin to see them everywhere.
+Similar to the idea of 'optionality' in quantitative finance, once you understand that `reduce` is fundamental you begin to see it everywhere.
 
-But let's begin with something more down to earth - summarising a portfolio holdings file from AQR's Large Cap Momentum Fund.
+But let's begin with something more down to earth - summarising a [portfolio holdings file](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%204%20-%20reduce/testDrop.csv) from AQR's Large Cap Momentum Fund.
+
+![AQR Large Cap Momentum Fund Exposure](images/04_aqr_exposure.png)
 
 ##Beginner's Origami
 
 ~~~~~~~~
 rows
  	.reduce(
-  		function(a,c){
-   			return +c.Exposure + a;
-   			}
+  		function(total, row){
+                        return +row.Exposure + total;
+                        }
   		, 0
  		);
 ~~~~~~~~
 
-The quicker amongst you will notice no fold in the code! JavaScript uses the term `reduce` instead of fold.
-
-This line of code calculates the total exposure of a fund, you can run and download the demo from [here](https://drive.google.com/file/d/0BwPhSfUoNGHDZnRLN2RZUWYyMFU/view?usp=sharing) (best to test with FireFox).
+This line of code calculates the total exposure of a fund, you can run and download the demo from [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%204%20-%20reduce/reduce.zip) (best to test with FireFox).
 
 `reduce` takes three main arguments.
 
@@ -30,25 +30,23 @@ Starting from the bottom. The initial value. Seeing as we are calculating the to
 
 Next, a function which takes two arguments.
 
-The first `a` variable stores the current running total.
+The first `total` variable stores the current running total.
 
-The `c` variable represents the current row of data.
+The `row` variable represents the current row of data.
 
 Every time we `return`, we add to the current running total.
 
-In this case we find the `Exposure` figure for each stock holding (the `+` suffix converts text to numbers in JavaScript) and then adds it to `a` - our running total.
-
-##Gilding the Lily
+In this case we find the `Exposure` figure for each stock holding (the `+` suffix converts text to numbers in JavaScript) and then adds it to `total`.
 
 Let's tweak the code to further describe the portfolio.
 
 ~~~~~~~~
 rows
   	.reduce(
-   		function(a,c){
-    			if (+c.Exposure > +a.Exposure) { return c; }
-    			else { return a; }
-    			}
+   		function(top, row){
+                        if(+row.Exposure > +top.Exposure){ return row; }
+                        else { return top; }
+                        }
   		);
 ~~~~~~~~
 
@@ -56,7 +54,7 @@ This will return the row or stock with the largest exposure.
 
 The 'running total' is now an object. By default, if no initial value is declared, the first element in the array will be used. In this case a row object.
 
-We update `a` if a current row's exposure is greater than our current highest row.
+We update `top` if a current row's exposure is greater than our current highest row.
 
 No surprise that the largest holding for August 2015 is Apple at $68m.
 
@@ -67,11 +65,11 @@ Let's combine the first two examples and see how much of the portfolio is compri
 ~~~~~~~~
 rows
  	.reduce(
-  		function(a,c){
-   			if( c['Security Description'].contains('REIT') ){ 
-				return +c.Exposure + a;
+  		function(total,row){
+   			if( c['Security Description'].includes('REIT') ){ 
+				return +row.Exposure + total;
 				}
-   			else { return a; }
+   			else { return total; }
    			}
   		, 0
   		);
@@ -79,16 +77,16 @@ rows
 
 If the row's security description field contains the word 'REIT' we add the current row's exposure, otherwise it remains as before.
 
-Lastly, let's combine all three examples together in one fold.
+Lastly, let's combine all three examples together in one `reduce`.
 
 ~~~~~~~~
 rows
  	.reduce(
-  		function(a,c){
+  		function(results,row){
    			return {
-    				'Total': totalExp(a['Total'],c),
-    				'Top':   topExp(a['Top'],c),
-    				'REIT':  reitExp(a['REIT'],c)
+    				'Total': totalExp(results['Total'],row),
+    				'Top':   topExp(results['Top'],row),
+    				'REIT':  reitExp(results['REIT'],row)
     				};
    			}
 		, {
@@ -106,8 +104,8 @@ We now have a set or object of initial values, and we return an object matching 
 You will notice also that we have named functions for each set of logic. `totalExp` looks like this for example:
 
 ~~~~~~~~
-totalExp = function(a,c){
-	return +c.Exposure + a;
+totalExp = function(total, row){
+	return +row.Exposure + total;
 	};
 ~~~~~~~~
 
@@ -115,13 +113,13 @@ which helps keep everything tidy.
 
 The upshot?
 
-Fold or `reduce` can be incredibly efficient and succinct. We are summarising the data in three different ways with just one pass through!
+`reduce` can be incredibly efficient and succinct. We are summarising the data in three different ways with just one pass through!
 
 ##Fundamental
 
-As alluded to previously, Fold is perhaps *the* fundamental building block of functional programming, but much more than that, it is incredibly useful too!
+As alluded to previously, `reduce` is perhaps *the* fundamental building block of functional programming, but much more than that, it is incredibly useful too!
 
-We will explore more applications of Fold in the coming chapters and along the way uncover some more of its deep secrets.
+We will explore more applications of `reduce` in the coming chapters and along the way uncover some more of its deep secrets.
 
 ##More Info
 
@@ -135,4 +133,4 @@ Graham Hutton's [Tutorial](http://www.cs.nott.ac.uk/~pszgmh/fold.pdf) on the uni
 
 2) Rather than just reporting the top exposure, try reporting the top five exposures.
 
-3) Show the primitive nature of fold - reinterpret the `map` and `filter` functions just using `reduce`!
+3) Reinterpret the `map` and `filter` functions just using `reduce`!
