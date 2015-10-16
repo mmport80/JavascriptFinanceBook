@@ -21,11 +21,11 @@
                         
                         //open
                         return rows
-                          .map(
-                           function(row){
-                            return {openPrice: row['Open']};
-                           }
-                          );
+                                .map(
+                                        function(row){
+                                                return {openPrice: row['Open']};
+                                                }
+                                        );
                         
                         /*
                         //high - low
@@ -40,21 +40,21 @@
                         //high - low with index
                         /*
                         return rows
-                          .map(
-                           function(row, i){
-                            return {Index: i, Range: row['High'] - row['Low']};
-                           }
-                          );
+                                .map(
+                                        function(row, i){
+                                                return {Index: i, Range: row['High'] - row['Low']};
+                                                }
+                                        );
                           */
                         
                         //high - low with index count down
                         /*
                         return rows
-                          .map(
-                           function(row,i,a){
-                            return {Index: a.length-i, Range: row['High'] - row['Low']};
-                           }
-                          );
+                                .map(
+                                        function(row,i,a){
+                                                return {Index: a.length-i, Range: row['High'] - row['Low']};
+                                                }
+                                        );
                         */
                           
                         }
