@@ -39,7 +39,7 @@ The output will be,
 
 The `reduce` function takes an 'anonymous' function (or 'lambda') as an input.
 
-Functions are first class citizens of Javascript, so we can of course name them (if you want to jump down that rabbit hole!).
+Functions are first class citizens of Javascript, we can of course name them also, if you want to jump down that rabbit hole!
 
 ~~~~~~~~
 sum = function(total,item){
