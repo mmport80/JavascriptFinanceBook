@@ -7,8 +7,8 @@ Open up the JavaScript console and paste or type in the following code,
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
  	.filter(
-  		function(j){
-   			return j%2===1;
+  		function(item){
+   			return item%2===1;
    			}
   		);
 ~~~~~~~~
@@ -26,13 +26,13 @@ E.g.,
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
  	.filter(
-  		function(j){
-   			return j%2===1;
+  		function(item){
+   			return item%2===1;
    			}
   		)
  	.map(
-  		function(j){
-   			return j*j;
+  		function(item){
+   			return item*item;
   			}
  		);
 ~~~~~~~~
@@ -47,23 +47,23 @@ There are two things to note.
 
 Firstly, because the inputs and outputs of the filters and maps are arrays, our data flows through the logic piping we have built, in short this means we can read our code from top to bottom or left to right - in contrast to usual coding styles which are read inside out; bottom to top or right to left.
 
-E.g.,
+E.g. in illustrative *pseudo* code (it doesn't actually run),
 
 ~~~~~~~~
-[].map.call(
-	[].filter.call(
+map(
+	filter(
   		[0,1,2,3,4,5,6,7,8,9],
-   		function(i){
-     			return i%2===1;
+   		function(item){
+     			return item%2===1;
     			}
   		),
- 	function(i){
-  		return i*i;
+ 	function(item){
+  		return item*item;
  		}
 	)
 ~~~~~~~~
 
-This ‘classic’ code style is positively mind bending in comparison, and yet this is how it's usually written!
+This ‘classic’ code style is positively mind bending in comparison, and yet this is how code is often written!
 
 Secondly, whenever the order of our logic 'blocks' is not important we know we are onto something!
 
@@ -73,13 +73,13 @@ E.g. we can switch the order of map and filter,
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
  	.map(
-  		function(j){
-   			return j*j;
+  		function(item){
+   			return item*item;
    			}
   		)
  	.filter(
-  		function(j){
-   			return j%2===1;
+  		function(item){
+   			return item%2===1;
    			}
   		);
 ~~~~~~~~
