@@ -1,0 +1,86 @@
+<html>
+        <head>
+                <script src="tco.js"></script>
+        </head>
+        <body>
+                <script>
+                        "use strict"
+                
+                        var sum =
+                                (
+                                        (x, y) => {
+                                        return  y > 0 ? sum(x + 1, y - 1) :
+                                                y < 0 ? sum(x - 1, y + 1) :
+                                                x;
+                                        }
+                                )
+                          .tco2();
+                
+                        var sum2 =
+                                tco(
+                                (
+                                        x => {
+                                                return x === 0 ?
+                                                        0
+                                                        :
+                                                        x + sum2(x - 1);                                        
+                                                }
+                                )
+                                );
+                
+                
+                        var factorial = 
+                                (
+                                function(m, n) {
+                                        return n === 0 ? m : factorial(m*n, n-1);
+                                        }
+                                )
+                                .tco2()
+                                
+                        
+                        var fibonacci = function(n) {
+                                if (n < 2){
+                                        return 1;
+                                        }
+                                else{
+                                        return fibonacci(n-2) + fibonacci(n-1);
+                                        }
+                                }
+                        
+                        
+                        function fibDriver(n) {
+                                return n === 0 ? 0 : fib(0, 1, n);
+                                }
+                                 
+                        function fib(a, b, n) {
+                                return n < 3 ? b : fib(b, a+b, n-1);
+                                }
+                        
+                        
+                        
+                        /*
+                        var r = 0.1
+                        var t = 1;
+                        var sd = 0.2;
+                        var n = 4;
+                        var s = 100;
+                            
+                        var nodes = [{s:s,p:1}];
+                        var dt = t/n;
+                        var u = Math.exp(sd*Math.sqrt(dt));
+                        var d = 1/u;
+                        var p = (Math.exp(r * dt) - d) / (u - d);
+                                
+                        var binTree =
+                                (
+                                        (x, y) => {
+                                        return  y > 0 ? sum(x + 1, y - 1) :
+                                                y < 0 ? sum(x - 1, y + 1) :
+                                                x;
+                                        }
+                                )
+                          .tco2();
+                        */
+                </script>
+        </body>
+</html>
