@@ -43,12 +43,11 @@ Functions are first class citizens of Javascript, we can of course name them als
 
 ~~~~~~~~
 sum =
-    function(total,item){
-        return total + item;
-        };
+    (total,item) =>
+        total + item
 ~~~~~~~~
 ~~~~~~~~
-[1,1,1,1,1].reduce(sum);
+[1,1,1,1,1].reduce(sum)
 ~~~~~~~~
 
 Again the result is,
@@ -61,9 +60,8 @@ Rewriting or copying code is irksome and trouble prone, luckily functions in Jav
 
 ~~~~~~~~
 toGBP = 
-    function(item){
-        return item * 1.5;
-        }
+    item =>
+        item * 1.5
 ~~~~~~~~
 ~~~~~~~~
 Number.prototype.convert =
@@ -94,15 +92,14 @@ Let's add `toUSD` and find out.
 
 ~~~~~~~~
 toUSD =
-    function(item){
-        return item;
-        }
+    item =>
+        item * 1
 ~~~~~~~~
 
 It doesn't actually do much, our base currency is USD.
 
 ~~~~~~~~
-[1,2,3].reduce(sum).convert( [toGBP, toUSD] );
+[1,2,3].reduce(sum).convert( [toGBP, toUSD] )
 ~~~~~~~~
 
 `>> [ 9, 6 ]`

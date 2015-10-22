@@ -129,7 +129,7 @@ Finally, a duration function,
 ~~~~~~~~
 duration =
     ( fn, s = 0.01 ) =>
-        - (fn(s)-fn(-s))
+        ( fn(-s)-fn(s) )
         / fn()
         / (s*2);
 ~~~~~~~~

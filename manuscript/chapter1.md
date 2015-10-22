@@ -13,7 +13,7 @@ Do some maths,
 ~~~~~~~~
 
 ~~~~~~~~
->>2
+>> 2
 ~~~~~~~~
 
 or
@@ -23,7 +23,7 @@ Math.log(Math.E)
 ~~~~~~~~
 
 ~~~~~~~~
->>1
+>> 1
 ~~~~~~~~
 
 ##Welcome to the Web's OS
@@ -84,7 +84,7 @@ Using code we will learn more about in the coming chapters, type or paste this l
         $$('.gf-table.historical_price td')
         )
 	.filter(
-  		(_,i) => i%6===4
+  		(_,i) => i % 6 === 4
   		)
  	.map(
   		i => +i.innerHTML
