@@ -11,6 +11,7 @@ Do some maths,
 ~~~~~~~~
 1+1
 ~~~~~~~~
+
 ~~~~~~~~
 >>2
 ~~~~~~~~
@@ -20,6 +21,7 @@ or
 ~~~~~~~~
 Math.log(Math.E)
 ~~~~~~~~
+
 ~~~~~~~~
 >>1
 ~~~~~~~~
@@ -78,18 +80,14 @@ Using code we will learn more about in the coming chapters, type or paste this l
 
 ~~~~~~~~
 [].slice
-        .call(
-		    $$('.gf-table.historical_price td')
-		    )
+    .call(
+        $$('.gf-table.historical_price td')
+        )
 	.filter(
-  		function(_,i){
-   			return i%6===4;
-   			}
+  		(_,i) => i%6===4
   		)
  	.map(
-  		function(i){
-   			return +i.innerHTML;
-   			}
+  		i => +i.innerHTML
   		);
 ~~~~~~~~
 

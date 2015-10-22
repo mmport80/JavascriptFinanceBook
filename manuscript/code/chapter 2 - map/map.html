@@ -22,16 +22,18 @@
                         //open
                         return rows
                                 .map(
-                                        function(row){
+                                        row => 
+                                                {
                                                 return {openPrice: row['Open']};
                                                 }
                                         );
                         
-                        /*
                         //high - low
+                        /*
                         return rows
                                 .map(
-                                        function(row){
+                                        row =>
+                                                {
                                                 return {Range: row['High'] - row['Low']};
                                                 }
                                          );
@@ -41,17 +43,19 @@
                         /*
                         return rows
                                 .map(
-                                        function(row, i){
+                                        (row, i) =>
+                                                {
                                                 return {Index: i, Range: row['High'] - row['Low']};
                                                 }
                                         );
-                          */
+                        */
                         
                         //high - low with index count down
                         /*
                         return rows
                                 .map(
-                                        function(row,i,a){
+                                        (row,i,a) =>
+                                                {
                                                 return {Index: a.length-i, Range: row['High'] - row['Low']};
                                                 }
                                         );

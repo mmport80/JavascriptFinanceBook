@@ -11,9 +11,7 @@ You can use variations of this line of JavaScript to transform your spreadsheets
 ~~~~~~~~
 rows
 	.map(
-		function(row){
-   			return {openPrice: row['Open']};
-   			}
+		row => {openPrice: row['Open']}
   		);
 ~~~~~~~~
 
