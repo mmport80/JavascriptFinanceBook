@@ -6,8 +6,8 @@ Open up the JavaScript console and paste or type in the following code,
 
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
- 	.filter(
-  		function(item){
+    .filter(
+	    function(item){
    			return item%2===1;
    			}
   		);
@@ -28,7 +28,7 @@ E.g.,
  	.filter(
   		function(item){
    			return item%2===1;
-   			}
+		    }
   		)
  	.map(
   		function(item){
@@ -54,8 +54,8 @@ map(
 	filter(
   		[0,1,2,3,4,5,6,7,8,9],
    		function(item){
-     			return item%2===1;
-    			}
+ 			return item%2===1;
+			}
   		),
  	function(item){
   		return item*item;

@@ -26,11 +26,11 @@ Simplifying the example found in the previous chapter, paste this into your Java
 
 ~~~~~~~~
 [1,1,1,1,1]
-        .reduce(
-                function(total,item){
-                        return total + item;
-                        }
-                );
+    .reduce(
+        function(total,item){
+            return total + item;
+            }
+        );
 ~~~~~~~~
 
 The output will be,
@@ -42,7 +42,8 @@ The `reduce` function takes an 'anonymous' function (or 'lambda') as an input.
 Functions are first class citizens of Javascript, we can of course name them also, if you want to jump down that rabbit hole!
 
 ~~~~~~~~
-sum = function(total,item){
+sum =
+    function(total,item){
         return total + item;
         };
 ~~~~~~~~
@@ -59,15 +60,16 @@ It is easy to imagine a complicated scenario similar to the last chapter where w
 Rewriting or copying code is irksome and trouble prone, luckily functions in JavaScript are super flexible.
 
 ~~~~~~~~
-toGBP = function(item){
- return item * 1.5;
- }
+toGBP = 
+    function(item){
+        return item * 1.5;
+        }
 ~~~~~~~~
 ~~~~~~~~
 Number.prototype.convert =
- function(funs){
-  return funs.map( f => f(this) );
-  }
+    function(funs){
+        return funs.map( f => f(this) );
+        }
 ~~~~~~~~
 
 Before we deconstruct this, let's run it.
@@ -91,9 +93,10 @@ Why is `toGBP` encased in square array brackets?
 Let's add `toUSD` and find out.
 
 ~~~~~~~~
-toUSD = function(item){
- return item;
- }
+toUSD =
+    function(item){
+        return item;
+        }
 ~~~~~~~~
 
 It doesn't actually do much, our base currency is USD.
@@ -112,9 +115,9 @@ For fun let's rename the `reduce` function.
 
 ~~~~~~~~
 Array.prototype.calculate =
- function(fun){
-  return this.reduce(fun);
-  }
+    function(fun){
+        return this.reduce(fun);
+        }
 ~~~~~~~~
 
 ~~~~~~~~

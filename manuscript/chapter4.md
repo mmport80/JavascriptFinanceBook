@@ -16,8 +16,8 @@ But let's begin with something more down to earth - summarising a [portfolio hol
 rows
  	.reduce(
   		function(total, row){
-                        return +row.Exposure + total;
-                        }
+            return +row.Exposure + total;
+            }
   		, 0
  		);
 ~~~~~~~~
@@ -44,9 +44,9 @@ Let's tweak the code to further describe the portfolio.
 rows
   	.reduce(
    		function(top, row){
-                        if(+row.Exposure > +top.Exposure){ return row; }
-                        else { return top; }
-                        }
+            if(+row.Exposure > +top.Exposure){ return row; }
+            else { return top; }
+            }
   		);
 ~~~~~~~~
 
@@ -83,17 +83,18 @@ Lastly, let's combine all three examples together in one `reduce`.
 rows
  	.reduce(
   		function(results,row){
-   			return {
-    				'Total': totalExp(results['Total'],row),
-    				'Top':   topExp(results['Top'],row),
-    				'REIT':  reitExp(results['REIT'],row)
-    				};
+   			return 
+   			    {
+			    'Total': totalExp(results['Total'],row),
+				'Top':   topExp(results['Top'],row),
+				'REIT':  reitExp(results['REIT'],row)
+				};
    			}
-		, {
-    			'Total': 0,
-    			'Top':   {Exposure:-Infinity},
-    			'REIT':  0
-    			}
+		,   {
+			'Total': 0,
+			'Top':   {Exposure:-Infinity},
+			'REIT':  0
+			}
  		);
 ~~~~~~~~
 

@@ -16,7 +16,6 @@ As the old saying goes though,
 
 First let's create a 'complicated' function. Open your JavaScript console and paste the following,
 
-{lang='js'}
 ~~~~~~~~
 zeroCouponBondValue =
     (p,y,i) =>
@@ -37,7 +36,6 @@ Our valuation function might be perfectly fine for accountants, but for traders 
 
 Let's *halve* the valuation function into two pieces, one half representing bond terms and conditions and the other fluctuating market data.
 
-{lang='js'}
 ~~~~~~~~
 partialVal =
     (p, y) =>
@@ -67,7 +65,6 @@ Of course, as well as modelling 'instantaneous' shocks to the portfolio, you mig
 
 We will carve out 'years to maturity' too then.
 
-{lang='js'}
 ~~~~~~~~
 partialVal =
     (p) =>
@@ -100,7 +97,6 @@ As well as carving it up we can add to its functionality.
 
 For example,
 
-{lang='js'}
 ~~~~~~~~
 partialVal =
     (p) =>
@@ -130,7 +126,6 @@ but now we can add a shock,
 
 Finally, a duration function,
 
-{lang='js'}
 ~~~~~~~~
 duration =
     ( fn, s = 0.01 ) =>

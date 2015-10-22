@@ -47,7 +47,7 @@ Let's try something slightly trickier,
 rows
   	.map(
    		function(row){
-    			return {Range: row['High'] - row['Low']};
+			return {Range: row['High'] - row['Low']};
    			}
   		);
 ~~~~~~~~
@@ -77,7 +77,7 @@ As well as keeping track of relative order each map can also have an eye on the 
 rows
   	.map(
    		function(row,i,a){
-    			return {Index: a.length-i, Range: row['High'] - row['Low']};
+			return {Index: a.length-i, Range: row['High'] - row['Low']};
    			}
   		);
 ~~~~~~~~
