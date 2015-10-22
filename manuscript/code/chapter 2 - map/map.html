@@ -19,24 +19,23 @@
         
                 function processFile(rows) {
                         
+                        
                         //open
                         return rows
                                 .map(
-                                        row => 
-                                                {
-                                                return {openPrice: row['Open']};
-                                                }
+                                        row =>
+                                                ( {openPrice: row['Open']} )
                                         );
                         
-                        //high - low
+                        
                         /*
+                        //high - low
+                        
                         return rows
                                 .map(
                                         row =>
-                                                {
-                                                return {Range: row['High'] - row['Low']};
-                                                }
-                                         );
+                                                ( {Range: row['High'] - row['Low']} )
+                                        );
                         */
                           
                         //high - low with index
@@ -44,9 +43,7 @@
                         return rows
                                 .map(
                                         (row, i) =>
-                                                {
-                                                return {Index: i, Range: row['High'] - row['Low']};
-                                                }
+                                                ( {Index: i, Range: row['High'] - row['Low']} )
                                         );
                         */
                         
@@ -55,9 +52,7 @@
                         return rows
                                 .map(
                                         (row,i,a) =>
-                                                {
-                                                return {Index: a.length-i, Range: row['High'] - row['Low']};
-                                                }
+                                                ( {Index: a.length-i, Range: row['High'] - row['Low']} )
                                         );
                         */
                           

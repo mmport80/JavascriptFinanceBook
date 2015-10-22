@@ -11,7 +11,7 @@ You can use variations of this line of JavaScript to transform your spreadsheets
 ~~~~~~~~
 rows
 	.map(
-		row => {openPrice: row['Open']}
+		row => ( {openPrice: row['Open']} )
   		);
 ~~~~~~~~
 
@@ -44,9 +44,8 @@ Let's try something slightly trickier,
 ~~~~~~~~
 rows
   	.map(
-   		function(row){
-			return {Range: row['High'] - row['Low']};
-   			}
+   		row =>
+   		    ( {Range: row['High'] - row['Low']} )
   		);
 ~~~~~~~~
 
@@ -59,9 +58,8 @@ Sometimes, you need to know about where each element is relative to the others, 
 ~~~~~~~~
 rows
 	.map(
-   		function(row, i){
-			return {Index: i, Range: row['High'] - row['Low']};
-   			}
+   		(row, i) =>
+   		    ( {Index: i, Range: row['High'] - row['Low']} )
   		);
 ~~~~~~~~
 
@@ -74,9 +72,8 @@ As well as keeping track of relative order each map can also have an eye on the 
 ~~~~~~~~
 rows
   	.map(
-   		function(row,i,a){
-			return {Index: a.length-i, Range: row['High'] - row['Low']};
-   			}
+   		(row,i,a) =>
+   		    ( {Index: a.length-i, Range: row['High'] - row['Low']} )
   		);
 ~~~~~~~~
 

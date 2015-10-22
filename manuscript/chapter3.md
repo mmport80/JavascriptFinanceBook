@@ -7,10 +7,8 @@ Open up the JavaScript console and paste or type in the following code,
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
     .filter(
-	    function(item){
-   			return item%2===1;
-   			}
-  		);
+	    item => item % 2 === 1
+  		)
 ~~~~~~~~
 
 This code filters the array of numbers and returns an array of odd numbers.
@@ -26,15 +24,11 @@ E.g.,
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
  	.filter(
-  		function(item){
-   			return item%2===1;
-		    }
+  		item => item %2 === 1
   		)
  	.map(
-  		function(item){
-   			return item*item;
-  			}
- 		);
+  		item => item * item
+ 		)
 ~~~~~~~~
 
 The code filters out even numbers then squares whatever's left,
@@ -53,13 +47,11 @@ E.g. in illustrative *pseudo* code (it doesn't actually run),
 map(
 	filter(
   		[0,1,2,3,4,5,6,7,8,9],
-   		function(item){
- 			return item%2===1;
-			}
+   		item =>
+   		    item % 2 === 1
   		),
- 	function(item){
-  		return item*item;
- 		}
+ 	item =>
+ 	    item * item
 	)
 ~~~~~~~~
 
@@ -73,15 +65,11 @@ E.g. we can switch the order of map and filter,
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
  	.map(
-  		function(item){
-   			return item*item;
-   			}
+  		item => item * item
   		)
  	.filter(
-  		function(item){
-   			return item%2===1;
-   			}
-  		);
+  		item => item % 2 === 1
+  		)
 ~~~~~~~~
 
 and the result is the same.
