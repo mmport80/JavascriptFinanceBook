@@ -38,9 +38,12 @@ function handleFileSelect(evt) {
 
 	var reader = new FileReader();
 	reader.onload = function (event) {
-	        var fileData = event.target.result;	
+	        var fileData = event.target.result;
+                //setup csv download	
                 setUpCSV(
+                        //do custom processing
                         processFile( 
+                                //parse file data
                                 d3.csv.parse(fileData)
                                 )
                         );
