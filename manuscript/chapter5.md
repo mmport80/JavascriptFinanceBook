@@ -1,4 +1,4 @@
-#High Order Functions
+#Higher Order Functions
 
 The most difficult thing to do in computer science is naming things.
 
