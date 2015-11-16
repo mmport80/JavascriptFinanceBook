@@ -23,15 +23,19 @@ Programmers solve this waiting problem caused by distributed systems using the c
 
 Usually when we do something in a programming language we expect the `A`, `B` and `C` commands to be executed in order.
 
-`|----A-----||-----B-----------||-------C------|`
+~~~~~~~~
+|----A-----||-----B-----------||-------C------|
+~~~~~~~~
 
 Once `A` is finished we move on to `B` and so on.
 
 I.e. `A`'s input and output occur *synchronously* within the same time period 'A'.
 
-`|----A-----|
+~~~~~~~~
+|----A-----|
   |-----B-----------| 
-   |-------C------|`
+   |-------C------|
+~~~~~~~~
 
 With asynchronous execution, we kick off `A`, `B` then `C`, and they run *asynchronously* until they are finished.
 
@@ -183,8 +187,9 @@ This particular 'postbox' accepts two messages `a` and `b`.
 After being sent two messages, the postbox will process the data. In this case it will log the output of a generalised VLookUp function.
 
 We initialise `postBox` like so,
+
 ~~~~~~~~
-`const send = postBox();
+const send = postBox();
 send.next();
 ~~~~~~~~
 
