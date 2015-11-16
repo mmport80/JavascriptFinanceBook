@@ -9,7 +9,7 @@ Our programs are only as fast as the slowest component.
 
 To put machine-scale wait times in a human context, this table normalises wait times to a base of one second.
 
-![](images/07_latency_table.png)
+![Latency Table](images/07_latency_table.png)
 
 [[Systems Performance: Enterprise and the Cloud](http://www.amazon.com/dp/0133390098/?tag=codihorr-20) via [Jeff Atwood](http://blog.codinghorror.com/the-infinite-space-between-words/)]
 
@@ -194,7 +194,7 @@ Each message is sent in this format,
 
 We will demo this functionality in a demo application which is part of code used to backtest a strategy based on EuroDollar prices.  
 
-![](images/07_eurodollar_prices.png)
+![Euro Dollar Prices](images/07_eurodollar_prices.png)
 
 (Example EuroDollar price history file)
 
