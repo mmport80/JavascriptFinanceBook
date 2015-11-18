@@ -1,0 +1,62 @@
+<html>
+        <head></head>
+        <body></body>
+        
+        <script type="text/javascript" charset="utf-8">
+        
+                "use strict";
+                
+                var first = 1;
+                var second = 2;
+        
+        	// Requires script name as input
+        	var myWorker = new Worker("worker.js");
+
+        	myWorker.postMessage(["xoxo"]); //sending message as array to the worker
+                
+                var workerResult = n => 'Result: ' + n;
+  
+                myWorker.postMessage([workerResult(1)]);
+                
+        	console.log('Message posted to worker');
+
+        	myWorker.postMessage([workerResult(2)]);
+        	console.log('Message posted to worker');
+
+        	myWorker.onmessage =
+                        e =>
+                                {
+                                var result = e.data;
+                		console.log('Message received from worker');
+                                console.log(result);
+                	        };
+        
+        
+                
+                var generate = (n) =>
+                        n <= 1 ? 
+                                [n-1]
+                                :
+                                generate(n-1).concat([n-1]);
+                
+                
+                Array.prototype.fibonacciNumbers = function(){
+                        return this.reduce( 
+                                (a,c) =>
+                                        a.concat(a[a.length-1]+a[a.length-2]), 
+                                [0,1] 
+                                );
+                        }
+                        
+                Array.prototype.randomNumbers = function(){
+                        return this.reduce( 
+                                (a,c) =>
+                                        a.concat(Math.random()), 
+                                [] 
+                                );
+                        }
+        
+                
+        </script>
+           
+</html>
