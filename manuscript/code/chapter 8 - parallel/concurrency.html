@@ -1,61 +1,63 @@
 <html>
-        <head></head>
+        <head>
+
+                <script type="text/javascript" src="jstat.min.js"></script>
+                <script type="text/javascript" src="monteCarlo.js"></script>
+        </head>
         <body></body>
         
         <script type="text/javascript" charset="utf-8">
         
                 "use strict";
                 
-                var first = 1;
-                var second = 2;
-        
-        	// Requires script name as input
-        	var myWorker = new Worker("worker.js");
-
-        	myWorker.postMessage(["xoxo"]); //sending message as array to the worker
+                ////////////////////////////////////
                 
-                var workerResult = n => 'Result: ' + n;
-  
-                myWorker.postMessage([workerResult(1)]);
-                
-        	console.log('Message posted to worker');
-
-        	myWorker.postMessage([workerResult(2)]);
-        	console.log('Message posted to worker');
-
-        	myWorker.onmessage =
-                        e =>
-                                {
-                                var result = e.data;
-                		console.log('Message received from worker');
-                                console.log(result);
-                	        };
-        
-        
-                
-                var generate = (n) =>
-                        n <= 1 ? 
-                                [n-1]
-                                :
-                                generate(n-1).concat([n-1]);
-                
-                
-                Array.prototype.fibonacciNumbers = function(){
-                        return this.reduce( 
-                                (a,c) =>
-                                        a.concat(a[a.length-1]+a[a.length-2]), 
-                                [0,1] 
-                                );
-                        }
+                //collect results
+                var postBox = function*(){
+                        console.time("Concurrent");
                         
-                Array.prototype.randomNumbers = function(){
-                        return this.reduce( 
-                                (a,c) =>
-                                        a.concat(Math.random()), 
-                                [] 
-                                );
+                        const a = yield;
+                        
+                        const b = yield;
+                        
+                        console.log( (a + b) / 2 );
+                                
+                        console.timeEnd("Concurrent");
                         }
-        
+                
+                //init
+                const send = postBox();
+                send.next();
+                
+                //create worker object
+                const c =
+                        (forwardStrikePrice, spot, volatility, expiry, interestRate) =>
+                                {
+                                const w = new Worker("worker.js");
+                                w.postMessage(
+                                        [
+                                                {
+                                                forwardStrikePrice:     forwardStrikePrice, 
+                                                spot:                   spot, 
+                                                volatility:             volatility, 
+                                                expiry:                 expiry, 
+                                                interestRate:           interestRate
+                                                }
+                                        ] 
+                                        );    
+                                w.onmessage =
+                                        result =>
+                                                {
+                                  		console.log('Message received from worker');
+                                                console.log(result.data);
+                                                send.next(result.data);
+                                  	        };
+                                return w;
+                                }
+                                
+                c(110, 100, 0.1, 10, 0.01);
+                
+                c(110, 100, 0.1, 10, 0.01);
                 
         </script>
            
