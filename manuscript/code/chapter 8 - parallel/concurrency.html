@@ -31,13 +31,27 @@
                                 console.log(result);
                 	        };
         
-        
-                
-                var generate = (n) =>
+                //this as the prototype function
+                //accepts function
+                //applies function after intial array gen
+                //if poss would simplify code quite a bit... 
+                const generate = n =>
                         n <= 1 ? 
-                                [n-1]
+                                [0]
                                 :
-                                generate(n-1).concat([n-1]);
+                                [0].concat(generate(n-1));
+                             
+                Function.prototype.take = n =>
+                        n <= 1 ? 
+                                [0].this
+                                :
+                                [0].concat(generate(n-1));
+                             
+                 Array.prototype.brownianMotion = function(){
+                        return this.map( 
+                                _ => Math.random()
+                                );
+                        }
                 
                 
                 Array.prototype.fibonacciNumbers = function(){
@@ -47,12 +61,11 @@
                                 [0,1] 
                                 );
                         }
+        
                         
                 Array.prototype.randomNumbers = function(){
-                        return this.reduce( 
-                                (a,c) =>
-                                        a.concat(Math.random()), 
-                                [] 
+                        return this.map( 
+                                _ => Math.random()
                                 );
                         }
         
