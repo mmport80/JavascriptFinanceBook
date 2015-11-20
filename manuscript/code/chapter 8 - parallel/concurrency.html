@@ -1,19 +1,18 @@
 <html>
-        <head></head>
+        <head>
+
+                <script type="text/javascript" src="jstat.min.js"></script>
+                <script type="text/javascript" src="monteCarlo.js"></script>
+        </head>
         <body></body>
         
         <script type="text/javascript" charset="utf-8">
         
                 "use strict";
                 
-                var first = 1;
-                var second = 2;
-        
-        	// Requires script name as input
-        	var myWorker = new Worker("worker.js");
-
-        	myWorker.postMessage(["xoxo"]); //sending message as array to the worker
+                ////////////////////////////////////
                 
+<<<<<<< HEAD
                 var workerResult = n => 'Result: ' + n;
   
                 myWorker.postMessage([workerResult(1)]);
@@ -52,8 +51,54 @@
                                 _ => Math.random()
                                 );
                         }
+=======
+                //collect results
+                var postBox = function*(){
+                        console.time("Concurrent");
+                        
+                        const a = yield;
+                        
+                        const b = yield;
+                        
+                        console.log( (a + b) / 2 );
+                                
+                        console.timeEnd("Concurrent");
+                        }
                 
+                //init
+                const send = postBox();
+                send.next();
+>>>>>>> 50fa8449aea1ab407d59a45f646e4dfa0ce087ec
                 
+                //create worker object
+                const c =
+                        (forwardStrikePrice, spot, volatility, expiry, interestRate) =>
+                                {
+                                const w = new Worker("worker.js");
+                                w.postMessage(
+                                        [
+                                                {
+                                                forwardStrikePrice:     forwardStrikePrice, 
+                                                spot:                   spot, 
+                                                volatility:             volatility, 
+                                                expiry:                 expiry, 
+                                                interestRate:           interestRate
+                                                }
+                                        ] 
+                                        );    
+                                w.onmessage =
+                                        result =>
+                                                {
+                                  		console.log('Message received from worker');
+                                                console.log(result.data);
+                                                send.next(result.data);
+                                  	        };
+                                return w;
+                                }
+                                
+                c(110, 100, 0.1, 10, 0.01);
+                
+<<<<<<< HEAD
                 Array.prototype.fibonacciNumbers = function(){
                         return this.reduce( 
                                 (a,c) =>
@@ -69,6 +114,9 @@
                                 );
                         }
         
+=======
+                c(110, 100, 0.1, 10, 0.01);
+>>>>>>> 50fa8449aea1ab407d59a45f646e4dfa0ce087ec
                 
         </script>
            
