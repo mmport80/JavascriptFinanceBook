@@ -1,0 +1,83 @@
+
+
+<html>
+        <head>
+        	<script src="plotly-latest.min.js"></script>
+        </head>
+        <body>
+                <div id="graph" style="width:80%;height:80%;"></div>
+        </body>  
+        <script>
+        
+        
+        
+        const generate =
+                n =>
+                        n <= 1 ? 
+                                [1]
+                                :
+                                [1].concat( generate(n-1) );
+                                
+        Array.prototype.yearsFromNow = function(){
+                const yr = new Date().getFullYear();
+                return this.map( 
+                        (_ , i) => yr + i
+                        );
+                }
+
+        Plotly.plot( 
+                document.getElementById('graph'), 
+                [
+                        {
+                                x: [],
+                                y: []
+                        }
+                ],
+                        {
+                        margin: { t: 0 } 
+                        } 
+                );
+
+        const postBox = function*(yy){
+                
+                const y = yield;
+                
+                newData = yy.concat(y);
+                
+                sorted_y = newData.sort( (a,b) => a.year > b.year)
+                
+                Plotly.addTraces( 
+                        document.getElementById('graph'), 
+                        [
+                                {
+                                        x: sorted_y.map( y => y.year ),
+                                        y: sorted_y.map( y => y.result[0].Settle )
+                                }
+                        ],
+                                {
+                                margin: { t: 0 } 
+                                } 
+                        );
+                
+                yield* postBox(newData);
+                }
+                
+        //init
+        const send = postBox([]);
+        send.next();
+        
+        //retrieve and parse data
+        
+        generate(10)
+                .yearsFromNow()
+                .map(
+                        yr =>
+                               d3.csv( 
+                                       "https://www.quandl.com/api/v3/datasets/CME/EDU"+yr+".csv?api_key=Fp6cFhibc5xvL2pN3dnu", 
+                                       data => send.next( {year: yr, result: data} ) 
+                                       ) 
+                        )
+        
+        </script>
+
+</html>
