@@ -2,14 +2,17 @@
 
 <html>
         <head>
-        	<script src="plotly-latest.min.js"></script>
+        	<script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         </head>
         <body>
                 <div id="graph" style="width:80%;height:80%;"></div>
-        </body>  
+        </body>
+        <!-- Default to "" if secret file doesn't exist -->
+        <script> var quandlApiKey = "";</script>
+        <!-- Store API secret in this file -->
+        <script src="quandl-api-key.js"></script>
         <script>
-        
-        
+        "use strict";
         
         const generate =
                 n =>
@@ -17,49 +20,41 @@
                                 [1]
                                 :
                                 [1].concat( generate(n-1) );
-                                
+        
         Array.prototype.yearsFromNow = function(){
-                const yr = new Date().getFullYear();
-                return this.map( 
-                        (_ , i) => yr + i
+                const nextYear = new Date().getFullYear() + 1;
+                return this.map(
+                        (_ , i) =>
+                                nextYear + i 
                         );
                 }
 
-        Plotly.plot( 
-                document.getElementById('graph'), 
-                [
-                        {
-                                x: [],
-                                y: []
-                        }
-                ],
-                        {
-                        margin: { t: 0 } 
-                        } 
-                );
-
-        const postBox = function*(yy){
+        const postBox = function*(previousData){
+                const newData = yield;
+                const combinedData = previousData.concat(newData);
+                const sortedData = combinedData.sort( (a,b) => a.year > b.year);
                 
-                const y = yield;
+                const graphDiv = document.getElementById('graph');
                 
-                newData = yy.concat(y);
+                const trace = {
+                                x: sortedData.map( futureContract => futureContract.year ),
+                                //latest settle price
+                                y: sortedData.map( futureContract => futureContract.data[0].Settle )
+                                };
                 
-                sorted_y = newData.sort( (a,b) => a.year > b.year)
-                
-                Plotly.addTraces( 
-                        document.getElementById('graph'), 
-                        [
-                                {
-                                        x: sorted_y.map( y => y.year ),
-                                        y: sorted_y.map( y => y.result[0].Settle )
-                                }
-                        ],
-                                {
-                                margin: { t: 0 } 
-                                } 
+                const layout = {
+                        title: "Euro Dollar Term Structure",
+                        xaxis: { title:"Maturity Year" },
+                        yaxis: { title:"Current Price" }
+                        };
+                        
+                Plotly.newPlot( 
+                        graphDiv, 
+                        [ trace ],
+                        layout
                         );
                 
-                yield* postBox(newData);
+                yield* postBox(sortedData);
                 }
                 
         //init
@@ -67,15 +62,14 @@
         send.next();
         
         //retrieve and parse data
-        
         generate(10)
                 .yearsFromNow()
                 .map(
-                        yr =>
+                        year =>
                                d3.csv( 
-                                       "https://www.quandl.com/api/v3/datasets/CME/EDU"+yr+".csv?api_key=Fp6cFhibc5xvL2pN3dnu", 
-                                       data => send.next( {year: yr, result: data} ) 
-                                       ) 
+                                       "https://www.quandl.com/api/v3/datasets/CME/EDU"+year+".csv?api_key="+quandlApiKey, 
+                                       data => send.next( {year: year, data: data} ) 
+                                       )
                         )
         
         </script>
