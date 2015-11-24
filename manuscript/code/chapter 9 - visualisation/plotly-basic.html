@@ -14,21 +14,7 @@
         <script>
         "use strict";
         
-        const generate =
-                n =>
-                        n <= 1 ? 
-                                [1]
-                                :
-                                [1].concat( generate(n-1) );
-        
-        Array.prototype.yearsFromNow = function(){
-                const nextYear = new Date().getFullYear() + 1;
-                return this.map(
-                        (_ , i) =>
-                                nextYear + i 
-                        );
-                }
-
+        //accumulate data and plot
         const postBox = function*(previousData){
                 const newData = yield;
                 const combinedData = previousData.concat(newData);
@@ -61,7 +47,24 @@
         const send = postBox([]);
         send.next();
         
-        //retrieve and parse data
+        //generate
+        const generate =
+                n =>
+                        n <= 1 ? 
+                                [1]
+                                :
+                                [1].concat( generate(n-1) );
+        
+        //years, i.e. 2016, 2017 etc...
+        Array.prototype.yearsFromNow = function(){
+                const nextYear = new Date().getFullYear() + 1;
+                return this.map(
+                        (_ , i) =>
+                                nextYear + i 
+                        );
+                }
+        
+        //retrieve data from Quandl and parse
         generate(10)
                 .yearsFromNow()
                 .map(
