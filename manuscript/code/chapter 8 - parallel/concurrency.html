@@ -12,7 +12,6 @@
                 
                 ////////////////////////////////////
                 
-<<<<<<< HEAD
                 var workerResult = n => 'Result: ' + n;
   
                 myWorker.postMessage([workerResult(1)]);
@@ -51,7 +50,7 @@
                                 _ => Math.random()
                                 );
                         }
-=======
+                        
                 //collect results
                 var postBox = function*(){
                         console.time("Concurrent");
@@ -68,7 +67,6 @@
                 //init
                 const send = postBox();
                 send.next();
->>>>>>> 50fa8449aea1ab407d59a45f646e4dfa0ce087ec
                 
                 //create worker object
                 const c =
@@ -97,8 +95,7 @@
                                 }
                                 
                 c(110, 100, 0.1, 10, 0.01);
-                
-<<<<<<< HEAD
+            
                 Array.prototype.fibonacciNumbers = function(){
                         return this.reduce( 
                                 (a,c) =>
@@ -114,9 +111,7 @@
                                 );
                         }
         
-=======
                 c(110, 100, 0.1, 10, 0.01);
->>>>>>> 50fa8449aea1ab407d59a45f646e4dfa0ce087ec
                 
         </script>
            
