@@ -1,0 +1,73 @@
+<html>
+        <head>
+
+                <script type="text/javascript" src="jstat.min.js"></script>
+                <script type="text/javascript" src="monteCarlo.js"></script>
+        </head>
+        <body></body>
+        
+        <script type="text/javascript" charset="utf-8">
+        
+                "use strict";
+                
+                //collect results
+                var postBox = function*(previousData){
+                        const a = yield;
+                        const latestData = previousData.concat(a);
+                        
+                        console.log(latestData.length);
+                        console.log(latestData);
+                        
+                        yield* postBox(latestData);
+                        }
+                
+                //init
+                const send = postBox([]);
+                send.next();
+                
+                //create worker object
+                const c =
+                        (forwardStrikePrice, spot, volatility, expiry, interestRate) =>
+                                {
+                                const w = new Worker("worker.js");
+                                w.postMessage(
+                                        [
+                                                {
+                                                forwardStrikePrice:     forwardStrikePrice, 
+                                                spot:                   spot, 
+                                                volatility:             volatility, 
+                                                expiry:                 expiry, 
+                                                interestRate:           interestRate
+                                                }
+                                        ] 
+                                        );    
+                                w.onmessage =
+                                        result =>
+                                                {
+                                  		send.next(result.data);
+                                                w.terminate();
+                                  	        };
+                                return w;
+                                }
+                
+                
+                //value for a series of maturities and volatilities
+                //generate(10).yearsToMaturity().generate(10).volatilities()
+                //c(110, 100, 0.1, 10, 0.01);
+                //c(110, 100, 0.1, 10, 0.01);
+                
+                
+                var maturities = generate(10).map( (_,index) => index+1 );
+                var vols = generate(10).map( (_,index) => (index+1)*0.1 );
+                       
+                                 
+                maturities.map(
+                        m => vols.map(
+                                v => c(110, 100, v, m, 0.01)
+                                )
+                        );
+                
+                
+        </script>
+           
+</html>
