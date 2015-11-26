@@ -17,8 +17,12 @@ onmessage = function(e) {
         
         postMessage(
                 {
-                        parameters:     parameters,
-                        result:         jStat(callPrices).mean() 
+                        forwardStrikePrice:     parameters.forwardStrikePrice, 
+                        spot:                   parameters.spot, 
+                        volatility:             parameters.volatility, 
+                        expiry:                 parameters.expiry, 
+                        interestRate:           parameters.interestRate,
+                        result:                 jStat(callPrices).mean() 
                 }
                 );
         }

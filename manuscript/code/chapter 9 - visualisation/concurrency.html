@@ -3,20 +3,58 @@
 
                 <script type="text/javascript" src="jstat.min.js"></script>
                 <script type="text/javascript" src="monteCarlo.js"></script>
+                <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
         </head>
-        <body></body>
+        
+        
+        
+        <body>
+                
+                <div id="graph" style="width:80%;height:80%;"></div>
+                
+        </body>
         
         <script type="text/javascript" charset="utf-8">
         
                 "use strict";
+                
+                
+                
+                var maturities = generate(10).map( (_,index) => index+1 );
+                var vols = generate(10).map( (_,index) => (index+1)*0.1 );
                 
                 //collect results
                 var postBox = function*(previousData){
                         const a = yield;
                         const latestData = previousData.concat(a);
                         
-                        console.log(latestData.length);
-                        console.log(latestData);
+                        const es = _.uniq(
+                                        _.pluck(latestData,"expiry")
+                                        )
+                                        .sort( (a,b) => a > b );
+                        const vs = _.uniq(
+                                        _.pluck(latestData,"volatility")
+                                        )
+                                        .sort( (a,b) => a > b );
+                        
+                        const ps = 
+                        
+                        
+                        
+                        var data = [    {
+                                        x: es,
+                                        y: vs,
+                                        z: ps,                                        
+                                        type: 'surface'
+                                        }
+                                ];
+                                
+                        var layout = {
+                                title: 'Mt Bruno Elevation',
+                                };
+                                
+                        Plotly.newPlot('graph', data, layout);
                         
                         yield* postBox(latestData);
                         }
@@ -49,17 +87,6 @@
                                   	        };
                                 return w;
                                 }
-                
-                
-                //value for a series of maturities and volatilities
-                //generate(10).yearsToMaturity().generate(10).volatilities()
-                //c(110, 100, 0.1, 10, 0.01);
-                //c(110, 100, 0.1, 10, 0.01);
-                
-                
-                var maturities = generate(10).map( (_,index) => index+1 );
-                var vols = generate(10).map( (_,index) => (index+1)*0.1 );
-                       
                                  
                 maturities.map(
                         m => vols.map(
