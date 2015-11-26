@@ -1,0 +1,111 @@
+<html>
+        <head>
+
+                <script type="text/javascript" src="jstat.min.js"></script>
+                <script type="text/javascript" src="monteCarlo.js"></script>
+                <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+        </head>
+        
+        
+        
+        <body>
+                
+                <div id="graph" style="width:80%;height:80%;"></div>
+                
+        </body>
+        
+        <script type="text/javascript" charset="utf-8">
+        
+                "use strict";
+                
+                var expiries = [1,2,3,4,5,6,7,8,9,10];
+                var volatilities = [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1];
+                
+                //collect results
+                var postBox = function*(previousData){
+                        const a = yield;
+                        const latestData = _.chain( previousData.concat(a) );
+                        
+                        const es = latestData
+                                .pluck("expiry")
+                                .uniq()
+                                .sort( (a,b) => a > b )
+                                .value();
+                        
+                        const vs = latestData
+                                .pluck("volatility")
+                                .uniq()
+                                .sort( (a,b) => a > b )
+                                .value();
+                        
+                        const ps = latestData
+                                .sort( (a,b) => a.volatility > b.volatility )
+                                .groupBy( a => a.expiry )
+                                .map(
+                                        a => a.map(
+                                                b => b.result
+                                                )
+                                        )
+                                .value();
+                        
+                        var data = [    
+                                        {
+                                        x: es,
+                                        y: vs,
+                                        z: ps,                                        
+                                        type: 'surface'
+                                        }
+                                ];
+                                
+                        var layout = {
+                                title: 'Volatility Term Structure',
+                                zaxis: {title: "Price"},
+                                xaxis: {title: "Expiry"},
+                                yaxis: {title: "Volatility"}
+                                };
+                                
+                        Plotly.newPlot('graph', data, layout);
+                        
+                        yield* postBox(latestData);
+                        }
+                
+                //init
+                const send = postBox([]);
+                send.next();
+                
+                //create worker object
+                const c =
+                        (forwardStrikePrice, spot, volatility, expiry, interestRate) =>
+                                {
+                                const w = new Worker("worker.js");
+                                w.postMessage(
+                                        [
+                                                {
+                                                forwardStrikePrice:     forwardStrikePrice, 
+                                                spot:                   spot, 
+                                                volatility:             volatility, 
+                                                expiry:                 expiry, 
+                                                interestRate:           interestRate
+                                                }
+                                        ] 
+                                        );    
+                                w.onmessage =
+                                        result =>
+                                                {
+                                  		send.next(result.data);
+                                                w.terminate();
+                                  	        };
+                                return w;
+                                }
+                                 
+                expiries.map(
+                        e => volatilities.map(
+                                v => c(110, 100, v, e, 0.01)
+                                )
+                        );
+                
+                
+        </script>
+           
+</html>
