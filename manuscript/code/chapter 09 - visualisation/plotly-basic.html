@@ -57,6 +57,7 @@
                                 [1].concat( generate(n-1) );
         
         //years, e.g. 2016, 2017 etc...
+        //just use an array of years instead?
         Array.prototype.yearsFromNow = function(){
                 const nextYear = new Date().getFullYear() + 1;
                 return this.map(

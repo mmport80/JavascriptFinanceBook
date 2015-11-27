@@ -26,7 +26,7 @@ const generate = n =>
   [1].concat( generate(n-1) );
 ~~~~~~~~
 
-[Download the complete code [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%208%20-%20parallel/concurrency.zip)]
+[Download the complete code [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2008%20-%20parallel/concurrency.zip)]
 
 `concat` sticks two arrays together. `generate` returns either an array (`[1]`) or an array stuck together with the `generate` function itself.
 

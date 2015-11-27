@@ -178,7 +178,7 @@ const postBox = function*(){
 }
 ~~~~~~~~
 
-(Play with the example code [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%207%20-%20concurrency/concurrency.zip) - only compatible with the latest FireFox right now!)
+(Play with the example code [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2007%20-%20async/concurrency.zip) - only compatible with the latest FireFox right now!)
 
 Generator functions are denoted by an asterisk.
 

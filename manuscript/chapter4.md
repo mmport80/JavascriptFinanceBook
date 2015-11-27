@@ -6,7 +6,7 @@ Up until now we have introduced a handful of new concepts which needed just two 
 
 Similar to the idea of 'optionality' in quantitative finance, once you understand that `reduce` is fundamental you begin to see it everywhere.
 
-But let's begin with something more down to earth - summarising a [portfolio holdings file](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%204%20-%20reduce/testDrop.csv) from AQR's Large Cap Momentum Fund.
+But let's begin with something more down to earth - summarising a [portfolio holdings file](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2004%20-%20reduce/testDrop.csv) from AQR's Large Cap Momentum Fund.
 
 ![AQR Large Cap Momentum Fund Exposure](images/04_aqr_exposure.png)
 
