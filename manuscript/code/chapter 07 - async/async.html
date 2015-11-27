@@ -1,0 +1,62 @@
+<html>
+        
+        <body></body>
+        
+        <script type="text/javascript" charset="utf-8" src="d3.v3.min.js"></script>  
+        
+        <script type="text/javascript" charset="utf-8">
+        
+                "use strict";
+                
+                //default paramters only supported in latest FF - 11.6.15
+                
+                const vlookup = (array_1, key_1, array_2, key_2 = undefined) =>
+                                {
+                                //default key_2 if not supplied
+                                key_2 == undefined ? key_2 = key_1 : null;
+                                //cycle thru each object
+                                return array_1.map(
+                                        object_1 => {
+                                                const object_2 = 
+                                                        //find
+                                                        array_2.find( 
+                                                                //match
+                                                                p => object_1[key_1] == p[key_2] 
+                                                                );
+                                                //return pairing
+                                                return {first: object_1, second: object_2};
+                                                }
+                                        );
+                                }
+                        
+                   
+                const postBox = function*(){
+                        
+                        const a = yield;
+                        const b = yield;
+                        
+                        console.log(
+                                vlookup(a, 'date', b )
+                                );
+                        }
+                
+                
+                //init
+                const send = postBox();
+                send.next();
+                
+                //retrieve and parse data
+                d3.csv( "CME-EDU2021.csv", data => send.next(data) );
+                d3.csv( "CME-EDU2016.csv", data => send.next(data) );    
+                
+                
+                //network example
+                const send2 = postBox();
+                send2.next();
+                
+                d3.csv( "https://www.quandl.com/api/v3/datasets/CME/EDU2016.csv", data => send2.next(data) );
+                d3.csv( "https://www.quandl.com/api/v3/datasets/CME/EDU2021.csv", data => send2.next(data) );        
+                
+        </script>
+           
+</html>

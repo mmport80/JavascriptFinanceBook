@@ -1,0 +1,117 @@
+<html>
+        
+        <body>
+                
+                <div id = "dropFile" style="background-color:blue; color:white; width: 10em; height: 10em;">   
+                
+                        <p>Drag and drop file onto this text to process.</p>
+        
+                        <a id='downloadResults' style="color:white; font-weight:bold;"></a>
+                        
+                        
+                </div>
+        
+        </body>
+        
+        <script type="text/javascript" charset="utf-8">
+        
+                "use strict";
+                
+                function processFile(rows) {
+                        
+                        
+                        //total exposure
+                        const b = rows
+                                .reduce(
+  		                        (total, row) =>
+  		                                +row.Exposure + total
+  		                        , 0
+ 		                        );
+                        
+                        return [{'Total Exposure':b}];
+                        
+                        /*
+                        //top exposure
+                        
+                        const b = rows
+                                .reduce(
+                                        (top,row) =>
+                                                +row.Exposure > +top.Exposure ?
+                                                        row
+                                                        :
+                                                        top
+                                        );
+                        
+                        return [b];
+                        */
+                        
+                        //reit exposure
+                        /*
+                        const b = rows
+                                .reduce(
+                                        (total, row) =>
+                                                row['Security Description'].includes('REIT') ?
+                                                        +row.Exposure + total
+                                                        :
+                                                        total
+                                        , 0
+                                        );
+                        return [{'Reit Exposure':b}];
+                        */
+                        
+                        //combined view
+                        /*
+                        const totalExp =
+                                (total,row) =>
+                                        +row.Exposure + total;
+                                
+                        const topExp = 
+                                (top,row) =>
+                                        +row.Exposure > +top.Exposure ?
+                                                row
+                                                :
+                                                top;
+                                
+                        const reitExp = 
+                                (total, row) =>
+                                        row['Security Description'].includes('REIT') ?
+                                                +row.Exposure + total
+                                                :
+                                                total;
+                        
+                        const b = rows
+                                .reduce(
+                                        (results, row) => 
+                                                (
+                                                        {
+                                                        'Total': totalExp( results['Total'], row ),
+                                                        'Top': topExp( results['Top'], row ),
+                                                        'REIT': reitExp( results['REIT'], row )
+                                                        }
+                                                )
+                                        ,       {   
+                                                'Total': 0,
+                                                'Top': {Exposure:-Infinity},
+                                                'REIT': 0
+                                                }
+                                        );
+                                 
+                        return [
+                                        {   
+                                        'Total': b['Total'],
+                                        'Top': b['Top']['Security Description'],
+                                        'REIT': b['REIT']
+                                        }
+                                        ];
+                        */
+                        }       
+                        
+
+                        
+        </script>
+                
+                
+                
+        <script type="text/javascript" charset="utf-8" src="d3.v3.min.js"></script>      
+        <script type="text/javascript" charset="utf-8" src="index.js"></script>
+</html>

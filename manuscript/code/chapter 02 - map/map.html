@@ -1,0 +1,67 @@
+<html>
+        
+        <body>
+                
+                <div id = "dropFile" style="background-color:blue; color:white; width: 10em; height: 10em;">   
+                
+                        <p>Drag and drop file onto this text to process.</p>
+        
+                        <a id='downloadResults' style="color:white; font-weight:bold;"></a>
+                
+                </div>
+        
+        </body>
+        
+        <script type="text/javascript" charset="utf-8">
+        
+                "use strict";
+                
+        
+                function processFile(rows) {
+                        
+                        
+                        //open
+                        return rows
+                                .map(
+                                        row =>
+                                                ( {openPrice: row['Open']} )
+                                        );
+                        
+                        
+                        /*
+                        //high - low
+                        
+                        return rows
+                                .map(
+                                        row =>
+                                                ( {Range: row['High'] - row['Low']} )
+                                        );
+                        */
+                          
+                        //high - low with index
+                        /*
+                        return rows
+                                .map(
+                                        (row, i) =>
+                                                ( {Index: i, Range: row['High'] - row['Low']} )
+                                        );
+                        */
+                        
+                        //high - low with index count down
+                        /*
+                        return rows
+                                .map(
+                                        (row,i,a) =>
+                                                ( {Index: a.length-i, Range: row['High'] - row['Low']} )
+                                        );
+                        */
+                          
+                        }
+                
+        </script>
+                
+                
+                
+        <script type="text/javascript" charset="utf-8" src="d3.v3.min.js"></script>      
+        <script type="text/javascript" charset="utf-8" src="index.js"></script>
+</html>
