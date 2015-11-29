@@ -2,6 +2,9 @@
 <head>
         <script type="text/javascript" src="d3.v3.min.js"></script>
         <script type="text/javascript" src="d3.layout.cloud.js"></script>
+        <!--
+                <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
+        -->
 </head>
 <body>
         
@@ -43,10 +46,69 @@
                 .fontSize( d => d.size )
                 .on("end", draw)
                 .start();
-
-                
-        //http://www.sec.gov/Archives/edgar/data/320193/000119312515356351/d17062d10k.htm#toc17062_3
-        //words = $$('p').map(i=>i.innerHTML.split(" ")).reduce((a,c)=>a.concat(c),[])
-        //words.reduce((a,c)=>a.find(x=>x===c)?a.concat(c):a,[])
         
+        //d3.csv( "", data => console.log(data) );
+        
+        //var dsv = d3.dsv(" ", "text/plain");
+        
+        //dsv( "text.txt", b=>console.log(b) );
+        
+        
+        
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function(){
+                if(xmlhttp.status==200 && xmlhttp.readyState==4){    
+                        var words = xmlhttp
+                                .responseText
+                                .split([' '])
+                                .map(w=>w.trim());
+                                
+                        const freq = words
+                                .reduce(
+                                        (a,c) =>
+                                                {
+                                                
+                                                //with
+                                                const w = a.filter( d => d.word === c );
+                                                //without
+                                                const wo = a.filter( d => d.word != c );
+                                                
+                                                
+                                                
+                                                //if nothing's filtered out - new word
+                                                if ( w.length === 0 ) {
+                                                        const b = wo.concat( {word: c, count: 1} );
+                                                        }
+                                                else {
+                                                        const b = wo.concat( {word: c, count: w[0].count + 1} );   
+                                                        }       
+                                                return b;  
+                                                }
+                                        ,[]
+                                        );
+                                
+                        console.log(words);
+                        console.log(freq.sort((a,b)=>a.count < b.count));
+                        }
+                }
+        xmlhttp.open("GET","text.txt",true);
+        xmlhttp.send();
+        
+        
+        
+        /*       
+        //http://www.sec.gov/Archives/edgar/data/320193/000119312515356351/d17062d10k.htm#toc17062_3
+        words = Document.querySelectorAll('p')
+                .map(
+                        i=>i.innerHTML.split(" ")
+                        )
+                .reduce(
+                        (a,c)=>a.concat(c)
+                        ,[]
+                        )
+        
+        console.log(
+                words.reduce((a,c)=>a.find(x=>x===c)?a.concat(c):a,[])
+                );
+        */
 </script>
