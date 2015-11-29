@@ -13,47 +13,57 @@
         const fill = d3.scale.category20();
 
 
-        const draw = words =>
-                d3      .select("body")
-                        .append("svg")
-                                .attr("width", 300)
-                                .attr("height", 300)
-                        .append("g")
-                                .attr("transform", "translate(150,150)")
-                                .selectAll("text")
-                                .data(words)
-                                .enter()
-                        .append("text")
-                                .style("font-size", d => d.size + "px")
-                                .style("font-family", "Impact")
-                                .style("fill", (d, i) => fill(i) )
-                                .attr("text-anchor", "middle")
-                                .attr("transform", d => "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")")
-                                .text( d => d.text);
+        const drawx = xoxo =>
+                {
+                const draw = words =>
+                        d3      .select("body")
+                                .append("svg")
+                                        .attr("width", 300)
+                                        .attr("height", 300)
+                                .append("g")
+                                        .attr("transform", "translate(150,150)")
+                                        .selectAll("text")
+                                        .data(words)
+                                        .enter()
+                                .append("text")
+                                        .style("font-size", d => d.size + "px")
+                                        .style("font-family", "Impact")
+                                        .style("fill", (d, i) => fill(i) )
+                                        .attr("text-anchor", "middle")
+                                        .attr("transform", d => "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")")
+                                        .text( d => d.text);
                 
 
-        d3      .layout
-                .cloud()
-                .size([300, 300])
-                .words(
-                        [".NET", "Silverlight", "jQuery", "CSS3", "HTML5", "JavaScript", "SQL","C#"]
-                                .map( d => 
-                                        ( {text: d, size: 10 + Math.random() * 50} ) 
-                                        ) 
-                        )
-                .rotate( _ => ~~(Math.random() * 2) * 90 )
-                .font("Impact")
-                .fontSize( d => d.size )
-                .on("end", draw)
-                .start();
-        
+                d3      .layout
+                        .cloud()
+                        .size([300, 300])
+                        .words(
+                                xoxo
+                                        .map( d => 
+                                                ( {text: d.key, size: 50*d.count/97 + 10} )
+                                                //10 + Math.random() * 50 
+                                                ) 
+                                )
+                        .rotate( _ => ~~(Math.random() * 2) * 90 )
+                        .font("Impact")
+                        .fontSize( d => d.size )
+                        .on("end", draw)
+                        .start();
+                }
         //d3.csv( "", data => console.log(data) );
         
         //var dsv = d3.dsv(" ", "text/plain");
         
         //dsv( "text.txt", b=>console.log(b) );
-        
-        
+        //
+        var xo = [
+                "5","4","derivative","","the","and","of","to","in","company","company’s","company’s","for","a","or","2015","as","on","are","is","its","with","that","net","by","sales","be","2014","september","other","financial","from","may","0","products","apple","|","not","which","tax","operating","these","form","stock","billion","notes","26","could","foreign","2013","at","cash","10-k","such","related","product","total","income","assets","have","1","including","has","an","value","services","under","inc.","securities","$","statements","due","revenue","information","was","certain","also","fair","based","exchange","interest","all","this","item","future","consolidated","new","subject","third-party","quarter","components","market","any","liabilities","6","if","during","price","shares","risk","share","common","2","years","were","primarily","each","amount","million","27","business","rate","significant","currency","changes","purchase","it","change","accounting","through","instruments","period","can","generally","debt","part","hardware","over","will","management","than","deferred","plan","number","available","customers","their","costs","cost","recognized","been","into","those","credit","gross","following","reporting","results","content","includes","contracts","required","more","time","earnings","retail","effective","growth","current","store","investment","internal","adversely","unit","per","outstanding","equity","used","devices","amounts","condition","losses","taxes","marketable","no","loss","millions):","include","program","(in","28","–","associated","service","effect","control","rsus","3","segment","partners","result","materially","one","expense","reasonable","rates","factors","terms","markets","manufacturing","property","demand","repurchase","expected","stores","inventory","offset","fixed-rate","table","provide","affect","there","material","would","increase","customer","increased","when","registrant","applications","addition","use","component","assurance","believes","greater","products.","payments","conditions","balance","ended","issued","within","system","various","higher","supply","agreements","rights","expenses","equivalents","estimated","executive","operations","performance","periods","subsidiaries","well","included","relative","currently","10","selling","employee","directors","8","legal","purchases","transactions","sells","development","access","affected","commitments","upon","compared","gains","capital","against","dividends","statement","typically","equipment","laws","board","hedges","year-over-year","(1)","corporate","because","many","does","personal","ability","technology","prices","intellectual","third","international","impact","had","limited","experience","distribution","basis","comprehensive","warranty","arrangements","commercial","long-term","portion","dollar","dividend","hedge","paid","fiscal","year","data","most","october","compensation","security","but","11","additional","first","respectively","pricing","entered","issuance","public","require","exposure","partially","annual","commission","requirements","2016","ii","director","risks","geographic","reportable","using","major","existing","contents"
+                ,"the","margins","suppliers","economic","excess","recorded","activities","receivables","fourth","$	0","paper","maturities","intangible","principal","second","services.","provides","regarding","some","obtain","flow","trade","global","records","claims","currencies","term","driven","accordance","report","variety","segments","although","they","circumstances","competitors","competitive","substantial","increases","up","8-k","investments","prepayments","benefits","provision","share-based","recognizes","act","12","9","particular","therefore","rest","countries","note","options","between","accounted","essential","only","impairment","acquired","open","decline","shareholders’","percentage","income/(expense)","liability","whether","(2)","date","forward-looking","expectations","similar","media","accessories","2015.","application","both","further","users","continue","potential","fluctuations","however","regulations","quarterly","asset","successful","generated","policies","general","leases","accounts","dollar-denominated","follows","delivered","diluted","(dollars","$	13","2020","our","section","filed","aggregate","approximately","18","management’s","actual","significantly","otherwise","systems","designed","while","shows","continued","and/or","sold","industry","realized","make","manage","same","carrying","upgrade","incurred","outcome","officer","valuation","district","august","index","presents","2003","2017","estimates","benefit","pursuant","13","reports","incorporated","(the","end","7","historical","education","unique","sale","apps","multiple","payment","programs","experienced","sufficient","availability","patents","basic","margin","being","opinion","obligations","state","plant","non-current","weakness","billion.","16","weighted-average","adjustments","awards","unrealized","positions","designated","registered","x","months","herein","proceedings","analysis","controls","located","pay","plus","two","10%","introductions","uses","adverse","right","enter","reflect","april","beginning","2014.","restricted","goodwill","4.1","dated","rule","proxy","company.","held","where","matters","procedures","heading","directly","statements.","cause","differences","quarters","except",,"allows","marketing","activity","protection","additionally","quality","resellers","level","single","technological","often","set","forth","should","requires","sec","outside","failure","standards","provided","lower","determine","forecasted","made","respect","policy","acquire","specific","non-trade","financing","flows","2012","three","millions","likely","respectively.","indemnification","audit","unspecified","measured","underlying","granted","award","2022","past","purposes","officers","events","portfolio","direct","small","businesses","customers.","own","internet","basis.","respective","features","final","resources","technologies","invested","competition","rapid","substantially","strong","compete","obtained","production","unable","introduction","resulting","reduce","issues","limit","return","orders","vendor","less","infringement","temporary","recognition","considers","acquisitions","extent","chief","vendors","five","reflected","15","$	8","$	6","amortization","reductions","$	11","$	1","proceeds","swaps","unrecognized","classified","accompanying","aoci","billion:","see","shareholders","i","discussion","litigation","differ","unless","solutions","consumers","who","effectively","consist","devices.","independent","offers","range","coverage","beats","offer","sell","gain","expects","depend","able","guarantee","depends","accumulated","necessary","licenses","launch","jurisdictions","fixed","effects","must","individual","fully","process","rules","position","applicable","forward","exposures","hedging","accrued","court","plans","asr","2013.","&","$	10","20","prior","audits","2019","$	3","sheet","reported","evidence","upgrades","allocated","computed","floating-rate","39","translation","(1","(4","period.","vesting","forms","certificate","1934","york","check","accelerated","excluded","after","23","ownership","assumptions","ibooks","mid-sized","established","critical","segments.","found","line","record","card","testing","highly","companies","sources","competes","until","meet","performed","150","timely","regularly","patent","lives","considered","least","10-q","100","below","anticipated","regional","failures","supplier","functional","appropriate","reviews","contain","resolved","damages","among","cancelled","shift","mix","collateral","owned","space","agreement","-","25","29","37","24","$	53","declared","$	16","asps","$	12","$	4","2018","consisted","$	2","withheld","connection","preparation","deliverables","vsoe","incentive","assessment","ernst","young","millions)","(3","income/(loss)","dilutive","hedged","effectiveness","inputs","notional","floating","d.","2015"
+                ,"/s/","officer’s","representing","mark","disclosure","filer","completed","relating","120","days","selected","about","discussed","presented","years.","worldwide","force","value-added","compatible","them","touch","qualifying","across","integrated","providing","free","technical","high","locations","thousands","custom","initial","capacity","affected.","original","industries","licensing","applied","protect","channel","local","amended","contents"
+                ,"-","become","53","6%"
+                ,"item","vary","volatility","values","strengthening","overall","cancellation","inventories","facilities","value.","given","do","parties","before","likelihood","lease","federal","majority","authorities","judgment","settlement","remaining","$	37","units","31","$	15","subsequent","taxing","estimate","balances","reasonably","exercise","functionality","(11","summary","reclassified","useful","hedges:","retired","grant","grants","15(d)","file","issuer","best","march","determination","disclosures","71","72","relationships","fees","schedules","identified","reference.","stated","consumer","announced","(collectively","stores.","hong","separately","faces","build","help","remote","device","ensure","participants","delayed","depending","quantities","acceptable","all.","acquisition","relies","possible","sales.","reduced","intended","conditions.","event","liquidity","restrictions","order","nature","advance","renewal","investing","realizable","long-lived","consistent","practice","projected","firm","reasons","perform","natural","negatively","impacted","arise","rights.","possibility","contingencies","compliance","elements","transfer","penalties","transaction","limitations","expenditures","repurchases","declaration","shares.","movements","potentially","option","rates.","june","2015:","privately","negotiated","arrangement","$	170","$	39","$	81","euro-denominated","7%","calendar","3%","13%","$	21","administrative","$	14","without","principles","standard","short-term","notes.","$	9","off-balance","sheets","four","individuals","maximum","accepted","manufacturing-related","committee","criteria","receives","(i)","(ii)","product’s","deliverable","esps","method","model","llp","funds","ders","luca","maestri","we","xbrl","document.","jurisdiction","2024","2.000%","indicate","posted","regulation","registrant’s","10-k.","smaller","last","page","19","owners","1a","“risk","references","assumes","obligation","resellers.","user","strategy","continues","platform","delivery","kong","managed","“segment","introduced","works","display","specifically","built","way","present","streaming","secure","exist","tools","indirect","channels","integration","enhance","wide","materials","levels","business.","maintain","adoption","sensitivity","results.","source.","suppliers’","partner","renew","shortages","manufactured"
+                ,"2015 /s/","contentsthe","officer’s","–","management’s"
+                ];
         
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function(){
@@ -61,34 +71,44 @@
                         var words = xmlhttp
                                 .responseText
                                 .split([' '])
-                                .map(w=>w.trim());
-                                
+                                .map(w=>w.trim())
+                                .map(w=>w.split(',')[0])
+                                .map(w=>w.split("’")[0])
+                                .map(w=>w.toLowerCase())
+                                .filter(w=>xo.indexOf(w)==-1);
+                        
                         const freq = words
                                 .reduce(
                                         (a,c) =>
                                                 {
-                                                
-                                                //with
-                                                const w = a.filter( d => d.word === c );
-                                                //without
-                                                const wo = a.filter( d => d.word != c );
-                                                
-                                                
-                                                
-                                                //if nothing's filtered out - new word
-                                                if ( w.length === 0 ) {
-                                                        const b = wo.concat( {word: c, count: 1} );
+                                                var b = a;
+                                                if ( a[c] === undefined ) {
+                                                        b[c] = 1;
                                                         }
                                                 else {
-                                                        const b = wo.concat( {word: c, count: w[0].count + 1} );   
+                                                        b[c] = a[c] + 1;   
                                                         }       
                                                 return b;  
                                                 }
-                                        ,[]
+                                                ,{}
                                         );
-                                
+                        
+                        const ff = Object
+                                .keys(freq)
+                                .map(
+                                        k =>
+                                                ({key:k,count:freq[k]})
+                                        )
+                                .sort( (a,b) => a.count < b.count )
+                                ;
+                                //.map( x => x.key );
+                        
                         console.log(words);
-                        console.log(freq.sort((a,b)=>a.count < b.count));
+                        console.log(freq);
+                        console.log(ff);
+                        
+                        //document.write(ff.map( x => x.key ));
+                        drawx(ff.slice(0,50));
                         }
                 }
         xmlhttp.open("GET","text.txt",true);
