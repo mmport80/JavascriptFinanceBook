@@ -157,7 +157,7 @@ When stress testing portfolios for example, even very complex portfolios (at fir
 
 We have just scratched the surface on *one* popular visualisation library. In the next chapter we will take a brief look at the Gorilla in the room - D3 - which we can use to produce tailor made visualisations.
 
-In a world where Jupyter and Python notebooks are becoming ever more popular, publishing on the web is becoming more of a necessity, which ironically means that Python, R, Julia and the rest are depending on libraries like Plotly.
+In a world where Jupyter and Python notebooks are becoming ever more popular, publishing on the web is more of a necessity, which ironically means that Python, R, Julia and the rest are depending on libraries like Plotly.
 
 The advantage in using JavaScript is that we can speak the web's native language which we can use to fully express our ideas and tinker, rather than being limited by whatever hooks to JavaScript third party libraries provide.
 
