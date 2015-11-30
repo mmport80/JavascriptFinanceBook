@@ -14,24 +14,28 @@
                 {
                 const width = window.innerHeight*0.8;
                 
+                //draw word cloud
                 const draw = words =>
                         d3      .select("body")
-                                .append("svg")
-                                        .attr("width", width)
-                                        .attr("height", width)
-                                .append("g")
-                                        .attr("transform", "translate("+width/2+","+width/2+")")
-                                        .selectAll("text")
-                                        .data(words)
-                                        .enter()
-                                .append("text")
-                                        .style("font-size", d => d.size + "px")
-                                        .style("font-family", "Impact")
-                                        .style("fill", (d, i) => fill(i) )
-                                        .attr("text-anchor", "middle")
-                                        .attr("transform", d => "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")")
-                                        .text( d => d.text);
+                                        .append("svg")
+                                                .attr("width", width)
+                                                .attr("height", width)
+                                                .append("g")
+                                                        //set our origin is in the middle of the canvas,
+                                                        //rather than SVG's default of top left
+                                                        .attr("transform", "translate("+width/2+","+width/2+")")
+                                                        .selectAll("text")
+                                                        .data(words)
+                                                        .enter()
+                                                        .append("text")
+                                                                .style("font-size", word => word.size + "px")
+                                                                //.style("font-family", "Impact")
+                                                                .style("fill", (word, index) => fill(index) )
+                                                                .attr("text-anchor", "middle")
+                                                                .attr("transform", word => "translate(" + [word.x, word.y] + ") rotate(" + word.rotate + ")")
+                                                                .text( word => word.text);
 
+                //generate word cloud layout
                 d3      .layout
                         .cloud()
                         .size([width, width])
@@ -41,7 +45,7 @@
                                         ) 
                                 )
                         .rotate( _ => ~~(Math.random() * 2) * 90 )
-                        .font("Impact")
+                        //.font("Impact")
                         .fontSize( d => d.size )
                         .on("end", draw)
                         .start();
