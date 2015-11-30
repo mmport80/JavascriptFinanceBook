@@ -20,9 +20,11 @@ We have utilised pipes again and again in this book, so the learning curve shoul
 
 Instead of arrays of data flowing through D3's pipes, D3 objects flow through. 
 
-`d3
+~~~~~~~~
+d3
   .select("body")
-  .append("svg")`
+  .append("svg")
+~~~~~~~~
 
 D3 code builds up SVG (Simple Vector Graphic) visualisations layer by layer. 
 
@@ -30,11 +32,13 @@ First we select the HTML tag to append to, in this case the `body` tag, then we 
 
 `d3` is the initial D3 object - a blank slate. We take our D3 object and transform it by piping (or 'chaining') it through functions.
 
-`d3
+~~~~~~~~
+d3
   .select("body")
   .append("svg")
    .attr("width", height)
-   .attr("height", height)`
+   .attr("height", height)
+~~~~~~~~
 
 Thing of our SVG tag as a canvas, we need to set the canvas area, and do so through the height and width attributes. In this our canvas is a square `height*height` pixels squared.
 
@@ -44,15 +48,17 @@ The other key idea in D3 is joining data to visual elements or tags on a web pag
 
 In the following code we append a 'group' tag and then setup our selection, to select all SVG 'text' tags.
 
-`d3
-  .select("body")
-  .append("svg")
-   .attr("width", width)
-   .attr("height", width)
-   .append("g")
-    .selectAll("text")
-    .data(words)
-    .enter()`
+~~~~~~~~
+d3
+ .select("body")
+ .append("svg")
+  .attr("width", width)
+  .attr("height", width)
+  .append("g")
+   .selectAll("text")
+   .data(words)
+   .enter()
+~~~~~~~~
 
 `words` contain our data - we are about to build a word cloud.
 
@@ -62,14 +68,16 @@ Actually, this is usually the case with D3, select rules are put in place before
 
 This means we don't need one large method which accepts every possible input, we can break down our description of the visualisation in a more logical manner.
 
-`...
+~~~~~~~~
+...
 .append("g")
  .selectAll("text")
  .data(words)
  .enter()
  .append("text")
   .style("font-size", word => word.size + "px")
-  .style("fill", (word, index) => fill(index) )`
+  .style("fill", (word, index) => fill(index) )
+~~~~~~~~
 
 As we append each `text` element we set each element's `style` parameters. When setting `font-size` note that `word` represents each individual 'datum' of the data passed through. Here we can see that `words` is really an array of 'word' objects, one parameter of which is `size` in pixels.
 
@@ -77,32 +85,38 @@ The next style parameter sets the fill colour. `fill` takes an integer. `index` 
 
 In fact, we don't necessarily need to set SVG tag attributes using data, e.g. when setting where our text should 'anchor',
 
-`...
-.append("text")
- .style("font-size", word => word.size + "px")
- .style("fill", (word, index) => fill(index) )
- .attr("text-anchor", "middle")`
-
-Now let's position each word.
-
-`...
+~~~~~~~~
+...
 .append("text")
  .style("font-size", word => word.size + "px")
  .style("fill", (word, index) => fill(index) )
  .attr("text-anchor", "middle")
- .attr("transform", word => "translate(" + [word.x, word.y] + ")rotate(" + word.rotate + ")")`
+~~~~~~~~
+
+Now let's position each word.
+
+~~~~~~~~
+...
+.append("text")
+ .style("font-size", word => word.size + "px")
+ .style("fill", (word, index) => fill(index) )
+ .attr("text-anchor", "middle")
+ .attr("transform", word => "translate(" + [word.x, word.y] + ")rotate(" + word.rotate + ")")
+~~~~~~~~
 
 The SVG `transform` attribute uses two SVG functions. The first `translate` sets where our canvases origin is (SVG's default origin is the top left corner). The second `rotate` is obvious.
 
 Now we know our `word` objects contain positioning and rotation information, there's only one piece missing.
 
-`...
+~~~~~~~~
+...
 .append("text")
  .style("font-size", word => word.size + "px")
  .style("fill", (word, index) => fill(index) )
  .attr("text-anchor", "middle")
  .attr("transform", word => "translate(" + [word.x, word.y] + ") rotate(" + word.rotate + ")")
- .text( word => word.text)`
+ .text( word => word.text)
+~~~~~~~~
 
 As you can see, we are not individually setting each piece of text, rather we are declaratively setting out the rules which each piece of text should obey as its being laid out.
 
@@ -110,7 +124,7 @@ As you can see, we are not individually setting each piece of text, rather we ar
 
 Along with a little text parsing code, a rather nifty script called [D3-Cloud](https://github.com/jasondavies/d3-cloud) helps to fit our words together neatly on our SVG canvas by supplying the `x`, `y` and `rotate` positioning data.
 
-![Apple Word Cloud](http://)
+![Apple Word Cloud](images/10_apple_word_cloud.png)
 
 While often overlooked, such qualitative analysis is a big topic, which helps us understand what product lines, markets and issues a company views as important. Aggregating such information across a portfolio of companies give portfolio managers a descriptive view of risk in a way which gets lost in quantitative noise.
 

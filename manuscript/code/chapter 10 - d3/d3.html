@@ -12,24 +12,24 @@
 
         const drawWordCloud = ws =>
                 {
-                const width = window.innerHeight*0.8;
+                const height = window.innerHeight;
                 
                 //draw word cloud
                 const draw = words =>
                         d3      .select("body")
                                         .append("svg")
-                                                .attr("width", width)
-                                                .attr("height", width)
+                                                .attr("width", height)
+                                                .attr("height", height)
                                                 .append("g")
                                                         //set our origin is in the middle of the canvas,
                                                         //rather than SVG's default of top left
-                                                        .attr("transform", "translate("+width/2+","+width/2+")")
+                                                        .attr("transform", "translate("+height/2+","+height/2+")")
                                                         .selectAll("text")
                                                         .data(words)
                                                         .enter()
                                                         .append("text")
                                                                 .style("font-size", word => word.size + "px")
-                                                                //.style("font-family", "Impact")
+                                                                .style("font-family", "Impact")
                                                                 .style("fill", (word, index) => fill(index) )
                                                                 .attr("text-anchor", "middle")
                                                                 .attr("transform", word => "translate(" + [word.x, word.y] + ") rotate(" + word.rotate + ")")
@@ -38,14 +38,14 @@
                 //generate word cloud layout
                 d3      .layout
                         .cloud()
-                        .size([width, width])
+                        .size([height, height])
                         .words(
                                 ws.map( d => 
-                                        ( {text: d.key, size: (Math.pow(width,2)/90000)*(50*d.count/97) } )
+                                        ( {text: d.key, size: (Math.pow(height,2)/90000)*(50*d.count/97) } )
                                         ) 
                                 )
                         .rotate( _ => ~~(Math.random() * 2) * 90 )
-                        //.font("Impact")
+                        .font("Impact")
                         .fontSize( d => d.size )
                         .on("end", draw)
                         .start();
@@ -111,7 +111,7 @@
                         const ff = Object
                                 .keys(freq)
                                 .map(
-                                        k => ({key:k, count:freq[k]})
+                                        k => ( { key: k, count: freq[k] } )
                                         )
                                 .sort( (a,b) => a.count < b.count )
                                 .slice(0,50);
@@ -121,7 +121,7 @@
                 }
                 
         //http://www.sec.gov/edgar/searchedgar/companysearch.html
-        xmlhttp.open("GET","text.txt",true);
+        xmlhttp.open("GET","apple_quarterly_report.txt",true);
         xmlhttp.send();
         
 </script>
