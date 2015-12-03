@@ -1,0 +1,94 @@
+<html>
+<head>
+        <script type="text/javascript" src="jstat.min.js"></script>
+        <script type="text/javascript" src="d3.v3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+        <div id='graph'></div>
+</body>
+<script>
+        //pull down data from quandl
+        //t3
+        //r2
+        //plot
+        "use strict";
+
+        const quandlApiKey = "";
+
+        //accumulate data and plot
+        const postBox = function*(){
+                const newData = yield;
+                
+                //get returns
+                const returns = newData
+                        .reduce(
+                                (a,c) =>
+                                        a.previousPrice === null ?
+                                                { returns: [], previousPrice: c.Close }
+                                                :
+                                                {
+                                                returns: a.returns.concat({ date: c.Date, return: Math.log( c.Close / a.previousPrice ) }),
+                                                previousPrice: c.Close
+                                                }
+                                        , { returns: [], previousPrice: null }
+                                )
+                        .returns;
+                
+                const sd = jStat( returns.map(r => r.return) ).stdev(true);
+                const dof = 3
+
+                const result = returns
+                        .sort( (a,b) => a.return > b.return )
+                        .reduce(
+                                (previousValue, currentValue, currentIndex, array) =>
+                                        {
+                                        currentValue.t =
+                                                jStat.studentt.inv( (currentIndex+1) / (array.length+1), previousValue.dof ) * 
+                                                previousValue.sd * 
+                                                Math.sqrt( ( previousValue.dof - 2 ) / previousValue.dof );
+                                        
+                                        return {results: previousValue.results.concat(currentValue),
+                                                sd: previousValue.sd,
+                                                dof: previousValue.dof
+                                                };
+                                        }
+                                        , {     results: [],
+                                                sd: sd, 
+                                                dof: dof
+                                                }
+                                )
+                        .results;
+                
+                const rs = result.map(r => r.return);
+                const ts = result.map(t => t.t);
+                
+                //const rr = jStat.corrcoeff(rs,ts);
+                
+                const graphDiv = document.getElementById('graph');
+                
+                const trace1 = {y: rs, name: "return", type:"bar"};
+                const trace2 = {y: ts, name: "t", type:"bar"};
+                
+                const layout = {
+                        title: "t stat vs S&P returns",
+                        xaxis: { title:"Percentile" },
+                        yaxis: { title:"Return" }
+                        };
+                        
+                Plotly.newPlot( 
+                        graphDiv, 
+                        [ trace1, trace2 ],
+                        layout
+                        );
+                }
+        
+        //init
+        const send = postBox();
+        send.next();
+        
+        d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/INDEX_GSPC.csv?auth_token=Fp6cFhibc5xvL2pN3dnu", 
+                data => send.next( data ) 
+                )
+</script>
+</html>
