@@ -12,45 +12,51 @@
         var quandlApiKey = "";
 </script>
 <script type="text/javascript" src="quandl-api-key.js"></script>
-
 <script>
-        //pull down data from quandl
-        //t3
-        //r2
-        //plot
         "use strict";
 
         //accumulate data and plot
         const postBox = function*(){
-                const newData = yield;
+                const priceData = yield;
                 
-                //get returns
-                const returns = newData
+                //calc returns
+                const returns = priceData
+                        .sort( (a,b) => a.Date > b.Date )
                         .reduce(
                                 (a,c) =>
                                         a.previousPrice === null ?
                                                 { returns: [], previousPrice: c.Close }
                                                 :
                                                 {
-                                                returns: a.returns.concat({ date: c.Date, return: Math.log( c.Close / a.previousPrice ) }),
+                                                returns: a.returns.concat( { date: c.Date, return: Math.log( c.Close / a.previousPrice ) } ),
                                                 previousPrice: c.Close
                                                 }
                                         , { returns: [], previousPrice: null }
                                 )
-                        .returns;
+                        .returns
+                        .sort( (a,b) => a.return > b.return );
                 
-                const sd = jStat( returns.map(r => r.return) ).stdev(true);
+                const rs = returns.map(r => r.return);
+                
+                const sd = jStat(rs).stdev(true);
                 const dof = 3
 
-                const result = returns
-                        .sort( (a,b) => a.return > b.return )
+                //calc t stats
+                const results = returns
                         .reduce(
-                                (previousValue, currentValue, currentIndex, array) =>
+                                ( previousValue, currentValue, currentIndex, array ) =>
                                         {
                                         currentValue.t =
-                                                jStat.studentt.inv( (currentIndex+1) / (array.length+1), previousValue.dof ) * 
+                                                jStat.studentt.inv( ( currentIndex + 1 ) / ( array.length + 1 ), previousValue.dof ) * 
                                                 previousValue.sd * 
                                                 Math.sqrt( ( previousValue.dof - 2 ) / previousValue.dof );
+                                        
+                                        currentValue.n =
+                                                jStat.normal.inv(
+                                                        ( currentIndex + 1 ) / ( array.length + 1 ),
+                                                        0,
+                                                        previousValue.sd
+                                                        );
                                         
                                         return {results: previousValue.results.concat(currentValue),
                                                 sd: previousValue.sd,
@@ -64,33 +70,51 @@
                                 )
                         .results;
                 
-                const rs = result.map(r => r.return);
-                const ts = result.map(t => t.t);
+                const ts = results.map(t => t.t);
+                const r2t = Math.pow( jStat.corrcoeff(rs,ts), 2);
                 
-                //const rr = jStat.corrcoeff(rs,ts);
+                console.log(r2t);
+                
+                const ns = results.map(t => t.n);
+                const r2n = Math.pow( jStat.corrcoeff(rs,ns), 2);
+                
+                console.log(r2n);
+                
+                
+                
                 
                 const graphDiv = document.getElementById('graph');
                 
-                const trace1 = {y: rs, name: "return", type:"bar"};
-                const trace2 = {y: ts, name: "t", type:"bar"};
+                const trace = {
+                                x: ts,
+                                y: rs
+                                };
+                
+                const trace1 = {
+                                x: ns,
+                                y: rs
+                                };
                 
                 const layout = {
-                        title: "t stat vs S&P returns",
-                        xaxis: { title:"Percentile" },
-                        yaxis: { title:"Return" }
+                        title: "Euro Dollar Term Structure",
+                        xaxis: { title:"t stat" },
+                        yaxis: { title:"returns" }
                         };
                         
                 Plotly.newPlot( 
                         graphDiv, 
-                        [ trace1, trace2 ],
+                        [ trace, trace1 ],
                         layout
                         );
+                
+                
                 }
         
         //init
         const send = postBox();
         send.next();
         
+        //download data
         d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/INDEX_GSPC.csv?auth_token="+quandlApiKey, 
                 data => send.next( data ) 
                 )
