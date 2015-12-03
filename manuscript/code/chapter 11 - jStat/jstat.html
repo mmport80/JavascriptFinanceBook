@@ -3,18 +3,22 @@
         <script type="text/javascript" src="jstat.min.js"></script>
         <script type="text/javascript" src="d3.v3.min.js"></script>
         <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script type="text/javascript" src="quandl-api-key.js"></script>
 </head>
 <body>
         <div id='graph'></div>
 </body>
+<script>
+        var quandlApiKey = "";
+</script>
+<script type="text/javascript" src="quandl-api-key.js"></script>
+
 <script>
         //pull down data from quandl
         //t3
         //r2
         //plot
         "use strict";
-
-        const quandlApiKey = "";
 
         //accumulate data and plot
         const postBox = function*(){
@@ -87,7 +91,7 @@
         const send = postBox();
         send.next();
         
-        d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/INDEX_GSPC.csv?auth_token=Fp6cFhibc5xvL2pN3dnu", 
+        d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/INDEX_GSPC.csv?auth_token="+quandlApiKey, 
                 data => send.next( data ) 
                 )
 </script>
