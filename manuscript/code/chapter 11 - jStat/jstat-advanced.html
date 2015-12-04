@@ -1,0 +1,133 @@
+<html>
+<head>
+        <script type="text/javascript" src="jstat.min.js"></script>
+        <script type="text/javascript" src="d3.v3.min.js"></script>
+        <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script type="text/javascript" src="quandl-api-key.js"></script>
+</head>
+<body>
+        <div id='graph' style="width:800;height:700"></div>
+</body>
+<script>
+        var quandlApiKey = "";
+</script>
+<script type="text/javascript" src="quandl-api-key.js"></script>
+<script>
+        "use strict";
+
+        //accumulate data and plot
+        const postBox = function*(){
+                
+                
+                const priceData = yield;
+                
+                
+                //returns
+                const actualReturns = priceData
+                        .reverse()
+                        .reduce(
+                                (accumulant, currentValue) =>
+                                        accumulant.previousPrice === null ?
+                                                { returns: [], previousPrice: currentValue.Close }
+                                                :
+                                                {
+                                                returns:
+                                                        accumulant.returns.concat(
+                                                                {
+                                                                date: currentValue.Date, 
+                                                                return: Math.log( currentValue.Close / accumulant.previousPrice ) 
+                                                                } 
+                                                                ),
+                                                previousPrice: currentValue.Close
+                                                }
+                                        , { returns: [], previousPrice: null }
+                                )
+                        .returns
+                        .sort( (a,b) => a.return > b.return )
+                        .map(r => r.return)
+                        ;
+
+                
+                //parameters
+                const sd = jStat(actualReturns).stdev(true);
+                const mean = jStat(actualReturns).mean();
+                const dof = 3;
+                const numberOfReturns = actualReturns.length;
+
+                const demeanedActualReturns = jStat(actualReturns).subtract(mean)[0];
+
+     
+                //predictions
+                const percentiles = jStat(
+                        1/(numberOfReturns+1), 
+                        numberOfReturns/(numberOfReturns+1), 
+                        (numberOfReturns+1) 
+                        );
+                                    
+                const normalPredictions = percentiles
+                        .normal(0,sd)
+                        .inv()[0];
+                        
+                const studentPredictions = percentiles
+                        .studentt(dof)
+                        .inv()[0]
+                        .map(   n => 
+                                        n *
+                                        sd * 
+                                        Math.sqrt( ( dof - 2 ) / dof )
+                                );
+                
+                
+                //calc r2
+                console.log(
+                        Math.pow( jStat.corrcoeff(demeanedActualReturns,studentPredictions), 2)
+                        );
+                
+                console.log(
+                        Math.pow( jStat.corrcoeff(demeanedActualReturns,normalPredictions), 2)
+                        );
+                
+                
+                //graph it
+                const graphDiv = document.getElementById('graph');
+                
+                const studentTrace = {
+                                x: studentPredictions,
+                                y: demeanedActualReturns,
+                                name: "T"+dof,
+                                mode: "markers"
+                                };
+                
+                const normalTrace = {
+                                x: normalPredictions,
+                                y: demeanedActualReturns,
+                                name: "Normal",
+                                mode: "markers"
+                                };
+                
+                const layout = {
+                        title: "S&P 500 Daily Returns QQ Plot",
+                        xaxis: { title: "Prediction" },
+                        yaxis: { title: "Actual" }
+                        };
+                
+                Plotly.newPlot( 
+                        graphDiv, 
+                        [ studentTrace, normalTrace ],
+                        layout
+                        );
+                
+                }
+        
+        
+        //init
+        const send = postBox();
+        send.next();
+        
+        
+        //download data
+        d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/INDEX_GSPC.csv?auth_token="+quandlApiKey, 
+                data => send.next( data ) 
+                )
+</script>
+</html>
