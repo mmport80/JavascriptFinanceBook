@@ -17,15 +17,13 @@
 
         //accumulate data and plot
         const postBox = function*(){
-                
                 const a = yield;
                 const b = yield;
                 
                 //merge objects
                 const result = Object.assign(a,b);
                 
-                console.log(result.sd);
-                console.log(result.mean);
+                console.log(result);
                 }
         
         //init
@@ -35,7 +33,7 @@
         const rndms = jStat().rand(1,100000000);
         
         //download data
-        rnmds
+        rndms
                 .mean( x=>send.next( {mean: x} ) )
                 .stdev( x=>send.next( {sd: x} ) );
 </script>
