@@ -1,6 +1,6 @@
 <html>
 <head>
-        <script type="text/javascript" src="http://cdn.jsdelivr.net/jstat/1.5/jstat.min.js"></script>
+        <script type="text/javascript" src="jstat.min.js"></script>
         <script type="text/javascript" src="d3.v3.min.js"></script>
         <script type="text/javascript" src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script type="text/javascript" src="quandl-api-key.js"></script>
@@ -17,6 +17,7 @@
 
         //accumulate data and plot
         const postBox = function*(){
+                
                 
                 const priceData = yield;
                 
@@ -43,16 +44,19 @@
                                 )
                         .returns
                         .sort( (a,b) => a.return > b.return )
-                        .map(r => r.return);
-                
+                        .map(r => r.return)
+                        ;
+
                 
                 //parameters
                 const sd = jStat(actualReturns).stdev(true);
-                const dof = 3
-
+                const mean = jStat(actualReturns).mean();
+                const dof = 3;
                 const numberOfReturns = actualReturns.length;
-                                    
-                                        
+
+                const demeanedActualReturns = jStat(actualReturns).subtract(mean)[0];
+
+     
                 //predictions
                 const percentiles = jStat(
                         1/(numberOfReturns+1), 
@@ -67,8 +71,7 @@
                 const studentPredictions = percentiles
                         .studentt(dof)
                         .inv()[0]
-                        .map(
-                                n => 
+                        .map(   n => 
                                         n *
                                         sd * 
                                         Math.sqrt( ( dof - 2 ) / dof )
@@ -77,11 +80,11 @@
                 
                 //calc r2
                 console.log(
-                        Math.pow( jStat.corrcoeff(actualReturns,studentPredictions), 2)
+                        Math.pow( jStat.corrcoeff(demeanedActualReturns,studentPredictions), 2)
                         );
                 
                 console.log(
-                        Math.pow( jStat.corrcoeff(actualReturns,normalPredictions), 2)
+                        Math.pow( jStat.corrcoeff(demeanedActualReturns,normalPredictions), 2)
                         );
                 
                 
@@ -90,14 +93,14 @@
                 
                 const studentTrace = {
                                 x: studentPredictions,
-                                y: actualReturns,
+                                y: demeanedActualReturns,
                                 name: "T"+dof,
                                 mode: "markers"
                                 };
                 
                 const normalTrace = {
                                 x: normalPredictions,
-                                y: actualReturns,
+                                y: demeanedActualReturns,
                                 name: "Normal",
                                 mode: "markers"
                                 };
@@ -116,9 +119,11 @@
                 
                 }
         
+        
         //init
         const send = postBox();
         send.next();
+        
         
         //download data
         d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/INDEX_GSPC.csv?auth_token="+quandlApiKey, 
