@@ -17,7 +17,9 @@
 
         //accumulate data and plot
         const postBox = function*(){
+                
                 const priceData = yield;
+                
                 
                 //returns
                 const actualReturns = priceData
@@ -43,11 +45,13 @@
                         .sort( (a,b) => a.return > b.return )
                         .map(r => r.return);
                 
+                
                 //parameters
                 const sd = jStat(actualReturns).stdev(true);
                 const dof = 3
 
                 const numberOfReturns = actualReturns.length;
+                                    
                                         
                 //predictions
                 const percentiles = jStat(
@@ -69,6 +73,7 @@
                                         sd * 
                                         Math.sqrt( ( dof - 2 ) / dof )
                                 );
+                
                 
                 //calc r2
                 console.log(
@@ -102,7 +107,6 @@
                         xaxis: { title: "Prediction" },
                         yaxis: { title: "Actual" }
                         };
-                
                 
                 Plotly.newPlot( 
                         graphDiv, 
