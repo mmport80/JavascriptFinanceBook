@@ -1,8 +1,8 @@
 #Reduce
 
-Up until now we have introduced a handful of new concepts which needed just two words of vocabulary - `map` and `filter`.
+Until now we have introduced a handful of new concepts which needed just two pieces of vocabulary - `map` and `filter`.
 
-`reduce` however, is a new piece of vocabulary (also known as 'fold') and one of the most powerful concepts in computer science rolled into one!
+`reduce` is a new piece of vocabulary and one of the most powerful concepts in computer science rolled into one!
 
 Similar to the idea of 'optionality' in quantitative finance, once you understand that `reduce` is fundamental you begin to see it everywhere.
 
@@ -16,12 +16,12 @@ But let's begin with something more down to earth - summarising a [portfolio hol
 rows
  	.reduce(
   		(total, row) =>
-  		    +row.Exposure + total
-  		, 0
- 		);
+            +row.Exposure + total
+    	, 0
+	    );
 ~~~~~~~~
 
-This line of code calculates the total exposure of a fund, you can run and download the demo from [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%204%20-%20reduce/reduce.zip) (best to test with FireFox).
+This line of code calculates the total exposure of a fund, you can run and download the demo from the [code repository on GitHub mentioned in the introduction](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%204%20-%20reduce/reduce.zip).
 
 `reduce` takes three main arguments.
 
@@ -41,13 +41,13 @@ Let's tweak the code to further describe the portfolio.
 
 ~~~~~~~~
 rows
-  	.reduce(
-   		(top, row) =>
+    .reduce(
+    	(top, row) =>
             +row.Exposure > +top.Exposure ?
                 row
                 :
                 top
-  		);
+        );
 ~~~~~~~~
 
 This will return the row or stock with the largest exposure.
@@ -56,7 +56,7 @@ The 'running total' is now an object. By default, if no initial value is declare
 
 We update `top` if a current row's exposure is greater than our current highest row.
 
-No surprise that the largest holding for August 2015 is Apple at $68m.
+No surprise that the largest holding in August 2015 is Apple at $68m.
 
 ##Efficiency
 

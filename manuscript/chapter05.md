@@ -39,7 +39,7 @@ The output will be,
 
 The `reduce` function takes an 'anonymous' function (or 'lambda') as an input.
 
-Functions are first class citizens of Javascript, we can of course name them also, if you want to jump down that rabbit hole!
+Functions are first class citizens of Javascript, we can of course name them also (if you want to jump down that rabbit hole).
 
 ~~~~~~~~
 sum =
@@ -135,9 +135,7 @@ The next chapters will explore the other side of the coin - functional outputs!
 
 ##More Info
 
-1) I snuck an `arrow` function in the `convert` function instead of the usual `function()` syntax. Find out more [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
-
-2) Learn more about Lambda Calculus [here](http://palmstroem.blogspot.de/2012/05/lambda-calculus-for-absolute-dummies.html)
+1) Learn more about Lambda Calculus [here](http://palmstroem.blogspot.de/2012/05/lambda-calculus-for-absolute-dummies.html)
 
 ##Try
 
@@ -146,7 +144,7 @@ The next chapters will explore the other side of the coin - functional outputs!
 
 2) Modify the `convert` function to convert multiple arbitrary analytics
 
-3) Instead of just returning numbers from the `toCCY` functions, return an object. E.g. `{ccy:'USD', amt:10}` is 10 USD.
+3) Instead of just returning numbers from the `toCCY` functions, return an object. E.g. `{ ccy: 'USD', amt: 10 }` is 10 USD.
 
 4) List out an extension of our current set of vocabulary (`calculate`, `sum`, `convert`, `toCCY`) which would complete a current task you have at work.
 

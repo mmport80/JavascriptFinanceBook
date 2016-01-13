@@ -20,13 +20,11 @@ Our generic generation function looks like this,
 
 ~~~~~~~~
 const generate = n =>
- n <= 1 ? 
-  [1]
-  :
-  [1].concat( generate(n-1) );
+    n <= 1 ? 
+        [1]
+        :
+        [1].concat( generate(n-1) );
 ~~~~~~~~
-
-[Download the complete code [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2008%20-%20parallel/concurrency.zip)]
 
 `concat` sticks two arrays together. `generate` returns either an array (`[1]`) or an array stuck together with the `generate` function itself.
 
@@ -36,10 +34,10 @@ Next, let's generate some random numbers.
 
 ~~~~~~~~
 Array.prototype.randomNumbers = function(){
- return this.map( 
-  _ => Math.random()
-  );
- }
+    return this.map( 
+        _ => Math.random()
+        );
+    }
 ~~~~~~~~
 
 Unsurprisingly for the English language readers amongst you, `generate(100).randomNumbers()` returns an array of 100 random numbers.
@@ -48,10 +46,10 @@ We can do the same for a series of numbers pulled from a Brownian Motion process
 
 ~~~~~~~~
 Array.prototype.bMPNumbers = function(){
- return this.map( 
-  _ => jStat.normal.sample( 0, 1 )
-  );
- }
+    return this.map( 
+        _ => jStat.normal.sample( 0, 1 )
+        );
+    }
 ~~~~~~~~
 
 The jStat library's `normal` function pulls a number from the normal distribution with a mean of zero and a standard deviation of one.
@@ -62,19 +60,19 @@ So in the usual way of things, let's define a geometric Brownian process as,
 
 ~~~~~~~~
 Array.prototype.gBMPForwardPrices = 
- function(spot, volatility, expiry, interestRate){
-  return this.map(
-   _ =>
-    spot * 
-    Math.exp(
-     (interestRate - 0.5 * Math.pow(volatility, 2) ) * 
-     expiry + 
-     volatility * 
-     Math.sqrt(expiry) * 
-     generate(1).bMPNumbers()
-     )
-   )
-  }
+    function(spot, volatility, expiry, interestRate){
+        return this.map(
+            _ =>
+                spot * 
+                Math.exp(
+                    (interestRate - 0.5 * Math.pow(volatility, 2) ) * 
+                    expiry + 
+                    volatility * 
+                    Math.sqrt(expiry) * 
+                    generate(1).bMPNumbers()
+                    )
+            )
+        }
 ~~~~~~~~
 
 If we want to have an idea of where a stock price could end up at a particular 'expiry' date 10 years hence, we could write the following,
@@ -87,25 +85,25 @@ and now let's see how those 'forward' prices influence the value of a call optio
 
 ~~~~~~~~
 Array.prototype.callOptionForwardPrices =
- function( forwardStrikePrice, spot, volatility, expiry, interestRate){
-  return this.map(
-   _ => Math.max(
-    generate(1)
-    .gBMPForwardPrices(spot, volatility, expiry, interestRate)
-    - forwardStrikePrice
-    , 0 
-    )
-  )
- }
+    function( forwardStrikePrice, spot, volatility, expiry, interestRate){
+        return this.map(
+            _ => Math.max(
+                generate(1)
+                    .gBMPForwardPrices(spot, volatility, expiry, interestRate)
+                - forwardStrikePrice
+                , 0 
+                )
+            )
+        }
 ~~~~~~~~
 
 The average of our forward prices hover around the analytical Black Scholes solution (~14.12).
 
 ~~~~~~~~
 jStat(
- generate(5000)
- .callOptionForwardPrices(110, 100, 0.1, 10, 0.01)
- ).mean()
+    generate(5000)
+        .callOptionForwardPrices(110, 100, 0.1, 10, 0.01)
+    ).mean()
 ~~~~~~~~
 
 `>> 14.610885699674231`

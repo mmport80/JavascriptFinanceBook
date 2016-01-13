@@ -28,7 +28,7 @@ where
 - `y` years to maturity
 - `i` interest rate
 
-Financial markets are continuously writhing, but our principal will remain the same along with the bond's maturity date.
+Financial markets never stop writhing, but our principal will remain the same along with the bond's maturity date.
 
 The one thing that does fluctuate is the interest rate, which a bond trader'd keep an eye on like a hawk.
 
@@ -154,9 +154,9 @@ The arguments functions take often correlate well to problem domains. Decomposit
 
 ##More Info
 
-1) Check out more on partial function application [here](https://en.wikipedia.org/wiki/Partial_application)
+Check out more on partial function application [here](https://en.wikipedia.org/wiki/Partial_application)
 
-2) [Currying](https://en.wikipedia.org/wiki/Currying) is related also
+[Currying](https://en.wikipedia.org/wiki/Currying) is related also
 
 ##Try
 

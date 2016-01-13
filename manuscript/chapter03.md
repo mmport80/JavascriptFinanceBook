@@ -6,9 +6,9 @@ Open up the JavaScript console and paste or type in the following code,
 
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
-        .filter(
-                item => item % 2 === 1
-                )
+    .filter(
+        item => item % 2 === 1
+        )
 ~~~~~~~~
 
 This code filters the array of numbers and returns an array of odd numbers.
@@ -48,10 +48,10 @@ map(
 	filter(
   		[0,1,2,3,4,5,6,7,8,9],
    		item =>
-                        item % 2 === 1
+            item % 2 === 1
   		),
  	item =>
-                item * item
+        item * item
 	)
 ~~~~~~~~
 

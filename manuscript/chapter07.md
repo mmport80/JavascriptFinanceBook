@@ -1,4 +1,3 @@
-
 #Asynchronicity & Performance
 
 We are all waiting for something, and our computers are no different.
@@ -41,7 +40,7 @@ With asynchronous execution, we kick off `A`, `B` then `C`, and they run *asynch
 
 The execution times are no longer clearly demarcated in relation to each other. A hold up in `A` won't a delay `B` and `C`.
 
-We have stepped from the safety of line by line execution into a world which bedevils programmers everywhere, but we need to embrace this new world because the clear performance benefits are far too enticing to resist.
+We have stepped from the safety of line by line execution into a world which bedevils programmers everywhere, but we need to embrace this new world because the clear performance benefits will end up being far too enticing to resist.
 
 ##VLookUp Example
 
@@ -55,20 +54,20 @@ In your browser's console paste the following.
 
 ~~~~~~~~
 const countries = [
- {name:"IBM",     country:"USA"},
- {name:"VW",      country:"Germany"},
- {name:"Xiaomi",  country:"China"},
- {name:"Lenovo",  country:"China"},
- {name:"Twitter", country:"USA"}
- ]
+    {name:"IBM",     country:"USA"},
+    {name:"VW",      country:"Germany"},
+    {name:"Xiaomi",  country:"China"},
+    {name:"Lenovo",  country:"China"},
+    {name:"Twitter", country:"USA"}
+    ]
 ~~~~~~~~
 
 and then,
 
 ~~~~~~~~
 countries.find(
- row => row["country"] == "USA"
- )
+    row => row["country"] == "USA"
+    )
 ~~~~~~~~
 
 This searches through our array of objects and returns the first which has country equal to `USA`,
@@ -81,8 +80,8 @@ Let's do the same for China.
 
 ~~~~~~~~
 countries.find(
- row => row["country"] == "China"
- )
+    row => row["country"] == "China"
+    )
 ~~~~~~~~
 
 ~~~~~~~~
@@ -95,15 +94,15 @@ If the first array represents the 'spreadsheet' which we are looking up, let's c
 
 ~~~~~~~~
 const holdings = [
- {name:"IBM",     value:1000000},
- {name:"VW",      value:10000},
- {name:"Xiaomi",  value:5000000},
- {name:"Lenovo",  value:4000},
- {name:"Twitter", value:90000}
-]
+    {name:"IBM",     value:1000000},
+    {name:"VW",      value:10000},
+    {name:"Xiaomi",  value:5000000},
+    {name:"Lenovo",  value:4000},
+    {name:"Twitter", value:90000}
+    ]
 ~~~~~~~~
 
-We can imagine that we have a holdings report of our portfolio's investments and a spreadsheet with our country information, and we want to join both sets of data so we can summarise our holdings by `country`.
+We can imagine that we have a holdings report of our portfolio's investments; a spreadsheet with our country information; and we want to join both sets of data so we can summarise our holdings by `country`.
 
 In essence, we would like to `map` each `holding` and for each `holding` object `find` the matching `name`, returning a `holding`-`country` object pairing.
 
@@ -111,10 +110,10 @@ This seems like a good way to begin,
 
 ~~~~~~~~
 holdings.map(
- holding => {
- ...
- }
-);
+    holding => {
+        ...
+        }
+    );
 ~~~~~~~~
 
 what will we do with each `holding`?
@@ -123,28 +122,28 @@ We will use its name to match an object in our `countries` array,
 
 ~~~~~~~~
 holdings.map(
- holding => {
-  const country =
-   countries.find(
-    row => holding['name'] == row['name'] 
+    holding => {
+        const country =
+            countries.find(
+                row => holding['name'] == row['name'] 
+                );
+        ...
+        }
     );
-  ...
- }
-);
 ~~~~~~~~
 
 Once we have our `country` object from the `countries` array we will return the `holding` and `country` objects as a pair to our `map` function.
 
 ~~~~~~~~
 holdings.map(
- holding => {
-  const country =
-   countries.find(
-    c => holding['name'] == c['name'] 
+    holding => {
+        const country =
+            countries.find(
+                c => holding['name'] == c['name'] 
+                );
+        return {holding: holding, country: country};
+        }
     );
-  return {holding: holding, country: country};
- }
-);
 ~~~~~~~~
 
 which gives us a joined array of objects where we can access all of the data we need to summarise by value and country.
@@ -178,7 +177,7 @@ const postBox = function*(){
 }
 ~~~~~~~~
 
-(Play with the example code [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2007%20-%20async/concurrency.zip) - only compatible with the latest FireFox right now!)
+(Play with the example code download from Github [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2007%20-%20async/concurrency.zip))
 
 Generator functions are denoted by an asterisk.
 
@@ -214,7 +213,7 @@ d3.csv(
 
 The first input is the file's name. The second is the 'callback' function used to process the data after parsing. We just send the data over to our `postBox`.
 
-Doing the same again 'fills' the postbox,
+Doing the same again with 2016 contracts 'fills' the postbox,
 
 ~~~~~~~~
 d3.csv(
@@ -250,9 +249,9 @@ JavaScript was born on the web, in that world JavaScript users (read website vis
 
 Instead JavaScript relies heavily on asynchronous execution to limit delays.
 
-Our demo code shaved a handful of milliseconds off total execution by reading and parsing data concurrently.
+Our demo code only shaved a handful of milliseconds off total execution by reading and parsing data concurrently.
 
-If this was 'big data', this would result in a 'big' performance win, by loading and processing large files at the same time.
+If this was 'big data', this would result becomes a 'big' performance win, by loading and processing large files at the same time.
 
 Also if we are continuously processing files over the network, we could shave seconds off execution time.
 
