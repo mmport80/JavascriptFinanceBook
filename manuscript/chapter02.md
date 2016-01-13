@@ -87,9 +87,9 @@ While many in finance would bristle at their work being likened to plumbing, we 
 
 ##More Info
 
-[Maps](https://en.wikipedia.org/wiki/Map_(higher-order_function)) on Wikipedia.
+1) [Maps](https://en.wikipedia.org/wiki/Map_(higher-order_function)) on Wikipedia.
 
-Mozilla's [JavaScript Map reference](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
+2) Mozilla's [JavaScript Map reference](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
 
 ##Try
 

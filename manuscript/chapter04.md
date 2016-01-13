@@ -123,9 +123,9 @@ We will explore more applications of `reduce` in the coming chapters and along t
 
 ##More Info
 
-Mozilla's `reduce` [documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) for JavaScript. Note the optional extra index and array inputs.
+1) Mozilla's `reduce` [documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) for JavaScript. Note the optional extra index and array inputs.
 
-Graham Hutton's [Tutorial](http://www.cs.nott.ac.uk/~pszgmh/fold.pdf) on the universality and expresiveness of fold.
+2) Graham Hutton's [Tutorial](http://www.cs.nott.ac.uk/~pszgmh/fold.pdf) on the universality and expresiveness of fold.
 
 ##Try
 

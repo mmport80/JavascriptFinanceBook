@@ -154,9 +154,9 @@ The arguments functions take often correlate well to problem domains. Decomposit
 
 ##More Info
 
-Check out more on partial function application [here](https://en.wikipedia.org/wiki/Partial_application)
+1) Check out more on partial function application [here](https://en.wikipedia.org/wiki/Partial_application)
 
-[Currying](https://en.wikipedia.org/wiki/Currying) is related also
+2) [Currying](https://en.wikipedia.org/wiki/Currying) is related also
 
 ##Try
 

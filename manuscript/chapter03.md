@@ -84,9 +84,9 @@ At first, the pipe analogy seems like an attempt at overly dumbing down, but in 
 
 ##More Info 
 
-Read up on declarative programming [here](https://en.wikipedia.org/wiki/Declarative_programming) and [here](http://latentflip.com/imperative-vs-declarative/).
+1) Read up on declarative programming [here](https://en.wikipedia.org/wiki/Declarative_programming) and [here](http://latentflip.com/imperative-vs-declarative/).
 
-Mozilla's JavaScript [filter documentation](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
+2) Mozilla's JavaScript [filter documentation](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/filter).
 
 ##Try
 

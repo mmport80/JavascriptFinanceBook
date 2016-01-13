@@ -99,9 +99,9 @@ As you can see, scraping HTML is trickier than parsing APIs - nevertheless Javas
 
 ##More Info
 
-Take a look at [Google](https://developer.chrome.com/devtools/docs/console) and [Mozilla's](https://developer.mozilla.org/en/docs/Web/API/console) browser console reference pages.
+1) Take a look at [Google](https://developer.chrome.com/devtools/docs/console) and [Mozilla's](https://developer.mozilla.org/en/docs/Web/API/console) browser console reference pages.
 
-The $() and $$() functions utilise [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors) to search web pages.
+2) The $() and $$() functions utilise [CSS Selectors](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Getting_Started/Selectors) to search web pages.
 
 ##Try
 
