@@ -18,8 +18,8 @@ First let's create a 'complicated' function. Open your JavaScript console and pa
 
 ~~~~~~~~
 zeroCouponBondValue =
-    (p,y,i) =>
-        p / Math.pow(1+i,y);
+ (p,y,i) =>
+  p / Math.pow( 1+i ,y );
 ~~~~~~~~
 
 where
@@ -38,9 +38,9 @@ Let's *halve* the valuation function into two pieces, one half representing bond
 
 ~~~~~~~~
 partialVal =
-    (p, y) =>
-        (i) =>
-            zeroCouponBondValue(p, y, i);
+ (p, y) =>
+  (i) =>
+   zeroCouponBondValue(p, y, i);
 ~~~~~~~~
 
 Let's test.
@@ -67,10 +67,10 @@ We will carve out 'years to maturity' too then.
 
 ~~~~~~~~
 partialVal =
-    (p) =>
-        (y) =>
-            (i) =>
-                zeroCouponBondValue(p, y, i);
+ (p) =>
+  (y) =>
+   (i) =>
+    zeroCouponBondValue(p, y, i);
 ~~~~~~~~
 
 Now we only instantiate the partial valuation function with the principal value.
@@ -99,11 +99,11 @@ For example,
 
 ~~~~~~~~
 partialVal =
-    (p) =>
-        (y) =>
-            (i) =>
-                (shock = 0)
-                    zeroCouponBondValue(p, y, i+shock);
+ (p) =>
+  (y) =>
+   (i) =>
+    (shock = 0)
+     zeroCouponBondValue(p, y, i+shock);
 ~~~~~~~~
 
 Now we leave the current interest rate as is, and model shocks explicitly.
@@ -128,10 +128,10 @@ Finally, a duration function,
 
 ~~~~~~~~
 duration =
-    ( fn, s = 0.01 ) =>
-        ( fn(-s)-fn(s) )
-        / fn()
-        / (s*2);
+ ( fn, s = 0.01 ) =>
+  ( fn(-s)-fn(s) )
+  / fn()
+  / (s*2);
 ~~~~~~~~
 
 The shocks default to 1%.

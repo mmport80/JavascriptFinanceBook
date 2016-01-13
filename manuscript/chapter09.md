@@ -97,7 +97,7 @@ d3.csv(
  )
 ~~~~~~~~
 
-Download the full code and play around with it [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2009%20-%20visualisation/visualisation.zip).
+Download the full demo [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2009%20-%20visualisation/visualisation.zip).
 
 ##Going 3D
 
@@ -173,6 +173,6 @@ The advantage in using JavaScript is that we can speak the web's native language
 
 2) Plot the future term structure in 3D over time
 
-3) Do the same calculation with the  Black Scholes formula analytically instead of numerically
+3) Do the same calculation with the Black Scholes formula analytically instead
 
 4) Plot the differences between the numerical and analytical results

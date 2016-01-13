@@ -26,11 +26,10 @@ Simplifying the example found in the previous chapter, paste this into your Java
 
 ~~~~~~~~
 [1,1,1,1,1]
-    .reduce(
-        function(total,item){
-            return total + item;
-            }
-        );
+ .reduce(
+  (total,item) =>
+   total + item
+  );
 ~~~~~~~~
 
 The output will be,
@@ -43,8 +42,8 @@ Functions are first class citizens of Javascript, we can of course name them als
 
 ~~~~~~~~
 sum =
-    (total,item) =>
-        total + item
+ (total,item) =>
+  total + item
 ~~~~~~~~
 ~~~~~~~~
 [1,1,1,1,1].reduce(sum)
@@ -60,14 +59,14 @@ Rewriting or copying code is irksome and trouble prone, luckily functions in Jav
 
 ~~~~~~~~
 toGBP = 
-    item =>
-        item * 1.5
+ item =>
+  item * 1.5
 ~~~~~~~~
 ~~~~~~~~
 Number.prototype.convert =
-    function(funs){
-        return funs.map( f => f(this) );
-        }
+ function(funs){
+  return funs.map( f => f(this) );
+  }
 ~~~~~~~~
 
 Before we deconstruct this, let's run it.
@@ -92,8 +91,8 @@ Let's add `toUSD` and find out.
 
 ~~~~~~~~
 toUSD =
-    item =>
-        item * 1
+ item =>
+  item * 1
 ~~~~~~~~
 
 It doesn't actually do much, our base currency is USD.
@@ -112,9 +111,9 @@ For fun let's rename the `reduce` function.
 
 ~~~~~~~~
 Array.prototype.calculate =
-    function(fun){
-        return this.reduce(fun);
-        }
+ function(fun){
+  return this.reduce(fun);
+  }
 ~~~~~~~~
 
 ~~~~~~~~

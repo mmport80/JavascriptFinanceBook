@@ -10,9 +10,9 @@ You can use variations of this line of JavaScript to transform your spreadsheets
 
 ~~~~~~~~
 rows
-	.map(
-		row => ( {openPrice: row['Open']} )
-  		);
+ .map(
+  row => ( {openPrice: row['Open']} )
+  );
 ~~~~~~~~
 
 While technically just one line, it's a little complex.
@@ -43,10 +43,10 @@ Let's try something slightly trickier,
 
 ~~~~~~~~
 rows
-  	.map(
-   		row =>
-	        ( {Range: row['High'] - row['Low']} )
-  		);
+ .map(
+  row =>
+   ( {Range: row['High'] - row['Low']} )
+  );
 ~~~~~~~~
 
 Now we calculate intra-day price ranges, by taking a row's low figure from the daily high.
@@ -57,10 +57,10 @@ Sometimes, you need to know about where each element is relative to the others, 
 
 ~~~~~~~~
 rows
-	.map(
-   		(row, index) =>
-            ( {Index: index, Range: row['High'] - row['Low']} )
-  		);
+ .map(
+  (row, index) =>
+   ( {Index: index, Range: row['High'] - row['Low']} )
+  );
 ~~~~~~~~
 
 The `index` variable keeps track of each element's current index and we output using an 'Index' key in our object.
@@ -71,10 +71,10 @@ As well as keeping track of relative order each map can also have an eye on the 
 
 ~~~~~~~~
 rows
-  	.map(
-   		(row, index, array) =>
-            ( {Index: array.length - index, Range: row['High'] - row['Low']} )
-  		);
+ .map(
+  (row, index, array) =>
+   ( {Index: array.length - index, Range: row['High'] - row['Low']} )
+  );
 ~~~~~~~~
 
 Now our index will count down to zero, as the new `array` variable represents `rows` within the mapping logic.

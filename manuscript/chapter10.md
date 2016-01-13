@@ -6,7 +6,7 @@ It eschews classic programming styles in favour of a more functional approach.
 
 Luckily however, if you have come this far, get ready to sit back and enjoy of the fruits of your labour.
 
-Almost every charting library is descriptive, they give you several chart templates which you can configure and populate with data.
+Almost every charting library is prescriptive, they give you several chart templates which you can configure and populate with data.
 
 D3 is much more ambitious. It's descriptive, giving you all the tools to transform data into your own custom visualisations.
 
@@ -16,14 +16,14 @@ In our case, a word cloud based on Apple's September 2015 quarterly report.
 
 While D3 is complex, a large part of the initial confusion comes from it's not-so-common-declarative-style, aka piping.
 
-We have utilised pipes again and again in this book, so the learning curve should be gentle. Nevertheless, D3's piping implementation is a gives us a new angle on the technique.
+We have utilised pipes again and again in this book, so the learning curve should be gentle. Nevertheless, D3's piping implementation gives us a new angle on the technique.
 
 Instead of arrays of data flowing through D3's pipes, D3 objects flow through. 
 
 ~~~~~~~~
 d3
-  .select("body")
-  .append("svg")
+ .select("body")
+ .append("svg")
 ~~~~~~~~
 
 D3 code builds up SVG (Simple Vector Graphic) visualisations layer by layer. 
@@ -34,13 +34,13 @@ First we select the HTML tag to append to, in this case the `body` tag, then we 
 
 ~~~~~~~~
 d3
-  .select("body")
-  .append("svg")
-   .attr("width", height)
-   .attr("height", height)
+ .select("body")
+ .append("svg")
+  .attr("width", height)
+  .attr("height", height)
 ~~~~~~~~
 
-Thing of our SVG tag as a canvas, we need to set the canvas area, and do so through the height and width attributes. In this our canvas is a square `height*height` pixels squared.
+Think of our SVG tag as a canvas, we need to set the canvas area, and do so through the height and width attributes. In this case, our canvas is a square `height*height` pixels squared.
 
 ##Select & Enter
 

@@ -54,20 +54,20 @@ In your browser's console paste the following.
 
 ~~~~~~~~
 const countries = [
-    {name:"IBM",     country:"USA"},
-    {name:"VW",      country:"Germany"},
-    {name:"Xiaomi",  country:"China"},
-    {name:"Lenovo",  country:"China"},
-    {name:"Twitter", country:"USA"}
-    ]
+  {name:"IBM",     country:"USA"},
+  {name:"VW",      country:"Germany"},
+  {name:"Xiaomi",  country:"China"},
+  {name:"Lenovo",  country:"China"},
+  {name:"Twitter", country:"USA"}
+ ]
 ~~~~~~~~
 
 and then,
 
 ~~~~~~~~
 countries.find(
-    row => row["country"] == "USA"
-    )
+ row => row["country"] == "USA"
+ )
 ~~~~~~~~
 
 This searches through our array of objects and returns the first which has country equal to `USA`,
@@ -80,8 +80,8 @@ Let's do the same for China.
 
 ~~~~~~~~
 countries.find(
-    row => row["country"] == "China"
-    )
+ row => row["country"] == "China"
+ )
 ~~~~~~~~
 
 ~~~~~~~~
@@ -94,12 +94,12 @@ If the first array represents the 'spreadsheet' which we are looking up, let's c
 
 ~~~~~~~~
 const holdings = [
-    {name:"IBM",     value:1000000},
-    {name:"VW",      value:10000},
-    {name:"Xiaomi",  value:5000000},
-    {name:"Lenovo",  value:4000},
-    {name:"Twitter", value:90000}
-    ]
+  {name:"IBM",     value:1000000},
+  {name:"VW",      value:10000},
+  {name:"Xiaomi",  value:5000000},
+  {name:"Lenovo",  value:4000},
+  {name:"Twitter", value:90000}
+ ]
 ~~~~~~~~
 
 We can imagine that we have a holdings report of our portfolio's investments; a spreadsheet with our country information; and we want to join both sets of data so we can summarise our holdings by `country`.
@@ -110,10 +110,10 @@ This seems like a good way to begin,
 
 ~~~~~~~~
 holdings.map(
-    holding => {
-        ...
-        }
-    );
+ holding => {
+  ...
+  }
+ );
 ~~~~~~~~
 
 what will we do with each `holding`?
@@ -122,28 +122,28 @@ We will use its name to match an object in our `countries` array,
 
 ~~~~~~~~
 holdings.map(
-    holding => {
-        const country =
-            countries.find(
-                row => holding['name'] == row['name'] 
-                );
-        ...
-        }
+ holding => {
+  const country =
+   countries.find(
+    row => holding['name'] == row['name'] 
     );
+  ...
+  }
+ );
 ~~~~~~~~
 
 Once we have our `country` object from the `countries` array we will return the `holding` and `country` objects as a pair to our `map` function.
 
 ~~~~~~~~
 holdings.map(
-    holding => {
-        const country =
-            countries.find(
-                c => holding['name'] == c['name'] 
-                );
-        return {holding: holding, country: country};
-        }
+ holding => {
+  const country =
+   countries.find(
+    c => holding['name'] == c['name'] 
     );
+  return {holding: holding, country: country};
+  }
+ );
 ~~~~~~~~
 
 which gives us a joined array of objects where we can access all of the data we need to summarise by value and country.

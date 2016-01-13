@@ -14,11 +14,11 @@ But let's begin with something more down to earth - summarising a [portfolio hol
 
 ~~~~~~~~
 rows
- 	.reduce(
-  		(total, row) =>
-            +row.Exposure + total
-    	, 0
-	    );
+ .reduce(
+  (total, row) =>
+   +row.Exposure + total
+  , 0
+ );
 ~~~~~~~~
 
 This line of code calculates the total exposure of a fund, you can run and download the demo from the [code repository on GitHub mentioned in the introduction](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%204%20-%20reduce/reduce.zip).
@@ -41,13 +41,13 @@ Let's tweak the code to further describe the portfolio.
 
 ~~~~~~~~
 rows
-    .reduce(
-    	(top, row) =>
-            +row.Exposure > +top.Exposure ?
-                row
-                :
-                top
-        );
+ .reduce(
+  (top, row) =>
+   +row.Exposure > +top.Exposure ?
+    row
+    :
+    top
+ );
 ~~~~~~~~
 
 This will return the row or stock with the largest exposure.
@@ -64,14 +64,14 @@ Let's combine the first two examples and see how much of the portfolio is compri
 
 ~~~~~~~~
 rows
-    .reduce(
-        (total, row) =>
-            row['Security Description'].includes('REIT') ?
-                +row.Exposure + total
-                :
-                total
-        , 0
-        );
+ .reduce(
+  (total, row) =>
+   row['Security Description'].includes('REIT') ?
+    +row.Exposure + total
+    :
+    total
+  , 0
+ );
 ~~~~~~~~
 
 If the row's security description field contains the word 'REIT' we add the current row's exposure, otherwise it remains as before.
@@ -80,21 +80,21 @@ Lastly, let's combine all three examples together in one `reduce`.
 
 ~~~~~~~~
 rows
-    .reduce(
-        (results, row) => 
-            (
-                {
-                'Total': totalExp( results['Total'], row ),
-                'Top': topExp( results['Top'], row ),
-                'REIT': reitExp( results['REIT'], row )
-                }
-            )
-        , {   
-            'Total': 0,
-            'Top': {Exposure:-Infinity},
-            'REIT': 0
-            }
-        );
+ .reduce(
+  (results, row) => 
+   (
+    {
+    'Total': totalExp( results['Total'], row ),
+    'Top': topExp( results['Top'], row ),
+    'REIT': reitExp( results['REIT'], row )
+    }
+   )
+  , {   
+    'Total': 0,
+    'Top': {Exposure:-Infinity},
+    'REIT': 0
+    }
+ );
 ~~~~~~~~
 
 Beginning at our initial values. As before, our total and REIT exposures begin at `0`; our top exposure now begins at minus infinity (just in case we encounter short positions).
@@ -105,8 +105,8 @@ You will notice also that we have named functions for each set of logic. `totalE
 
 ~~~~~~~~
 totalExp =
-    (total, row) =>
-	    +row.Exposure + total;
+ (total, row) =>
+  +row.Exposure + total;
 ~~~~~~~~
 
 which helps keep everything tidy.

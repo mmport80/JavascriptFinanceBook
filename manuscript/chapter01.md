@@ -80,15 +80,15 @@ Using code we will learn more about in the coming chapters, type or paste this l
 
 ~~~~~~~~
 [].slice
-    .call(
-        $$('.gf-table.historical_price td')
-        )
-	.filter(
-  		(_,i) => i % 6 === 4
-  		)
- 	.map(
-  		i => +i.innerHTML
-  		);
+ .call(
+  $$('.gf-table.historical_price td')
+  )
+ .filter(
+  (_,i) => i % 6 === 4
+  )
+ .map(
+  i => +i.innerHTML
+  );
 ~~~~~~~~
 
 `>> [75.37, 77.04, 77.18, ... ]`
