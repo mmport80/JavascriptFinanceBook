@@ -1,6 +1,6 @@
 #Maps
 
-Most bankers, whether they admit it or not are really high tech plumbers. They receive data; process it; and send it on to a fancy risk or aggregation system.
+Most financiers, whether they admit it or not are really high tech plumbers. They receive data; process it; and send it on to a fancy risk or aggregation system.
 
 Extract, Transform and Load (ETL) takes up an inordinate amount of energy. Many do it manually in spreadsheets; some hire external companies; and others buy expensive products which claim to make the plumbing as efficient as possible.
 
@@ -45,7 +45,7 @@ Let's try something slightly trickier,
 rows
   	.map(
    		row =>
-   		    ( {Range: row['High'] - row['Low']} )
+   		        ( {Range: row['High'] - row['Low']} )
   		);
 ~~~~~~~~
 
@@ -58,12 +58,12 @@ Sometimes, you need to know about where each element is relative to the others, 
 ~~~~~~~~
 rows
 	.map(
-   		(row, i) =>
-   		    ( {Index: i, Range: row['High'] - row['Low']} )
+   		(row, index) =>
+                        ( {Index: index, Range: row['High'] - row['Low']} )
   		);
 ~~~~~~~~
 
-The `i` variable keeps track of each element's current index and we output using an 'Index' key in our object.
+The `index` variable keeps track of each element's current index and we output using an 'Index' key in our object.
 
 ![Indexed Table](images/01_index_table.png)
 
@@ -72,12 +72,12 @@ As well as keeping track of relative order each map can also have an eye on the 
 ~~~~~~~~
 rows
   	.map(
-   		(row,i,a) =>
-   		    ( {Index: a.length-i, Range: row['High'] - row['Low']} )
+   		(row, index, array) =>
+                        ( {Index: array.length - index, Range: row['High'] - row['Low']} )
   		);
 ~~~~~~~~
 
-Now our index will count down to zero, as the new `a` variable represents `rows` within the mapping logic.
+Now our index will count down to zero, as the new `array` variable represents `rows` within the mapping logic.
 
 ##Plumbing
 
@@ -93,7 +93,7 @@ Mozilla's [JavaScript Map reference](https://developer.mozilla.org/en/docs/Web/J
 
 ##Try
 
-1) [Download the example application](https://storage.googleapis.com/blogjohnorfordcom/book/map/map%20example.zip) and modify it to map either your own CSV files or those downloaded from Yahoo! or Google Finance (best test with a recent Firefox, Chrome for example doesn't allow some JavaScript features when using local HTML files)
+1) [Download the example application](https://github.com/mmport80/JavascriptFinanceBook/tree/master/manuscript/code/chapter%2002%20-%20map) from GitHub and modify it to map either your own CSV files or those downloaded from Yahoo! or Google Finance.
 
 2) How would you go about enforcing a specified input file format?  So that the program could point out problems when it's dropped and avoid frustration later on.
 

@@ -6,9 +6,9 @@ Open up the JavaScript console and paste or type in the following code,
 
 ~~~~~~~~
 [0,1,2,3,4,5,6,7,8,9]
-    .filter(
-	    item => item % 2 === 1
-  		)
+        .filter(
+                item => item % 2 === 1
+                )
 ~~~~~~~~
 
 This code filters the array of numbers and returns an array of odd numbers.
@@ -41,17 +41,17 @@ There are two things to note.
 
 Firstly, because the inputs and outputs of the filters and maps are arrays, our data flows through the logic piping we have built, in short this means we can read our code from top to bottom or left to right - in contrast to usual coding styles which are read inside out; bottom to top or right to left.
 
-E.g. in illustrative *pseudo* code (it doesn't actually run),
+E.g. in illustrative *pseudo* code,
 
 ~~~~~~~~
 map(
 	filter(
   		[0,1,2,3,4,5,6,7,8,9],
    		item =>
-   		    item % 2 === 1
+                        item % 2 === 1
   		),
  	item =>
- 	    item * item
+                item * item
 	)
 ~~~~~~~~
 
@@ -90,7 +90,7 @@ Mozilla's JavaScript [filter documentation](https://developer.mozilla.org/en/doc
 
 ##Try
 
-1) Tweak the map above to multiply each element by two instead of squaring, then figure out how to make it more declarative. I.e. filtering before or after the map should result in doubling the odd numbers, e.g. `>> [2,6,10,14]`.
+1) Tweak the map above to multiply each element by two instead of squaring, then figure out how to make it declarative. I.e. filtering before or after the map should result in doubling the odd numbers, e.g. `>> [2,6,10,14]`.
 
 2) Add a filter to the previous chapter's map which results in weekly and monthly data rather than daily.
 

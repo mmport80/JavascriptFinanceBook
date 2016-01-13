@@ -44,6 +44,10 @@ As the old programming adage goes,
 
 > Laziness is a virtue
 
-##Online Resources
+##Running Code
 
 Every script example in this book is available at the book's [GitHub](https://github.com/mmport80/JavascriptFinanceBook/tree/master/manuscript/code) page.
+
+JavaScript comes in a variety of flavours. We will use the latest 2015 version (ES6) and assume you will run the code on the latest version of FireFox. Safe deployment to all browsers old and new will be covered in Chapter XX.
+
+This means we don't have to watch our backs when taking advantage of nice new features.

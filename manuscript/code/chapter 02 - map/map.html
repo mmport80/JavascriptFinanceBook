@@ -27,7 +27,6 @@
                                                 ( {openPrice: row['Open']} )
                                         );
                         
-                        
                         /*
                         //high - low
                         
@@ -42,8 +41,8 @@
                         /*
                         return rows
                                 .map(
-                                        (row, i) =>
-                                                ( {Index: i, Range: row['High'] - row['Low']} )
+                                        (row, index) =>
+                                                ( {Index: index, Range: row['High'] - row['Low']} )
                                         );
                         */
                         
@@ -51,8 +50,8 @@
                         /*
                         return rows
                                 .map(
-                                        (row,i,a) =>
-                                                ( {Index: a.length-i, Range: row['High'] - row['Low']} )
+                                        (row, index, array) =>
+                                                ( {Index: array.length-index, Range: row['High'] - row['Low']} )
                                         );
                         */
                           
