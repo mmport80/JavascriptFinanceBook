@@ -6,7 +6,7 @@ Extract, Transform and Load (ETL) takes up an inordinate amount of energy. Many 
 
 ##A Line of Code
 
-You can use variations of this line of JavaScript to transform your spreadsheets and save a whole lot of time and money.
+You can use variations of this line of JavaScript to transform your spreadsheets and save a lot of time.
 
 ~~~~~~~~
 rows
@@ -17,13 +17,13 @@ rows
 
 While technically just one line, it's a little complex.
 
-Firstly what is `rows`? This is an array of data, each object within it is a 'row' object, which is exactly how we view spreadsheets.
+Firstly what is `rows`? This is an array of data, each object within it is a `row` object, which is exactly how we view spreadsheets.
 
 ![Example Table](images/01_example_table.png)
 
-The column names are used as the 'keys' for each object.
+The column names are the 'keys' for each `row` object.
 
-So `row['Open']` (or indeed `row.Open`) gives us the open price on each row.
+So `row['Open']` (or indeed `row.Open`) gives us the opening price on each row.
 
 As the name implies, map takes input objects and maps them one by one over to output objects.
 

@@ -6,35 +6,35 @@ Every financial analyst has spent hours, preparing complex spreadsheets, only fo
 
 The spreadsheet is a gift and a curse. Its luscious visual appeal is beguiling, but keeping track of hundreds or thousands of cell formulae inevitably leads to headaches and errors.
 
-Financial analysts are often far smarter than their spreadsheets allow. Investing a little time into more modern technology and ideas will reap immediate benefits to the average analyst.
+Financial analysts are far smarter than their spreadsheets allow. Investing a little time into more modern technology and ideas will reap immediate benefits to the average analyst.
 
 This book will show you how to use a few lines of Javascript to automate your daily tasks.
 
 ##Javascript
 
-Javascript is even more ubiquitous than Visual Basic for Applications (VBA) it is available on every desktop in the form of a web browser, into which we can load and process files and download the results.
+Javascript is more ubiquitous than Visual Basic for Applications (VBA) Python and R combined. It is available on every desktop in the form of a web browser, into which we can load and process files and download the results.
 
 VBA is the goto language for analysts, but even when it was fresh decades ago it was never considered a proper programming language.
 
 Javascript, moreover, is the world's most commonly used language with a large number of libraries that make solving problems easy.
 
-It is also the language with the most money behind it. Microsoft, Google, Apple and Mozilla all invest heavily in the language. Those corporations are taking part in an unprecedented race to have the fastest Javascript implementation, making the language one of the most efficient also.
+It is also the language with the most money behind it. Microsoft, Google, Apple and Mozilla all invest heavily in the language. Those corporations are taking part in an unprecedented race to have the fastest Javascript implementations, making the language one of the most efficient also.
 
 ## Functional
 
 We will focus on a functional style of programming which is both succinct and declarative.
 
-Functional code often requires an order of magnitude fewer lines of code than the imperative alternative.
+Functional code requires an order of magnitude fewer lines of code than the imperative alternative.
 
 Classic imperative code comes from a lineage of telling the computer exactly what to do, step by step. This was a necessity when computers were slow.
 
 Functional programming on the other hand is a little more mathematical. In fact, the basic building block of a functional language is the mathematical function, which simply maps inputs into outputs (similar to a spreadsheet formula).
 
-Such succinct code which reduces boilerplate leaves code that describes and solves the problem at hand, this is often called declarative or intuitive code.
+Such succinct code reduces boilerplate and leaves just the code needed to describe the problem at hand, which is often called declarative code.
 
 ##The Way Forward
 
-Each chapter will solve a common problem faced by financial analysts; introduce a functional programming concept; and discuss a line or two of code in detail.
+Each chapter will solve a common problem faced by financial analysts; introduce a functional programming concept; or discuss a line or two of code in detail.
 
 For example, the first chapter discusses map; shows how you can solve a common Extract Transform Load (ETL) problem; and discusses the magical line of code which will help reduce all the nasty daily spreadsheet copying and pasting.
 
@@ -43,3 +43,7 @@ The goal of the book is not just practical automation; it is also about writing 
 As the old programming adage goes,
 
 > Laziness is a virtue
+
+##Online Resources
+
+Every script example in this book is available at the book's [GitHub](https://github.com/mmport80/JavascriptFinanceBook/tree/master/manuscript/code) page.

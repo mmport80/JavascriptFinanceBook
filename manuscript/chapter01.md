@@ -60,7 +60,7 @@ The Markit API reports market action in real time (while markets are open).
 
 We first reload the web page to pull in the latest available information, and then parse the page's text into a format which JavaScript understands.
 
-Javascript's lingua franca is objects. Each object has keys and values. We use keys to access the data we are interested in.
+Javascript's lingua franca is objects (or 'JSON'). Each object has keys and values. We use keys to access the data we are interested in.
 
 E.g.
 
@@ -107,4 +107,4 @@ The $() and $$() functions utilise [CSS Selectors](https://developer.mozilla.org
 
 1) Find a JSON API to parse or web page to scrape
 2) Read up on JSON
-3) [Watch](https://www.youtube.com/watch?v=v2ifWcnQs6M) Douglas Crockford's (the creator of JSON) talk on Javascript
+3) [Watch](https://www.youtube.com/watch?v=v2ifWcnQs6M) Douglas Crockford's (the creator of JSON) talk about Javascript
