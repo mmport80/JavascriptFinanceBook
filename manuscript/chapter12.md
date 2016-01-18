@@ -30,9 +30,11 @@ const bonds = [
  ]
 ~~~~~~~~
 
-`_.chain(bonds)
+~~~~~~~~
+_.chain(bonds)
  .pluck('ticker')
- .value()`
+ .value()
+~~~~~~~~
 
 returns
 
@@ -42,11 +44,14 @@ Sure we could do this with native JavaScript but as mentioned before, it can be 
 
 See how simple grouping can be,
 
-`_.chain(bonds)
+~~~~~~~~
+_.chain(bonds)
  .groupBy( x => x.bps > 500 )
- .value()`
+ .value()
+~~~~~~~~
 
-`>> {
+~~~~~~~~
+>> {
  true: [
   {ticker:"IBM", bps:12},
   {ticker:"MCD", bps:65}
@@ -54,13 +59,16 @@ See how simple grouping can be,
  false: [
   {ticker:"FB",bps:864}
   ]
- }`
+ }
+~~~~~~~~
 
 or shuffling,
 
-`_.chain(bonds)
+~~~~~~~~
+_.chain(bonds)
  .shuffle()
- .value()`
+ .value()
+~~~~~~~~
 
 which randomly reorders our array.
 
@@ -88,11 +96,13 @@ An extreme example might be having a lot of data, an array of a quintrillion num
 
 Well if you are using Lazy.js a good start is writing down the problem, i.e.,
 
-`Lazy
+~~~~~~~~
+Lazy
  .range(1000000000000000000)
  .map( x => Math.pow(x,2) )
  .take(100)
- .value()`
+ .value()
+~~~~~~~~
 
 `>> [0,1,4,9,16,...]`
 
