@@ -101,11 +101,9 @@ returns the values of the standard normal distribution at each of the given perc
 
 ##Bringing It All Together
 
-Let's pull down daily returns for the S&P 500 from Quandl, create some predictive models then compare them against the actual data.
+Let's create some predictive models then compare them against the actual data.
 
-[Download the code [here](https://github.com/mmport80/JavascriptFinanceBook/blob/master/manuscript/code/chapter%2011%20-%20jStat/jstat.zip)]
-
-First step is to pull down the data from Quandl and then generate actual returns. This is done using the usual 'post box' pattern discussed before. These returns are the benchmark for our predictive models.
+First step is to pull down the data from Quandl and then generate actual returns. This is done using the usual 'postbox' pattern discussed before. These returns are the benchmark for our predictive models.
 
 Then find our model's parameters,
 
@@ -149,11 +147,15 @@ The `map` at the end takes each realisation of the Student T distribution (`n`) 
 
 When we calculate the R2 for each model against the data,
 
-`Math.pow( jStat.corrcoeff( demeanedActualReturns, normalPredictions ), 2)`
+~~~~~~~~
+Math.pow( jStat.corrcoeff( demeanedActualReturns, normalPredictions ), 2)
+~~~~~~~~
 
 `>> 0.8962...`
 
-`Math.pow( jStat.corrcoeff( demeanedActualReturns, studentPredictions ), 2)`
+~~~~~~~~
+Math.pow( jStat.corrcoeff( demeanedActualReturns, studentPredictions ), 2)
+~~~~~~~~
 
 `>> 0.9765...`
 
@@ -161,11 +163,11 @@ we see that the T distribution with 3 degrees of freedom captures 98% of the dai
 
 When we plot the results against the actual returns the R2 results are obvious,
 
-//plotly chart screenshot
+![S&P 500 Daily Returns](images/11_daily_returns_qq_plot.png)
 
-The normal distribution underestimates both large drops and jumps, where the Student T distribution keeps its grips on a slope of 1 with far greater fluctuations.
+The normal distribution underestimates both large drops and jumps, whereas the Student T distribution keeps its grips on a slope of 1 with far greater fluctuations.
 
-It only starts veering away from the actual data with extremely violent crashes. The largest daily drop of the S&P 500 over the past 65 years is 23% whereas the model predicts the largest drop to be a mere 15%.
+It only starts veering away from reality during a handful extremely violent crashes. The largest daily drop of the S&P 500 over the past 65 years is 23% whereas the model predicts the largest drop to be a mere 15%.
 
 ##Summary
 
@@ -181,6 +183,6 @@ Far tidier than the equivalent Excel spreadsheet.
 
 ##Try
 
-1) We calculate volatility from looking back at all the data how about tweaking the code to make each day's prediction based on the previous year's returns instead?
+1) We calculate volatility from looking back at all the data, how about tweaking the code to make each day's prediction based on the previous year's returns instead?
 
 2) Incorporate asynchronous jStat calculations, aggregate the results, and when done, plot
