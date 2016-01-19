@@ -48,7 +48,7 @@
                         .map( x => +x );
                 
                 //risk free rate
-                const rf = 0.00001;
+                const rf = 0.000063;
                 
                 //take away rf rate, sharpe only makes sense this way
                 //http://blog.johnorford.com/2015/05/06/sharpe-ratio-redux/
@@ -134,12 +134,8 @@
                                 )
                 
         pullData("FB", quandlApiKey);
-        pullData("GOOG", quandlApiKey);
-        pullData("AAPL", quandlApiKey);
-        pullData("MSFT", quandlApiKey);
+        pullData("TWTR", quandlApiKey);
         pullData("LNKD", quandlApiKey);
-        pullData("XOM", quandlApiKey);
-        pullData("BAC", quandlApiKey);
                 
 </script>
 </html>
