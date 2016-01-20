@@ -49,7 +49,7 @@ const mean = jStat.mean(returns);
 const R = numeric['-'](returns, mean);
 ~~~~~~~~
 
-#Portfolio Optimisation
+##Portfolio Optimisation
 
 How about putting those returns to good use and optimising a portfolio's Sharpe ratio with them? As per usual the code follows the ['postbox' generator pattern](http://blog.johnorford.com/2015/11/08/the-waiting-game/) which elegantly handles asynchronous calculations (refer to previous chapters).
 
