@@ -1,0 +1,141 @@
+<html>
+<head>
+        <script type="text/javascript" src="d3.v3.min.js"></script>
+        <script type="text/javascript" src="numeric-1.2.6.min.js"></script>
+        <script type="text/javascript" src="quandl-api-key.js"></script>
+        <script type="text/javascript" src="jstat.min.js"></script>
+        <!--
+                <script type="text/javascript" src="lodash.min.js"></script>
+        -->
+        <script type="text/javascript" src="underscore-min.js"></script>
+        
+</head>
+<body>
+</body>
+<script>
+        var quandlApiKey = "";
+</script>
+<script type="text/javascript" src="quandl-api-key.js"></script>
+<script>
+        "use strict";
+        
+        const getReturns =
+                closePrices =>
+                        {
+                        const before = closePrices.rest().value();
+                        const after = closePrices.initial().value();
+                        return numeric.log( numeric['/'](after, before) );
+                        }
+        
+        const sharpe =
+                (variance, ret, period) =>
+                        ret * Math.sqrt(period) / Math.sqrt(variance);
+        
+        Array.prototype.x = function(input){
+                return numeric.dot(this, input);
+                }
+
+        Array.prototype.d = function(input){
+                return numeric.div(this, input)
+                }
+
+        const postBox = function*(previousResults, n){
+                const data = yield;
+
+                const closePrices = _.chain(data)
+                        .take(n)
+                        .pluck("Adjusted Close")
+                        .map( x => +x );
+                
+                //risk free rate
+                const rf = 0.000063;
+                
+                //take away rf rate, sharpe only makes sense this way
+                //http://blog.johnorford.com/2015/05/06/sharpe-ratio-redux/
+                const returns = numeric['-']( getReturns(closePrices), rf );
+                
+                const mean = jStat.mean(returns);
+                const demeanedReturns = numeric['-'](returns, mean);
+                const currentResults = 
+                        previousResults
+                                .concat(
+                                        {Mean: mean, DemeanedReturns: demeanedReturns} 
+                                        );
+                
+                //weights - equal weights in this case
+                const w = numeric.rep(
+                        [currentResults.length],
+                        1/currentResults.length
+                        );
+                
+                //*************
+                //calc var covar matrix etc
+                //calc equal weighted sharpe
+                const R = _.chain(currentResults)
+                        .pluck("DemeanedReturns")
+                        .value();
+                
+                //variance covariance matrix
+                //divide by n  = number of prices
+                //n -1 = sample number of returns
+                //n - 2 = sample returns - 1
+                const S = R
+                        .x( numeric.transpose( R ) )
+                        .d(n-2);
+                
+                //holding weight vector everything equally weighted
+                const portfolioVariance = w.x(S).x(w);
+                
+                const m = _.chain(currentResults)
+                        .pluck("Mean")
+                        .value();
+                
+                const portolioReturn = m.x(w);
+                
+                //return / stdev ratio
+                console.log("Equal Weighted");
+                console.log( sharpe(portfolioVariance, portolioReturn, n-1) );
+                
+                //*************
+                //calculate tangency portfolio
+                const numerator = numeric
+                        .inv(S)
+                        .x(m);
+                
+                const denominator = numeric
+                        .rep([currentResults.length],1)
+                        .x(numerator);
+                
+                const ow = numerator.d(denominator);  
+                
+                const optPortolioReturn = m.x(ow);
+                const optPortfolioVariance = ow.x(S).x(ow);
+                
+                console.log("Optimal");
+                console.log( sharpe(optPortfolioVariance, optPortolioReturn, n-1) );
+                console.log( ow );
+                
+                console.log(
+                        ow.reduce( (a,c) => a+c )
+                        );
+                
+                yield* postBox(currentResults, n)
+                }
+        
+        //init
+        //request 253 prices
+        const send = postBox([], 253);
+        send.next();
+        
+        const pullData =
+                (ticker, quandlApiKey) =>
+                        d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/"+ticker+".csv?auth_token="+quandlApiKey, 
+                                data => send.next( data ) 
+                                )
+                
+        pullData("FB", quandlApiKey);
+        pullData("TWTR", quandlApiKey);
+        pullData("LNKD", quandlApiKey);
+                
+</script>
+</html>
