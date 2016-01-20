@@ -19,18 +19,24 @@ const closesPrices = _.chain(a)
 
 We are going to calculate daily returns, first step is to find an array of numerators and denominators.
 
-`const before = closePrices.rest().value();
-const after = closePrices.initial().value();`
+~~~~~~~~
+const before = closePrices.rest().value();
+const after = closePrices.initial().value();
+~~~~~~~~
 
 The `after` array will be our numerators array and so on.
 
 Dividing `after` by `before` is as simple as,
 
-`numeric['/'](after, before)`
+~~~~~~~~
+numeric['/'](after, before)
+~~~~~~~~
 
 and taking the natural logarithm of each element is simple too,
 
-`numeric.log( numeric['/'](after, before) );`
+~~~~~~~~
+numeric.log( numeric['/'](after, before) );
+~~~~~~~~
 
 Which is slightly more convenient than in classic linear algebra syntax.
 
@@ -55,7 +61,9 @@ How about putting those returns to good use and optimising a portfolio's Sharpe 
 
 Firstly set the daily risk free rate.
 
-`const rf = 0.000063;`
+~~~~~~~~
+const rf = 0.000063;
+~~~~~~~~
 
 Then remove it from our returns. `getReturns` encapsulates the previous code outlined above.
 
@@ -67,8 +75,10 @@ const returns = numeric['-'](
 
 We find the mean, and also demean the time series, like so,
 
-`const mean = jStat.mean(returns);
-const demeanedReturns = numeric['-'](returns, mean);`
+~~~~~~~~
+const mean = jStat.mean(returns);
+const demeanedReturns = numeric['-'](returns, mean);
+~~~~~~~~
 
 And adding our results to any previous results which have been 'posted' to us,
 
@@ -93,11 +103,17 @@ const w = numeric.rep(
 
 E.g. with four stocks in our portfolio we have,
 
-`>> [0.25,0.25,0.25,0.25]`
+~~~~~~~~
+>> [0.25,0.25,0.25,0.25]
+~~~~~~~~
 
-Set `R` to all of our stock's demeaned returns and calculate a variance covariance matrix.
+Set `R` to all of our stock's demeaned returns and calculate a variance covariance matrix using this formula,
 
-`(R' * R) / (n - 2)`
+~~~~~~~~
+(R' * R) / (n - 2)
+~~~~~~~~
+
+which looks like this in code,
 
 ~~~~~~~~
 const S = numeric
@@ -154,10 +170,10 @@ How about turning a frown into a smile by optimising? 20-20 hindsight is a wonde
 The optimal weights are a simple-to-calculate ratio.
 
 ~~~~~~~~
-( S^1 * m ) / (1' * S^1 * m)
+( S^-1 * m ) / (1' * S^-1 * m)
 ~~~~~~~~
 
-Where `1` is a vector of 1s.
+Where `1` is a vector of ones.
 
 ~~~~~~~~
 const numerator = numeric
