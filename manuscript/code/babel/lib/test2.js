@@ -2,8 +2,9 @@
 
 var f = function f(y) {
         if (y < 0) {
-                return r = 0;
+                r = 0;
         } else {
-                return y + f(y - 1);
+                r = y + f(y - 1);
         }
+        return r;
 };
