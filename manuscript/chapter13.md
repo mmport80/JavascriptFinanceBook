@@ -43,7 +43,7 @@ Which is slightly more convenient than in classic linear algebra syntax.
 E.g.
 
 ~~~~~~~~
-A = x\*B, A\*B^-1 = x
+A = x*B, A*B^-1 = x
 ~~~~~~~~
 
 and a lot simpler than using a `reduce` function.
