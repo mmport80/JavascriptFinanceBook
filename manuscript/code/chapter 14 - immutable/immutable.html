@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <script type="text/javascript" src="immutable.min.js"></script>
+    <script type="text/javascript" src="d3.v3.min.js"></script>
+    <script type="text/javascript" src="numeric-1.2.6.min.js"></script>
+    <script type="text/javascript" src="underscore-min.js"></script>
+  </head>
+  <script>
+    "use strict";
+    var quandlApiKey = "";
+  </script>
+  <script type="text/javascript" src="quandl-api-key.js"></script>
+  <script>
+    "use strict";
+
+    //do something big with lo-dash
+    //copy returns one day apart, 21 times
+    //find correlations between each time series
+
+    //0v1, 0v2, 0v3 etc... 20 times
+
+    //calc time between two approaches
+    var map1 = Immutable.Map({a:1, b:2, c:3});
+    var map2 = map1.set('b', 50);
+    map1.get('b'); // 2
+    map2.get('b'); // 50
+
+    console.log(map1.toJS(), map2.toJS());
+
+    const getReturns =
+      closePrices =>
+        {
+        const before = closePrices.rest().value();
+        const after = closePrices.initial().value();
+        return numeric.log( numeric['/'](after, before) );
+        }
+
+    const postBox = function*(previousResults){
+      const data = yield;
+
+      const closePrices = _.chain(data)
+        .pluck("Adj Close")
+        .map( x => +x );
+
+      //take away rf rate, sharpe only makes sense this way
+      //http://blog.johnorford.com/2015/05/06/sharpe-ratio-redux/
+      const returns = getReturns(closePrices);
+
+      console.log(returns);
+      console.log(closePrices);
+      console.log(data);
+
+      yield* postBox(closePrices)
+      }
+
+    //init
+    //request 253 prices
+    const send = postBox([]);
+    send.next();
+
+    const pullData =
+      (ticker, quandlApiKey) =>
+        d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/"+ticker+".csv?auth_token="+quandlApiKey,
+          data => send.next( data )
+          )
+
+    pullData("INDEX_GSPC", quandlApiKey);
+  </script>
+</html>
