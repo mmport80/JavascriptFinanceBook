@@ -27,28 +27,28 @@
 
     console.log(map1.toJS(), map2.toJS());
 
-    const getReturns =
-      closePrices =>
+    _.prototype.getReturns = function()
         {
-        const before = closePrices.rest().value();
-        const after = closePrices.initial().value();
+        const before = this.rest().value();
+        const after = this.initial().value();
         return numeric.log( numeric['/'](after, before) );
         }
 
     const postBox = function*(previousResults){
       const data = yield;
 
-      const closePrices = _.chain(data)
+      const returns = _.chain(data)
         .pluck("Adj Close")
-        .map( x => +x );
-
-      //take away rf rate, sharpe only makes sense this way
-      //http://blog.johnorford.com/2015/05/06/sharpe-ratio-redux/
-      const returns = getReturns(closePrices);
+        .map( x => +x )
+        .getReturns();
 
       console.log(returns);
-      console.log(closePrices);
-      console.log(data);
+
+      //reduce - take n-1, n-2, ..., n-20
+      //reduce auto-correlations between 0,1; 0,2; 0,3 etc.
+
+      //normal version
+      //immutable version
 
       yield* postBox(closePrices)
       }
