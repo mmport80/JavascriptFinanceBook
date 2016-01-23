@@ -4,6 +4,7 @@
     <script type="text/javascript" src="d3.v3.min.js"></script>
     <script type="text/javascript" src="numeric-1.2.6.min.js"></script>
     <script type="text/javascript" src="underscore-min.js"></script>
+    <script type="text/javascript" src="jstat.min.js"></script>
   </head>
   <script>
     "use strict";
@@ -14,10 +15,6 @@
     "use strict";
 
     //do something big with lo-dash
-    //copy returns one day apart, 21 times
-    //find correlations between each time series
-
-    //0v1, 0v2, 0v3 etc... 20 times
 
     //calc time between two approaches
     var map1 = Immutable.Map({a:1, b:2, c:3});
@@ -31,26 +28,71 @@
         {
         const before = this.rest().value();
         const after = this.initial().value();
-        return numeric.log( numeric['/'](after, before) );
+
+
+        const returns = numeric.log( numeric['/'](after, before) );
+
+        const mean = jStat(returns).mean();
+
+        return numeric['-'](returns, mean);
         }
+
+    const getAutocorrelations = returns =>
+      _.chain( _.range(1008) )
+        //reduce - take n-1, n-2, ..., n-20
+        .reduce(
+          (a, c, _, arr) =>
+            a.length >= arr.length ?
+              a
+              :
+              a.concat(
+                [ returns.slice( c, returns.length ) ]
+                )
+          , []
+          )
+        //reduce auto-correlations between 0,1; 0,2; 0,3 etc.
+        .reduce(
+          (a,c) =>
+            a.base === null ?
+              ({base: c, correlations: []})
+              :
+              ({
+                base: a.base
+                , correlations: a.correlations.concat(
+                  jStat.corrcoeff(
+                    a.base.slice(0,c.length)
+                    , c
+                    )
+                  )
+                })
+          , {base: null, correlations: []}
+          )
+        .value()
+        //only return correlations
+        .correlations;
 
     const postBox = function*(previousResults){
       const data = yield;
 
+      //calc returns
       const returns = _.chain(data)
         .pluck("Adj Close")
         .map( x => +x )
         .getReturns();
 
-      console.log(returns);
+      //demean returns b4 calc'ing anything else
 
-      //reduce - take n-1, n-2, ..., n-20
-      //reduce auto-correlations between 0,1; 0,2; 0,3 etc.
+
+      //autocorrelations over time
+      //generate array from 1 to 252
+      const result = getAutocorrelations(returns);
+
+      console.log(result);
 
       //normal version
       //immutable version
 
-      yield* postBox(closePrices)
+      yield* postBox(returns)
       }
 
     //init
