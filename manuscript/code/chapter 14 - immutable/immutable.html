@@ -3,7 +3,7 @@
     <script type="text/javascript" src="immutable.min.js"></script>
     <script type="text/javascript" src="d3.v3.min.js"></script>
     <script type="text/javascript" src="numeric-1.2.6.min.js"></script>
-    <script type="text/javascript" src="underscore-min.js"></script>
+    <script type="text/javascript" src="lodash.js"></script>
     <script type="text/javascript" src="jstat.min.js"></script>
   </head>
   <script>
@@ -14,31 +14,30 @@
   <script>
     "use strict";
 
-    //do something big with lo-dash
 
-    //calc time between two approaches
-    var map1 = Immutable.Map({a:1, b:2, c:3});
-    var map2 = map1.set('b', 50);
-    map1.get('b'); // 2
-    map2.get('b'); // 50
+    //how to get monoids/plugs from underscore / etc. chains?
+    //es2015 maps vs immutable maps?
 
-    console.log(map1.toJS(), map2.toJS());
+    //equality check - portfolio check for recalculation
+    //copy over - changing holdings / parameters etc
+    //no defensive copying - weird javascript object / scope problems...
+
 
     _.prototype.getReturns = function()
         {
         const before = this.rest().value();
         const after = this.initial().value();
 
-
         const returns = numeric.log( numeric['/'](after, before) );
 
         const mean = jStat(returns).mean();
 
+        //demean returns b4 calc'ing anything else
         return numeric['-'](returns, mean);
         }
 
-    const getAutocorrelations = returns =>
-      _.chain( _.range(1008) )
+    Array.prototype.getAutocorrelations = function(n){
+      return _.chain( _.range(n) )
         //reduce - take n-1, n-2, ..., n-20
         .reduce(
           (a, c, _, arr) =>
@@ -46,7 +45,7 @@
               a
               :
               a.concat(
-                [ returns.slice( c, returns.length ) ]
+                [ this.slice( c, n ) ]
                 )
           , []
           )
@@ -70,29 +69,35 @@
         .value()
         //only return correlations
         .correlations;
+      }
+
+    Array.prototype.groupedReturns = function(){
+      return _.chain(this).reduce(
+        (a,c) =>
+          a.concat( [ a[a.length-1].concat(c) ] )
+        , [[]]
+        )
+        .value();
+      }
+
 
     const postBox = function*(previousResults){
-      const data = yield;
+      var data = yield;
 
-      //calc returns
-      const returns = _.chain(data)
-        .pluck("Adj Close")
-        .map( x => +x )
-        .getReturns();
+      var data0 = Immutable.List(data);
 
-      //demean returns b4 calc'ing anything else
+      console.time("timer");
 
+      var data1 = data0.concat(data);
+      var data2 = data1.concat(data);
+      var data3 = data2.concat(data);
+      var data4 = data3.concat(data);
+      var data5 = data4.concat(data);
 
-      //autocorrelations over time
-      //generate array from 1 to 252
-      const result = getAutocorrelations(returns);
+      console.timeEnd("timer");
+      console.log("5 "+data5.length);
+      console.log("5 "+data0.length);
 
-      console.log(result);
-
-      //normal version
-      //immutable version
-
-      yield* postBox(returns)
       }
 
     //init
@@ -102,10 +107,83 @@
 
     const pullData =
       (ticker, quandlApiKey) =>
-        d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/"+ticker+".csv?auth_token="+quandlApiKey,
+
+        d3.csv( "YAHOO-INDEX_GSPC.csv",
+        //d3.csv( "https://www.quandl.com/api/v3/datasets/YAHOO/"+ticker+".csv?auth_token="+quandlApiKey,
           data => send.next( data )
           )
 
-    pullData("INDEX_GSPC", quandlApiKey);
+    //pullData("INDEX_GSPC", quandlApiKey);
+
+
+
+    const n = 1000000;
+
+    var a =
+      _.chain( _.range(n) )
+      .map(x => Math.random())
+      .value();
+
+
+    console.time("timer_imm");
+
+      console.time("timer_imm_1");
+        const orig = Immutable.List(a);
+      console.timeEnd("timer_imm_1");
+
+      console.time("timer_imm_2");
+        console.log("add 1 to array");
+        const orig_push = orig.push(1);
+      console.timeEnd("timer_imm_2");
+
+      console.time("timer_imm_3");
+        console.log("check whether changed and 'orig' is equal");
+        console.log(Immutable.is(orig, orig_push));
+      console.timeEnd("timer_imm_3");
+
+
+      console.time("timer_imm_4");
+        console.log("pop out previous change");
+        const orig_push_pop = orig_push.pop();
+      console.timeEnd("timer_imm_4");
+
+
+      console.time("timer_imm_5");
+        console.log("check whether change and 'undo' results in same state");
+        console.log( Immutable.is(orig_push_pop, orig) );
+      console.timeEnd("timer_imm_5");
+
+    console.timeEnd("timer_imm");
+
+
+
+    console.time("timer_mut_ld");
+
+      var m_orig = _.cloneDeep(a);
+
+      console.log("add 1 to array");
+      var m_orig_push = m_orig.concat(1);
+
+      console.log("check whether changed and 'orig' is equal");
+      console.log(_.isEqual(m_orig, m_orig_push));
+
+      console.log("pop out previous change");
+      var m_orig_push_pop = _.initial(m_orig_push );
+
+      console.log("check whether change and 'undo' results in same state");
+      console.log( _.isEqual(m_orig, m_orig_push_pop) );
+
+    console.timeEnd("timer_mut_ld");
+
+
+
+    console.time("timer_mut");
+
+
+    console.timeEnd("timer_mut");
+
+
+
+
   </script>
 </html>
