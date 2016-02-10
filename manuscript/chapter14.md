@@ -224,7 +224,7 @@ Immutable data is a slam dunk. It both simplifies our code and makes our program
 
 ##Try
 
-1) Add a reconciliation step which would check a back office holdings for a particular day with the running total we obtain from our transactions.
+1) Add a reconciliation step which would check a back office holdings file for a particular day with the running total we obtain from our transactions.
 
 2) Build up a mutable data structure for option pricing (all the market data inputs, terms and conditions and finally pricing).
 
