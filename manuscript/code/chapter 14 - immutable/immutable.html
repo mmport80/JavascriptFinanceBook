@@ -11,39 +11,6 @@
   <script type="text/javascript" src="quandl-api-key.js"></script>
   <script>
     "use strict";
-    //how to get monoids/plugs from underscore / etc. chains?
-    //es2015 maps vs immutable maps?
-
-    //equality check - portfolio check for recalculation
-    //copy over - changing holdings / parameters etc
-    //no defensive copying - weird javascript object / scope problems...
-
-    //portfolio
-    //check whether object/position has changed
-    //have list of calc'ed positions
-    //if find a new position then recalc'
-
-    //or...
-    //single position
-    //check for changing t&cs or mkt data
-    //once changed, reprice security
-    //security is imm
-    //security depends upons mkt data & t&cs
-    //how does react do it...
-
-    //do & undo stacks
-    //pop and push as we move thru history
-
-    //react does reconciliation
-    //it sees what's changed
-    //and updates - how does this work?
-
-
-    //transactions
-    //reconciliation against holdings
-
-    //portfolio - list of securities
-
     //*******
     //immutable analogy - tracking transactions at a point of time instead of tracking holdings
     const convertToImmutableList = data =>
@@ -110,7 +77,7 @@
     //ticker
     const pullData =
       _ =>
-        d3.csv( "data/transactions_commas.csv",
+        d3.csv( "transactions.csv",
           data => send.next( data )
           )
 
