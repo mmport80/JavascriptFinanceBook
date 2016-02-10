@@ -4,6 +4,6 @@ console.log( "//Fat" );
 
 const fat = input => input;
 
-const f = fat("test")
+const f = fat("> Test")
 
 console.log( f );

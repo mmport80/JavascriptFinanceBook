@@ -5,8 +5,8 @@ console.log( "//Generator" );
 const postBox = function*(history){
   const message = yield;
 
-  console.log( "History " + history );
-  console.log( "Input " + message );
+  console.log( "> History " + history );
+  console.log( "> Input " + message );
 
   yield* postBox( history.concat(message) );
   }
