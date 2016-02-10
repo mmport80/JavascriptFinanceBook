@@ -212,7 +212,7 @@ We can collect each day's totals or each minute's if you need the granularity, w
 
 ##Conclusion
 
-Immutable data is a slam dunk. It both simplifies our code and makes our programs far more efficient.
+Immutable data is a slam dunk. It both simplifies our code and makes our programs far more efficient. It's a pity that JavaScript does not support it out of the box - as it is the one major feature which it so sorely lacks.
 
 ##More Info
 
