@@ -222,6 +222,8 @@ Immutable data is a slam dunk. It both simplifies our code and makes our program
 
 3) Two videos ([1](https://www.youtube.com/watch?v=I7IdS-PbEgI) + [2](https://www.youtube.com/watch?v=wA98Coal4jk)) introducing immutability to a Javascript audience
 
+4) Cheekily described by its creator as a Domain Specific Language for immutabile data structures, [ClojureScript](https://github.com/clojure/clojurescript) is a functional language that compiles to JavaScript, whose performance inspired Facebook's Immutable JS library
+
 ##Try
 
 1) Add a reconciliation step which would check a back office holdings file for a particular day with the running total we obtain from our transactions.
