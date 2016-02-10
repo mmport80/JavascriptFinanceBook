@@ -161,6 +161,8 @@ The program parses a CSV file of transactions in the usual way, and then we have
 
 The CSV file has four columns, called 'Date', 'Symbol', 'Issue_Description' and 'Transaction'.
 
+![Transactions Table](images/14_transactions_table.png)
+
 ~~~~~~~~
 const convertToImmutableList = data =>
   Immutable
