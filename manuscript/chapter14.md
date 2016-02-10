@@ -159,8 +159,6 @@ Let's take a couple of thousand fund transactions and process them using our new
 
 The program parses a CSV file of transactions in the usual way, and then we have to convert each row object into an immutable map in order to excise all mutable data.
 
-The CSV file has four columns, called 'Date', 'Symbol', 'Issue_Description' and 'Transaction'.
-
 ![Transactions Table](images/14_transactions_table.png)
 
 ~~~~~~~~
