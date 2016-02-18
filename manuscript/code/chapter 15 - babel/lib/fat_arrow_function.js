@@ -6,6 +6,6 @@ var fat = function fat(input) {
   return input;
 };
 
-var f = fat("test");
+var f = fat("> Test");
 
 console.log(f);
