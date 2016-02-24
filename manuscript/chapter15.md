@@ -1,3 +1,4 @@
+#Babel
 Like all superheroes JavaScript's biggest strength is also its main weakness. JavaScript can be distributed and run anywhere, easily. The problem is that each browser or platform supports a slightly different subset of the language.
 
 This book follows the current 2015 or EcmaScript 6 version of the language, which is OK for those of us running the latest browsers but unworkable for those lagging behind.
