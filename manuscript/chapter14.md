@@ -1,5 +1,4 @@
 #Immutability
-
 There is a subterranean theme flowing under each chapter of this book. Furthermore, you see it again and again in far flung fields and yet people rarely discuss it.
 
 That is, often, tying your hands behind your back, i.e. prohibiting certain actions can help you immeasurably.
@@ -9,7 +8,6 @@ This book presents a functional style of programming, which only uses a subset o
 Constant values can't be reassigned, they are carved in stone, whereas variables are flexible.
 
 ##S&M
-
 The variable concept in programming is unheard of in mathematics. Once you set an `x` to a value it won't be changed a few lines down, right? If you need a holder for a new value or function, you will use `y`, `z`, `g()` or `h()` rather than recycling `x` again.
 
 Why? Mostly due to clarity. Changing x from '1' to '2' halfway down a list of equations is likely to throw the cat amongst the pigeons; and yet programmers do this all of the time!
@@ -17,7 +15,6 @@ Why? Mostly due to clarity. Changing x from '1' to '2' halfway down a list of eq
 Except for functional programmers that is, they eschew variables for the most part in favour of constants, ensuring that there can be no ambiguity.
 
 ##Mutable Hell
-
 It turns out *the* big skeleton in JavaScript's closet is mutability. Almost everything is in fact mutable, even our beloved 'constants'! Leading to slippery buggy code that every JavaScript developer has to contend with.
 
 For example type this in your console,
@@ -76,7 +73,6 @@ while leaving `b` and `a` alone.
 Secondly cloning lots of data is at best cumbersome but also terribly wasteful.
 
 ##Simplicity
-
 Facebook's Immutable library ensures our data is held securely in immutable structures which help us patch over the mess we would otherwise be in.
 
 Let's replay the previous examples. Opening the 'immutable.html' page on this book's GitHub repository will import the Immutable library. We will convert our object to an Immutable Map (i.e. a list of key value pairs).
@@ -90,7 +86,6 @@ and convert back to JavaScript,
 ~~~~~~~~
 a_imm.toJS()
 ~~~~~~~~
-
 ~~~~~~~~
 >> {value:1}
 ~~~~~~~~
@@ -118,7 +113,6 @@ Where does our change go? It gets returned as a new immutable object.
 ~~~~~~~~
 const b_imm_change = b_imm.set('value',2)
 ~~~~~~~~
-
 ~~~~~~~~
 >> {value:2}
 ~~~~~~~~
@@ -132,7 +126,6 @@ All of our immutable objects on the other hand neatly link to each other. By def
 ~~~~~~~~
 b_imm === b_imm_change
 ~~~~~~~~
-
 ~~~~~~~~
 >> false
 ~~~~~~~~
@@ -142,11 +135,9 @@ And when we 'change back' the link between `b_imm_changed` and `b_imm` is remove
 ~~~~~~~~
 const b_imm_change_back = b_imm_change.set('value',1)
 ~~~~~~~~
-
 ~~~~~~~~
 b_imm === b_imm_change_back
 ~~~~~~~~
-
 ~~~~~~~~
 >> true
 ~~~~~~~~
@@ -154,7 +145,6 @@ b_imm === b_imm_change_back
 All the while, the cleverness of such structural sharing is hidden behind the simple API.
 
 ##An Example
-
 Let's take a couple of thousand fund transactions and process them using our new found immutable data structures (take a look at a working example in the GitHub repository).
 
 The program parses a CSV file of transactions in the usual way, and then we have to convert each row object into an immutable map in order to excise all mutable data.
@@ -211,11 +201,9 @@ Now we can leverage Immutable's extremely efficient way of utilising memory. Dep
 We can collect each day's totals or each minute's if you need the granularity, which remember, is much more space efficient that usual mutable data, rewind and fast forward through the holdings snapshots.
 
 ##Conclusion
-
 Immutable data is a slam dunk. It both simplifies our code and makes our programs far more efficient. It's a pity that JavaScript does not support it out of the box - as it is the one major feature which it so sorely lacks.
 
 ##More Info
-
 1) Facebook's [Immutable JS library](http://facebook.github.io/immutable-js/)
 
 2) The [Seamless Immutable library](https://github.com/rtfeldman/seamless-immutable) from the indefatigable Richard Feldman gives you immutable data which is backwards compatible with JavaScript's normal arrays and objects
@@ -225,7 +213,6 @@ Immutable data is a slam dunk. It both simplifies our code and makes our program
 4) Cheekily described by its creator as a Domain Specific Language for immutabile data structures, [ClojureScript](https://github.com/clojure/clojurescript) is a functional language that compiles to JavaScript, whose performance inspired Facebook's Immutable JS library
 
 ##Try
-
 1) Add a reconciliation step which would check a back office holdings file for a particular day with the running total we obtain from our transactions.
 
 2) Build up a mutable data structure for option pricing (all the market data inputs, terms and conditions and finally pricing).

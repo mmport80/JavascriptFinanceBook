@@ -6,7 +6,6 @@ This book follows the current 2015 or EcmaScript 6 version of the language, whic
 This is where the Babel transpiler library comes into play. It reads our ES6 code and transforms it into ES5 code, which means browsers such as Internet Explorer 10 or 11 which don't support ES6 can nevertheless run our code!
 
 ##Setup
-
 NPM is the JavaScript package manager which helps us download and use JavaScript libraries. Visit the [NPM website](https://www.npmjs.com/) and install it on your system.
 
 Then move to the directory which contains this chapter's code (cf. [here](https://github.com/mmport80/JavascriptFinanceBook/tree/master/manuscript/code/chapter%2015%20-%20babel)) and install the following libraries using your operating system's command line interface (CLI).
@@ -44,7 +43,6 @@ This command transpiles every `.js` file found in the `src` (source) folder to t
 Now we can write using the modern syntax while still being backwards compatible.
 
 ##Postbox Example
-
 The main asynchronous pattern used throughout this book has been the postbox. We post messages asynchronously into our `postBox` which processes them in an elegant manner.
 
 Again, the basic pattern is as follows.
@@ -92,7 +90,8 @@ Of course we never have to worry about looking at the generated code.
 However, we can see that the code here references an objects and functions from the Polyfill library. We need to link to it before we can run the code. To do so, we add the library at the top of our HTML file.
 
 ~~~~~~~~
-<script type="text/javascript" charset="utf-8" src="node_modules/babel-polyfill/dist/polyfill.min.js" ></script>
+<script type="text/javascript" charset="utf-8" src="node_modules/babel-polyfill/dist/polyfill.min.js" >
+</script>
 ~~~~~~~~
 
 This path is where NPM install the packages we requested with respect to our html file.
