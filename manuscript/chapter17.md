@@ -39,9 +39,7 @@ const calculate =
  function(fun){
   return this.reduce(fun);
   }
-~~~~~~~~
 
-~~~~~~~~
 Object.defineProperty(
  Array.prototype,
  'calculate',
