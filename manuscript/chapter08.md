@@ -174,7 +174,7 @@ w.onmessage =
 What do we do with the results we receive from each worker? We send it to a `postBox` generator function just as we did in the previous chapter.
 
 ~~~~~~~~
-var postBox = function*(){
+const postBox = function*(){
  const a = yield;
  const b = yield;
  console.log( (a + b) / 2 );

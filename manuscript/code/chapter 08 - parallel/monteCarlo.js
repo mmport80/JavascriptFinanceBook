@@ -1,33 +1,33 @@
 "use strict";
 
-var generate = n =>
-        n <= 1 ? 
+const generate = n =>
+        n <= 1 ?
                 [1]
                 :
                 [1].concat(generate(n-1));
 
 
 Array.prototype.randomNumbers = function(){
-        return this.map( 
+        return this.map(
                 _ => Math.random()
                 );
         }
 
 Array.prototype.bMPNumbers = function(){
-        return this.map( 
+        return this.map(
                 _ => jStat.normal.sample( 0, 1 )
                 );
         }
-        
+
 Array.prototype.gBMPForwardPrices = function(spot, volatility, expiry, interestRate){
         return this.map(
                 _ =>
-                        spot * 
+                        spot *
                         Math.exp(
-                                (interestRate - 0.5 * Math.pow(volatility, 2) ) * 
-                                expiry + 
-                                volatility * 
-                                Math.sqrt(expiry) * 
+                                (interestRate - 0.5 * Math.pow(volatility, 2) ) *
+                                expiry +
+                                volatility *
+                                Math.sqrt(expiry) *
                                 generate(1).bMPNumbers()
                                 )
                 )
