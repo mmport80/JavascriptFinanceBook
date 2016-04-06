@@ -10,11 +10,13 @@ In almost every browser each recursive call uses up a little memory, however the
 
 The 'generate array' example in our concurrency chapter shows how we can build up an array,
 
-`const generate = n =>
+~~~~~~~~
+const generate = n =>
  n <= 1 ?
   [1]
   :
-  [1].concat(generate(n-1));`
+  [1].concat(generate(n-1));
+~~~~~~~~
 
 E.g. if we paste this into our console, and would call `generate(100)`, we can generate an array with 100 ones.
 
@@ -24,7 +26,8 @@ However, if I want to create an array of 6,000 ones (on my machine) I see an err
 
 On the other hand we can use the usual mutable and imperative style of coding and achieve the same result.
 
-`const generateW = x => {
+~~~~~~~~
+const generateW = x => {
  var r = [];
  while (x > 0)
   {
@@ -32,7 +35,8 @@ On the other hand we can use the usual mutable and imperative style of coding an
   x--;
   }
  return r;
- };`
+ };
+~~~~~~~~
 
 Now we can generate large arrays, but what is lost? Simplicity. We exchange our constants for variables. The road to hell is paved by good intentions, as they say, and the reason why it is best to avoid loops.
 
