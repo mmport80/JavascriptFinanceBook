@@ -83,4 +83,4 @@ Most of the prototype extension examples in this book were cosmetic. The main me
 
 However, as the old saying goes,
 
->just because you're not paranoid doesn't mean they're not after you
+>Just because you're not paranoid doesn't mean they're not after you
