@@ -4,10 +4,12 @@ This book has used 'pipes' to show how data can flow through your program and ho
 
 Up until now we have 'added pipes' or extended array prototypes in this way,
 
-`Array.prototype.calculate =
+~~~~~~~~
+Array.prototype.calculate =
  function(fun){
   return this.reduce(fun);
-  }`
+  }
+~~~~~~~~
 
 which was a way to change the name of `reduce` in chapter 5 on higher order functions to "calculate".
 
@@ -23,23 +25,29 @@ The next is not so obvious, but important. We need to set new functions as 'non-
 
 E.g. by typing this into the console,
 
-`xs = [3,4,5];
-for (var x in xs) console.log(x);`
+~~~~~~~~
+xs = [3,4,5];
+for (var x in xs) console.log(x);
+~~~~~~~~
 
 we will see the name of the 'calculate' method printed along with our numbers. Not what you would expect! Faulty logic from JavaScript, but unfortunately it's our problem too.
 
 We can solve this easily by extending our prototypes this way instead of the simpler method above,
 
-`const calculate =
+~~~~~~~~
+const calculate =
  function(fun){
   return this.reduce(fun);
-  }`
+  }
+~~~~~~~~
 
-`Object.defineProperty(
+~~~~~~~~
+Object.defineProperty(
  Array.prototype,
  'calculate',
  { value: calculate, enumerable: false }
- );`
+ );
+~~~~~~~~
 
 The first line defines the function, the *second* sets the `calculate` function as a property of `Array.prototype`, giving it the name `'calculate'` and ensures that it's not printed out when we use a `for in loop` by setting enumerable to `false` (which is actually the default value when the `defineProperty` function is called in any case).
 
