@@ -99,7 +99,7 @@ rows
 
 Beginning at our initial values. As before, our total and REIT exposures begin at `0`; our top exposure now begins at minus infinity (just in case we encounter short positions).
 
-We now have a set or object of initial values, and we return an object matching this template as we step through each row.
+We now have an object of initial values, and we return an object matching this template as we step through each row.
 
 You will notice also that we have named functions for each set of logic. `totalExp` looks like this for example:
 
