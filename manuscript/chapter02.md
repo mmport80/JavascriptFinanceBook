@@ -97,4 +97,4 @@ While many in finance would bristle at their work being likened to plumbing, we 
 
 2) How would you go about enforcing a specified input file format?  So that the program could point out problems when it's dropped and avoid frustration later on.
 
-3) Browse the [Eloquent JavaScript book](http://eloquentjavascript.net/1st_edition/contents.html)
+3) Browse the [Eloquent JavaScript book](http://eloquentjavascript.net)
