@@ -165,7 +165,7 @@ The advantage in using JavaScript is that we can speak the web's native language
 
 1) Plotly's documentation is [here](https://plot.ly/javascript/)
 
-2) Check our the cool 3D visualisations built by the [stack.gl](http://stack.gl/) (another pillar of plotly)
+2) Check our the cool 3D visualisations built by the [stack.gl](http://stack.gl/) (another pillar of plotly) library
 
 ##Try
 
