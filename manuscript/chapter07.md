@@ -259,14 +259,14 @@ For example,
 
 ~~~~~~~~
 d3.csv( 
- "https://www.quandl.com/api/v3/datasets/CME/EDU2016.csv", 
+ "https://query1.finance.yahoo.com/v7/finance/download/^GSPC?period1=1539929912&period2=1571465912&interval=1d&events=history&crumb=l0Pz3Lu7uTz", 
  data => send.next(data)
  );
 ~~~~~~~~
 
 ~~~~~~~~
 d3.csv(
- "https://www.quandl.com/api/v3/datasets/CME/EDU2021.csv", 
+ "https://query1.finance.yahoo.com/v7/finance/download/^RUT?period1=1539930223&period2=1571466223&interval=1d&events=history&crumb=l0Pz3Lu7uTz", 
  data => send.next(data)
 );
 ~~~~~~~~
